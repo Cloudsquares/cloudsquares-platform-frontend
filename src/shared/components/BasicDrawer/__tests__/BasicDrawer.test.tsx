@@ -16,10 +16,7 @@ describe("BasicDrawer", () => {
   it("отображает заголовок и содержимое", () => {
     render(<BasicDrawer {...defaultProps} />);
 
-    // Проверка заголовка
     expect(screen.getByText("Тестовый заголовок")).toBeInTheDocument();
-
-    // Проверка дочернего элемента
     expect(screen.getByTestId("drawer-children")).toBeInTheDocument();
   });
 
@@ -40,17 +37,11 @@ describe("BasicDrawer", () => {
     expect(defaultProps.setIsOpen).toHaveBeenCalledWith(false);
   });
 
-  it("вызывает setIsOpen(false) при onClose", () => {
-    // Нужно открыть и затем вызвать onClose вручную
-    const { container } = render(<BasicDrawer {...defaultProps} />);
-    const drawer = container.querySelector('[role="presentation"]');
+  it("вызывает setIsOpen(false) при нажатии Escape", () => {
+    render(<BasicDrawer {...defaultProps} />);
 
-    if (drawer?.parentElement) {
-      fireEvent.keyDown(drawer.parentElement, { key: "Escape" });
-    }
+    fireEvent.keyDown(document, { key: "Escape" });
 
-    // Здесь сложно отследить `onClose`, так как он навешивается через MUI,
-    // но можно проверить, что setIsOpen не был вызван вне клика
-    expect(defaultProps.setIsOpen).not.toHaveBeenCalled();
+    expect(defaultProps.setIsOpen).toHaveBeenCalledWith(false);
   });
 });

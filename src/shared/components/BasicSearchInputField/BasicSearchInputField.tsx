@@ -1,8 +1,11 @@
 import React from "react";
 import debounce from "lodash/debounce";
 import { MdSearch } from "react-icons/md";
-import { InputAdornment, TextField } from "@mui/material";
 import { Controller, useFormContext } from "react-hook-form";
+
+import { Input } from "@/shared/components/ui/input";
+import { Label } from "@/shared/components/ui/label";
+import { cn } from "@/shared/utils";
 
 /**
  * Пропсы для компонента `BasicSearchInputField`.
@@ -59,35 +62,42 @@ export const BasicSearchInputField = ({
     [onChange],
   );
 
+  React.useEffect(() => {
+    return () => {
+      debouncedOnChange.cancel();
+    };
+  }, [debouncedOnChange]);
+
+  const errorMessage = errors[name]?.message as string | undefined;
+
   return (
-    <Controller
-      name={name}
-      control={control}
-      render={({ field }) => (
-        <TextField
-          {...field}
-          size="small"
-          label={label}
-          variant="outlined"
-          placeholder={placeholder}
-          sx={{ minWidth: 150, width: 1 }}
-          helperText={errors[name]?.message as string}
-          error={!!errors[name]}
-          onChange={(e) => {
-            field.onChange(e);
-            debouncedOnChange(e.target.value);
-          }}
-          slotProps={{
-            input: {
-              startAdornment: (
-                <InputAdornment position="start">
-                  <MdSearch data-testid="SearchIcon" size={16} />
-                </InputAdornment>
-              ),
-            },
-          }}
-        />
-      )}
-    />
+    <div className="flex w-full flex-col gap-2">
+      {label && <Label htmlFor={name}>{label}</Label>}
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => (
+          <div className="relative">
+            <MdSearch
+              data-testid="SearchIcon"
+              className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-labels-secondary"
+            />
+            <Input
+              {...field}
+              ref={field.ref}
+              id={name}
+              placeholder={placeholder}
+              className={cn("pl-9", errorMessage && "border-error")}
+              hasError={Boolean(errorMessage)}
+              onChange={(event) => {
+                field.onChange(event);
+                debouncedOnChange(event.target.value);
+              }}
+            />
+          </div>
+        )}
+      />
+      {errorMessage && <p className="text-caption1 text-error">{errorMessage}</p>}
+    </div>
   );
 };
