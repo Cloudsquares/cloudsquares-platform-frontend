@@ -1,5 +1,3 @@
-import { Box, Typography } from "@mui/material";
-
 /**
  * Список правил для пароля с проверкой соответствия
  */
@@ -40,16 +38,12 @@ export const PasswordRulesHint = ({
   if (!touched || allPassed) return null;
 
   return (
-    <Box mt={1}>
+    <div className="mt-2 space-y-1">
       {rules.map((rule, index) => (
-        <Typography
-          key={index}
-          variant="body2"
-          sx={{ color: rule.passed ? "green" : "red" }}
-        >
+        <p key={index} className={rule.passed ? "text-success" : "text-error"}>
           {rule.label}
-        </Typography>
+        </p>
       ))}
-    </Box>
+    </div>
   );
 };

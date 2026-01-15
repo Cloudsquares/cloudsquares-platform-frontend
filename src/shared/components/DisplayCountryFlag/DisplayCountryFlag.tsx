@@ -1,4 +1,3 @@
-import { Typography } from "@mui/material";
 import { CountryCode, CountryCodeDisplayFlag } from "../../interfaces/Country";
 
 interface DisplayCountryFlagProps {
@@ -8,9 +7,5 @@ interface DisplayCountryFlagProps {
 export const DisplayCountryFlag = ({
   country_code,
 }: DisplayCountryFlagProps) => {
-  return (
-    <Typography component="span">
-      {CountryCodeDisplayFlag[country_code]}
-    </Typography>
-  );
+  return <span>{CountryCodeDisplayFlag[country_code]}</span>;
 };

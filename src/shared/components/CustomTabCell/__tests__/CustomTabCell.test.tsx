@@ -35,7 +35,7 @@ describe("CustomTableCell", () => {
     });
 
     const button = screen.getByRole("button");
-    expect(button).not.toHaveAttribute("aria-expanded");
+    expect(button).toHaveAttribute("aria-expanded", "false");
 
     fireEvent.click(button);
 
@@ -63,7 +63,7 @@ describe("CustomTableCell", () => {
     expect(onOptionClick).toHaveBeenCalledTimes(1);
 
     await waitFor(() => {
-      expect(button).not.toHaveAttribute("aria-expanded");
+      expect(button).toHaveAttribute("aria-expanded", "false");
       expect(screen.queryByRole("menu")).not.toBeInTheDocument();
     });
   });

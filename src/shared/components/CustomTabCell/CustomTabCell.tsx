@@ -1,12 +1,14 @@
 import React from "react";
-import {
-  IconButton,
-  Menu,
-  MenuItem,
-  TableCell,
-  Typography,
-} from "@mui/material";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
+
+import { Button } from "@/shared/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/shared/components/ui/dropdown-menu";
+import { cn } from "@/shared/utils";
 
 /**
  * Опции выпадающего меню внутри ячейки таблицы.
@@ -39,6 +41,22 @@ interface CustomTableCellProps {
   options?: CustomTableCellOptions[] | null;
 }
 
+const alignClasses = {
+  inherit: "text-left",
+  left: "text-left",
+  center: "text-center",
+  right: "text-right",
+  justify: "text-justify",
+} satisfies Record<NonNullable<CustomTableCellProps["align"]>, string>;
+
+const alignContainerClasses = {
+  inherit: "justify-start",
+  left: "justify-start",
+  center: "justify-center",
+  right: "justify-end",
+  justify: "justify-between",
+} satisfies Record<NonNullable<CustomTableCellProps["align"]>, string>;
+
 /**
  * Компонент ячейки таблицы с возможностью отображения выпадающего меню.
  *
@@ -54,69 +72,50 @@ export const CustomTableCell = ({
   align = "center",
   options,
 }: CustomTableCellProps) => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-
-  /**
-   * Открывает выпадающее меню.
-   * @param event Событие клика по кнопке
-   */
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  /** Закрывает выпадающее меню. */
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const [isOpen, setIsOpen] = React.useState(false);
 
   return (
-    <TableCell align={align} width={width}>
-      <Typography
-        component="p"
-        variant="body2"
-        color="customColors.colorsBlue"
-        fontWeight={fw}
-        sx={{ display: "inline-block", gap: 1, width: 1 }}
-      >
-        {text}
-        {options && (
-          <IconButton
-            aria-controls={open ? "basic-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-            onClick={handleClick}
-            size="small"
-            color="primary"
-          >
-            {open ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
-          </IconButton>
-        )}
-      </Typography>
-
-      {options && (
-        <Menu
-          id="options-menu"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          MenuListProps={{
-            "aria-labelledby": "options-button",
-          }}
-        >
-          {options?.map(({ label, onClick }, index) => (
-            <MenuItem
-              key={index}
-              onClick={() => {
-                onClick();
-                handleClose();
-              }}
-            >
-              {label}
-            </MenuItem>
-          ))}
-        </Menu>
+    <td
+      className={cn(
+        "px-3 py-2 text-body2 text-foreground",
+        alignClasses[align],
       )}
-    </TableCell>
+      style={{ width, fontWeight: fw }}
+    >
+      <div
+        className={cn("flex items-center gap-2", alignContainerClasses[align])}
+      >
+        <span className="inline-flex items-center gap-2 text-body2 text-foreground">
+          {text}
+        </span>
+        {options && options.length > 0 && (
+          <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+            <DropdownMenuTrigger asChild>
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                aria-expanded={isOpen}
+              >
+                {isOpen ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {options.map(({ label, onClick }, index) => (
+                <DropdownMenuItem
+                  key={index}
+                  onSelect={() => {
+                    onClick();
+                    setIsOpen(false);
+                  }}
+                >
+                  {label}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
+      </div>
+    </td>
   );
 };
