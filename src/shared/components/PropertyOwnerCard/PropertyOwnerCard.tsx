@@ -3,17 +3,18 @@ import {
   PropertyOwner,
 } from "@/shared/interfaces/PropertyOwner";
 import { displayUserName } from "@/shared/utils";
-import {
-  Box,
-  Card,
-  CardContent,
-  Chip,
-  IconButton,
-  Stack,
-  Tooltip,
-  Typography,
-} from "@mui/material";
 import { MdDelete, MdEdit } from "react-icons/md";
+
+import { Badge } from "@/shared/components/ui/badge";
+import { Button } from "@/shared/components/ui/button";
+import { Card, CardContent } from "@/shared/components/ui/card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/shared/components/ui/tooltip";
+import { cn } from "@/shared/utils";
 
 interface PropertyOwnerCardProps {
   owner: PropertyOwner;
@@ -40,71 +41,82 @@ export const PropertyOwnerCard = ({
     DisplayTextPropertyOwnerRole[owner.role] ?? String(owner.role);
 
   return (
-    <Card variant="outlined">
+    <Card>
       <CardContent>
-        <Stack spacing={1.25}>
-          <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            gap={1}
-          >
-            <Typography component="h4" variant="subtitle1">
-              {fullName}
-            </Typography>
+        <div className="flex flex-col gap-5">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="text-subtitle1 text-foreground">{fullName}</p>
 
-            <Box display="flex" alignItems="center" gap={1}>
-              {showActions && (
-                <Box display="flex" alignItems="center" gap={0.5}>
-                  {onEdit && (
-                    <Tooltip title="Редактировать">
-                      <IconButton
-                        size="small"
-                        aria-label="Редактировать владельца"
-                        onClick={() => onEdit(owner)}
-                      >
-                        <MdEdit />
-                      </IconButton>
-                    </Tooltip>
-                  )}
-                  {onDelete && (
-                    <Tooltip title="Удалить">
-                      <IconButton
-                        size="small"
-                        color="error"
-                        aria-label="Удалить владельца"
-                        onClick={() => onDelete(owner)}
-                      >
-                        <MdDelete />
-                      </IconButton>
-                    </Tooltip>
-                  )}
-                </Box>
+            <div className="flex items-center gap-3">
+              {showActions && (onEdit || onDelete) && (
+                <TooltipProvider>
+                  <div className="flex items-center gap-2">
+                    {onEdit && (
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            aria-label="Редактировать владельца"
+                            onClick={() => onEdit(owner)}
+                          >
+                            <MdEdit className="h-4 w-4" />
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>Редактировать</TooltipContent>
+                      </Tooltip>
+                    )}
+                    {onDelete && (
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            aria-label="Удалить владельца"
+                            onClick={() => onDelete(owner)}
+                            className="text-error hover:text-error"
+                          >
+                            <MdDelete className="h-4 w-4" />
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>Удалить</TooltipContent>
+                      </Tooltip>
+                    )}
+                  </div>
+                </TooltipProvider>
               )}
-              <Chip size="small" label={roleLabel} />
-            </Box>
-          </Stack>
+              <Badge>{roleLabel}</Badge>
+            </div>
+          </div>
 
           {(owner.email || owner.phone) && (
-            <Typography variant="body2" color="text.secondary">
+            <p className="text-body2 text-labels-secondary">
               {owner.email && (
-                <Box component="a" href={`mailto:${owner.email}`}>
+                <a
+                  href={`mailto:${owner.email}`}
+                  className="hover:text-foreground"
+                >
                   {owner.email}
-                </Box>
+                </a>
               )}
               {owner.email && owner.phone ? " · " : ""}
               {owner.phone && (
-                <Box component="a" href={`tel:${owner.phone}`}>
+                <a
+                  href={`tel:${owner.phone}`}
+                  className="hover:text-foreground"
+                >
                   +{owner.phone}
-                </Box>
+                </a>
               )}
-            </Typography>
+            </p>
           )}
 
           {owner.notes && (
-            <Typography variant="body2">{owner.notes}</Typography>
+            <p className={cn("text-body2 text-foreground")}>{owner.notes}</p>
           )}
-        </Stack>
+        </div>
       </CardContent>
     </Card>
   );
