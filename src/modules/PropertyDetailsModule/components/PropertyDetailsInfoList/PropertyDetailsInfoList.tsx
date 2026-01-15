@@ -1,6 +1,4 @@
-import { Box, Typography } from "@mui/material";
 import { PropertyDetailsInfoItem } from "../../../../shared/interfaces/PropertyDetails";
-import { dividerStyles } from "./styles";
 
 interface PropertyDetailsInfoListProps {
   data: PropertyDetailsInfoItem[];
@@ -10,25 +8,18 @@ export const PropertyDetailsInfoList = ({
   data,
 }: PropertyDetailsInfoListProps) => {
   return (
-    <Box
-      component="ul"
-      sx={{ display: "flex", flexDirection: "column", gap: 2 }}
-    >
+    <ul className="flex flex-col gap-3">
       {data.map(({ label, value }, index) => (
-        <Box
-          component="li"
-          key={index}
-          sx={{ width: 1, display: "flex", alignItems: "flex-end", gap: 0.5 }}
-        >
-          <Typography component="p" variant="body1" whiteSpace="nowrap">
+        <li key={index} className="flex items-end gap-2">
+          <span className="text-body1 text-foreground whitespace-nowrap">
             {label}
-          </Typography>
-          <Box sx={dividerStyles} />
-          <Typography component="p" variant="body1" whiteSpace="nowrap">
+          </span>
+          <span className="flex-1 border-b border-grey-200" />
+          <span className="text-body1 text-foreground whitespace-nowrap">
             {value}
-          </Typography>
-        </Box>
+          </span>
+        </li>
       ))}
-    </Box>
+    </ul>
   );
 };

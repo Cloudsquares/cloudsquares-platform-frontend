@@ -1,4 +1,3 @@
-import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
 import { PropertyDetailsInfoList } from "../PropertyDetailsInfoList";
 import { usePropertyDetailsStore } from "../../store";
@@ -29,21 +28,15 @@ export const PropertyDetailsAdditionalOptions = () => {
 
   return (
     <React.Fragment>
-      <Grid size={{ xs: 12, md: 6 }}>
-        <Box>
-          <Typography component="h5" variant="h5">
-            Дополнительные характеристики
-          </Typography>
-          <Box pt={2}>
-            <PropertyDetailsInfoList data={displayData()} />
-          </Box>
-        </Box>
-      </Grid>
-      <Grid size={{ xs: 12, md: 6 }}>
-        <Box sx={{ pt: { xs: 0, md: "46px" } }}>
-          <PropertyDetailsInfoList data={displayData()} />
-        </Box>
-      </Grid>
+      <div className="space-y-2">
+        <h5 className="text-h5 text-foreground">
+          Дополнительные характеристики
+        </h5>
+        <PropertyDetailsInfoList data={displayData()} />
+      </div>
+      <div className="space-y-2 md:pt-12">
+        <PropertyDetailsInfoList data={displayData()} />
+      </div>
     </React.Fragment>
   );
 };

@@ -1,4 +1,3 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
 import { IoMdDocument } from "react-icons/io";
 import { MdDelete, MdEdit, MdPerson } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +8,7 @@ import { DiscountLabel } from "@/shared/components/DiscountLabel";
 import { calculatePricePerMeter, propertyAddress } from "@/shared/utils";
 import { usePropertyDetailsStore } from "../../store";
 import { PropertyDetailsOwnersDrawer } from "../PropertyDetailsOwnersDrawer";
+import { Button } from "@/shared/components/ui/button";
 
 // TODO: При клике на "Данные владельца" открыть модалку с карточками всех владельцев и кнопку "Редактировать",
 // при клике на кнопку открывать страницу редактирования с параметром ?step=property_owners
@@ -27,85 +27,94 @@ export const PropertyDetailsPriceBlock = () => {
 
   if (currentProperty)
     return (
-      <Grid size={{ xs: 12, md: 4 }}>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-          <Box>
-            <Typography
-              component="p"
-              variant="body4"
-              color="customColors.grey500"
-            >
-              {calculatePricePerMeter(currentProperty.price, 42)}₽ за м²
-            </Typography>
-            <DiscountLabel
-              price={currentProperty.price}
-              discount={currentProperty.discount}
-            />
-            <Typography component="h5" variant="h5" mb={1}>
-              {(
-                currentProperty.price - currentProperty.discount
-              ).toLocaleString("ru")}
-              ₽
-            </Typography>
-            <Typography component="p" variant="subtitle2">
-              42,5м². 2-комн. квартира
-            </Typography>
-            <Typography
-              component="p"
-              variant="body1"
-              color={currentProperty.property_location ? "inherit" : "error"}
-            >
-              {currentProperty.property_location
-                ? propertyAddress(currentProperty).fullAddress
-                : "Адрес не указан"}
-            </Typography>
-          </Box>
-          <Box py={2}>
-            <AgentCompactCard agent={currentProperty.agent} />
-          </Box>
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-            <Button
-              fullWidth
-              variant="contained"
-              size="large"
-              startIcon={<MdEdit />}
-              onClick={() =>
-                navigate(
-                  `/properties/${currentProperty.id}/update?step=basic_data`,
-                )
-              }
-            >
+      <div className="space-y-4">
+        <div className="space-y-2">
+          <p className="text-body4 text-grey-500">
+            {calculatePricePerMeter(currentProperty.price, 42)}₽ за м²
+          </p>
+          <DiscountLabel
+            price={currentProperty.price}
+            discount={currentProperty.discount}
+          />
+          <h5 className="text-h5 text-foreground">
+            {(currentProperty.price - currentProperty.discount).toLocaleString(
+              "ru",
+            )}
+            ₽
+          </h5>
+          <p className="text-subtitle2 text-foreground">
+            42,5м². 2-комн. квартира
+          </p>
+          <p
+            className={
+              currentProperty.property_location
+                ? "text-body1 text-foreground"
+                : "text-body1 text-error"
+            }
+          >
+            {currentProperty.property_location
+              ? propertyAddress(currentProperty).fullAddress
+              : "Адрес не указан"}
+          </p>
+        </div>
+        <div className="py-2">
+          <AgentCompactCard agent={currentProperty.agent} />
+        </div>
+        <div className="flex flex-col gap-2">
+          <Button
+            type="button"
+            size="lg"
+            className="w-full"
+            onClick={() =>
+              navigate(
+                `/properties/${currentProperty.id}/update?step=basic_data`,
+              )
+            }
+          >
+            <span className="inline-flex items-center gap-2">
+              <MdEdit />
               Редактировать
-            </Button>
-            <Button
-              variant="outlined"
-              size="large"
-              startIcon={<MdPerson />}
-              onClick={() => setShowOwnersDrawer(true)}
-            >
+            </span>
+          </Button>
+          <Button
+            type="button"
+            variant="secondary"
+            size="lg"
+            className="w-full"
+            onClick={() => setShowOwnersDrawer(true)}
+          >
+            <span className="inline-flex items-center gap-2">
+              <MdPerson />
               Данные собственников
-            </Button>
-            <Button
-              variant="outlined"
-              size="large"
-              startIcon={<IoMdDocument />}
-            >
+            </span>
+          </Button>
+          <Button
+            type="button"
+            variant="secondary"
+            size="lg"
+            className="w-full"
+          >
+            <span className="inline-flex items-center gap-2">
+              <IoMdDocument />
               Заявки на покупку
-            </Button>
-            <Button
-              variant="outlined"
-              color="error"
-              size="large"
-              startIcon={<MdDelete />}
-              onClick={() => setShowDeactivateDrawer(true)}
-            >
+            </span>
+          </Button>
+          <Button
+            type="button"
+            variant="destructive"
+            size="lg"
+            className="w-full"
+            onClick={() => setShowDeactivateDrawer(true)}
+          >
+            <span className="inline-flex items-center gap-2">
+              <MdDelete />
               Удалить
-            </Button>
-          </Box>
-        </Box>
+            </span>
+          </Button>
+        </div>
         <PropertyDetailsOwnersDrawer />
         <PropertyOwnerDrawerModule />
-      </Grid>
+      </div>
     );
 
   return null;

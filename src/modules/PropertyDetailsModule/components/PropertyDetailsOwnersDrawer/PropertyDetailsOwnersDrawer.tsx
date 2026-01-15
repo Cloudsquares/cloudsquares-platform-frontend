@@ -3,8 +3,10 @@ import { usePropertyOwnerDrawersStore } from "@/modules/PropertyOwnerDrawerModul
 import { BasicDrawer } from "@/shared/components/BasicDrawer";
 import { PropertyOwnerCard } from "@/shared/components/PropertyOwnerCard";
 import { BasicDrawerMode } from "@/shared/interfaces/Shared";
-import { Alert, Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+
+import { Alert, AlertDescription } from "@/shared/components/ui/alert";
+import { Button } from "@/shared/components/ui/button";
 
 export const PropertyDetailsOwnersDrawer = () => {
   const showOwnersDrawer = usePropertyDetailsStore(
@@ -31,16 +33,10 @@ export const PropertyDetailsOwnersDrawer = () => {
       isOpen={showOwnersDrawer}
       setIsOpen={setShowOwnersDrawer}
     >
-      <Box sx={{ p: 2, display: "flex", flexDirection: "column", height: 1 }}>
-        <Box flexGrow={1}>
+      <div className="flex h-full flex-col gap-4 p-4">
+        <div className="flex-1">
           {showPropertyOwners && (
-            <Box
-              display="grid"
-              gap={1.5}
-              sx={{
-                gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
-              }}
-            >
+            <div className="grid gap-4 md:grid-cols-2">
               {currentProperty?.property_owners?.map((owner) => (
                 <PropertyOwnerCard
                   key={owner.id}
@@ -61,20 +57,22 @@ export const PropertyDetailsOwnersDrawer = () => {
                   }
                 />
               ))}
-            </Box>
+            </div>
           )}
 
           {!showPropertyOwners && (
-            <Alert severity="info">
-              Собственники для данного объекта недвижимости не указаны
+            <Alert variant="info">
+              <AlertDescription>
+                Собственники для данного объекта недвижимости не указаны
+              </AlertDescription>
             </Alert>
           )}
-        </Box>
-        <Box pt={2}>
+        </div>
+        <div className="pt-2">
           <Button
-            variant="contained"
-            size="large"
-            fullWidth
+            type="button"
+            size="lg"
+            className="w-full"
             onClick={() => {
               setShowOwnersDrawer(false);
               navigate(
@@ -84,8 +82,8 @@ export const PropertyDetailsOwnersDrawer = () => {
           >
             Добавить собственника
           </Button>
-        </Box>
-      </Box>
+        </div>
+      </div>
     </BasicDrawer>
   );
 };
