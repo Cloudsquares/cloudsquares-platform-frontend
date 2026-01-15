@@ -1,7 +1,8 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import { useGetAllUsersQuery } from "../../hooks";
-import { AxiosErrorAlertMessage } from "../../../../shared/components/AxiosErrorAlertMessage";
+import { AxiosErrorAlertMessage } from "@/shared/components/AxiosErrorAlertMessage";
+import { getUserStatusPriority } from "@/shared/utils";
 import { UsersListItem } from "../UsersListItem";
 import { UsersListSkeleton } from "../UsersListSkeleton";
 
@@ -12,16 +13,19 @@ export const UsersList = () => {
     if (!data) return [];
 
     return [...data].sort((a, b) => {
-      // Сначала по активности (true < false)
-      if (a.is_active !== b.is_active) {
-        return a.is_active ? -1 : 1;
+      // Сначала по приоритету статуса
+      const statusPriority =
+        getUserStatusPriority(a.user_status.status) -
+        getUserStatusPriority(b.user_status.status);
+
+      if (statusPriority !== 0) {
+        return statusPriority;
       }
 
       // Затем по дате создания (старые — выше)
-      return (
-        new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
-      );
+      return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
     });
+
   }, [data]);
 
   return (

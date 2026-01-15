@@ -13,6 +13,7 @@ export * from "./propertyAddress";
 export * from "./calculatePricePerMeter";
 export * from "./calculateDiscountInPercent";
 export * from "./htmlToText";
+export * from "./userStatus";
 
 // Basic api's
 export * from "./showApiError";

@@ -9,15 +9,28 @@ export interface UserSlim {
   last_name: string | null;
   middle_name: string | null;
 }
+export type UserStatus =
+  | "active"
+  | "banned"
+  | "pending"
+  | "verification_required"
+  | "deactivated";
+
+export interface UserStatusInfo {
+  status: UserStatus;
+  description: string | null;
+  changed_at: string | null;
+  changed_by_id: string | null;
+}
+
 export interface User extends UserSlim {
   role: UserRole;
   country_code: CountryCode;
-  is_active: boolean;
+  user_status: UserStatusInfo;
   email: string;
   agency: AgencySlim | null;
   created_at: string;
   updated_at: string;
-  deleted_at?: string;
 }
 
 export interface PostNewUserResponseData {

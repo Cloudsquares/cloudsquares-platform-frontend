@@ -1,13 +1,15 @@
 import { MdDelete, MdEdit } from "react-icons/md";
 import { Box, Chip, IconButton, Paper, Typography } from "@mui/material";
-import { User } from "../../../../shared/interfaces";
-import { displayUserName, formatDateTime } from "../../../../shared/utils";
-import { BasicDrawerMode } from "../../../../shared/interfaces/Shared";
-import { useCanAccess } from "../../../../shared/permissions/canAccess";
+import { User } from "@/shared/interfaces";
 import {
-  UserRole,
-  UserRoleDisplayText,
-} from "../../../../shared/permissions/roles";
+  displayUserName,
+  formatDateTime,
+  getUserStatusChipColor,
+  getUserStatusLabel,
+} from "@/shared/utils";
+import { BasicDrawerMode } from "@/shared/interfaces/Shared";
+import { useCanAccess } from "@/shared/permissions/canAccess";
+import { UserRole, UserRoleDisplayText } from "@/shared/permissions/roles";
 import { useUsersStore } from "../../store";
 import { titleWrapperStyles } from "./styles";
 
@@ -40,8 +42,9 @@ export const UsersListItem = ({ user }: UsersListItemProps) => {
         <Chip
           size="small"
           variant="filled"
-          color={user.is_active ? "success" : "error"}
-          label={user.is_active ? "Активный" : "Заблокирован"}
+          color={getUserStatusChipColor(user.user_status.status)}
+          label={getUserStatusLabel(user.user_status.status)}
+          title={user.user_status.description ?? undefined}
         />
         {canDeleteUsers && (
           <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
@@ -74,9 +77,12 @@ export const UsersListItem = ({ user }: UsersListItemProps) => {
         <Box component="li">Телефон: +{user.phone}</Box>
         <Box component="li">Почта: {user.email || "Не указана"}</Box>
         <Box component="li">Роль: {UserRoleDisplayText[user.role]}</Box>
-        {user.deleted_at && (
+        {user.user_status.description && (
+          <Box component="li">Причина: {user.user_status.description}</Box>
+        )}
+        {user.user_status.status === "deactivated" && user.user_status.changed_at && (
           <Box component="li">
-            Удален: {formatDateTime(user.deleted_at, true)}
+            Деактивирован: {formatDateTime(user.user_status.changed_at, true)}
           </Box>
         )}
       </Box>
