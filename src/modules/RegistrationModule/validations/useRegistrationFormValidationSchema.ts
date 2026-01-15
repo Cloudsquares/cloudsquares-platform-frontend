@@ -1,6 +1,9 @@
 import { z } from "zod";
 import { phoneRegex } from "../../../shared/constants";
 
+/**
+ * Zod-схема валидации формы регистрации агентства.
+ */
 export const useRegistrationFormValidationSchema = z
   .object({
     country_code: z

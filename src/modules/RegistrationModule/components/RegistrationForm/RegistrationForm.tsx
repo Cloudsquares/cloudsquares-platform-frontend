@@ -16,6 +16,14 @@ import { PasswordRulesHint } from "../../../../shared/components/PasswordRulesHi
 import { BasicTextField } from "../../../../shared/components/BasicTextField";
 import { devLogger } from "../../../../shared/utils";
 
+/**
+ * Форма регистрации агентского администратора и агентства.
+ *
+ * Собирает данные, нормализует телефон и отправляет запрос
+ * через `usePostNewUserMutation`.
+ *
+ * @returns JSX-форма регистрации
+ */
 export const RegistrationForm = () => {
   const setShowRegistrationDrawer = useRegistrationStore(
     (state) => state.setShowRegistrationDrawer,

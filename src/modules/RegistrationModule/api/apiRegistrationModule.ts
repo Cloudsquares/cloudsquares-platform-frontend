@@ -3,13 +3,17 @@ import { PostNewUserResponseData } from "../../../shared/interfaces";
 import { RegistrationFormData } from "../validations";
 
 /**
- * API-модуль для регистрации нового пользователя (публичная часть)
+ * API-модуль для регистрации агентства и администратора.
  */
 export const apiRegistrationModule = {
   /**
-   * Регистрация нового пользователя
-   * @param data - Данные формы регистрации
-   * @returns Ответ с данными нового пользователя
+   * Регистрирует агента с агентством через публичный эндпоинт.
+   *
+   * Формирует payload вида `{ user, agency }` и отправляет его на
+   * `/auth/register-agent-with-agency`.
+   *
+   * @param data Данные формы регистрации
+   * @returns Ответ с данными нового пользователя и токенами
    */
   postNewUser(data: RegistrationFormData): Promise<PostNewUserResponseData> {
     const { agency_title, ...userData } = data;
@@ -21,7 +25,10 @@ export const apiRegistrationModule = {
     };
 
     return axiosBaseWrap
-      .post<PostNewUserResponseData>("/auth/register-agent-with-agency", payload)
+      .post<PostNewUserResponseData>(
+        "/auth/register-agent-with-agency",
+        payload,
+      )
       .then((response) => response.data)
       .catch((error) => {
         throw error;
