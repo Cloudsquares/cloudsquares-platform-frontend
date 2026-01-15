@@ -1,5 +1,4 @@
 import { MdDelete, MdEdit } from "react-icons/md";
-import { Box, Chip, IconButton, Paper, Typography } from "@mui/material";
 import { User, UserStatus } from "@/shared/interfaces";
 import {
   displayUserName,
@@ -11,11 +10,20 @@ import { BasicDrawerMode } from "@/shared/interfaces/Shared";
 import { useCanAccess } from "@/shared/permissions/canAccess";
 import { UserRole, UserRoleDisplayText } from "@/shared/permissions/roles";
 import { useUsersStore } from "../../store";
-import { titleWrapperStyles } from "./styles";
+import { Badge } from "@/shared/components/ui/badge";
+import { Button } from "@/shared/components/ui/button";
+import { cn } from "@/shared/utils";
 
 interface UsersListItemProps {
   user: User;
 }
+
+const statusClasses = {
+  success: "border-success/30 bg-success/10 text-success",
+  warning: "border-accent/40 bg-accent/10 text-accent",
+  error: "border-error/30 bg-error/10 text-error",
+  info: "border-primary/30 bg-primary/10 text-primary",
+} satisfies Record<string, string>;
 
 // TODO: Добавить информацию о последнем входе в систему, дату и время
 export const UsersListItem = ({ user }: UsersListItemProps) => {
@@ -36,57 +44,54 @@ export const UsersListItem = ({ user }: UsersListItemProps) => {
     setEditableUser(user);
   };
 
+  const statusKey = getUserStatusChipColor(user.user_status.status);
+  const statusClassName = statusClasses[statusKey];
+
   return (
-    <Box component={Paper} p={2} height="100%">
-      <Box sx={titleWrapperStyles}>
-        <Chip
-          size="small"
-          variant="filled"
-          color={getUserStatusChipColor(user.user_status.status)}
-          label={getUserStatusLabel(user.user_status.status)}
-          title={user.user_status.description ?? undefined}
-        />
+    <div className="rounded-lg border border-border bg-card p-4">
+      <div className="flex items-center justify-between gap-3 pb-3">
+        <Badge className={cn("border", statusClassName)}>
+          {getUserStatusLabel(user.user_status.status)}
+        </Badge>
         {canDeleteUsers && (
-          <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-            <IconButton
-              size="small"
-              color="info"
+          <div className="flex items-center gap-2">
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
               onClick={handleClickEditIconButton}
             >
               <MdEdit />
-            </IconButton>
+            </Button>
             {user.role !== UserRole.agent_admin && (
-              <IconButton
-                size="small"
-                color="error"
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
                 onClick={handleClickDeleteIconButton}
+                className="text-error hover:text-error"
               >
                 <MdDelete />
-              </IconButton>
+              </Button>
             )}
-          </Box>
+          </div>
         )}
-      </Box>
-      <Typography component="h6" variant="h6">
-        {shortName}
-      </Typography>
-      <Box
-        component="ul"
-        sx={{ display: "flex", flexDirection: "column", gap: 1, pt: 1 }}
-      >
-        <Box component="li">Телефон: +{user.phone}</Box>
-        <Box component="li">Почта: {user.email || "Не указана"}</Box>
-        <Box component="li">Роль: {UserRoleDisplayText[user.role]}</Box>
+      </div>
+      <h6 className="text-h6 text-foreground">{shortName}</h6>
+      <ul className="space-y-2 pt-2 text-body2 text-labels-secondary">
+        <li>Телефон: +{user.phone}</li>
+        <li>Почта: {user.email || "Не указана"}</li>
+        <li>Роль: {UserRoleDisplayText[user.role]}</li>
         {user.user_status.description && (
-          <Box component="li">Причина: {user.user_status.description}</Box>
+          <li>Причина: {user.user_status.description}</li>
         )}
         {user.user_status.status === UserStatus.deactivated &&
           user.user_status.changed_at && (
-            <Box component="li">
+            <li>
               Деактивирован: {formatDateTime(user.user_status.changed_at, true)}
-            </Box>
+            </li>
           )}
-      </Box>
-    </Box>
+      </ul>
+    </div>
   );
 };

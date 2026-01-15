@@ -1,19 +1,11 @@
 import React from "react";
 import { useTablePagination } from "../../../../shared/hooks";
-import {
-  Alert,
-  Box,
-  CircularProgress,
-  Paper,
-  Table,
-  TableBody,
-  TableContainer,
-  TablePagination,
-} from "@mui/material";
 import { PropertyOwnersTableHeader } from "../PropertyOwnersTableHeader";
 import { PropertyOwnersTableBodyItem } from "../PropertyOwnersTableBodyItem";
 import { AxiosErrorAlertMessage } from "../../../../shared/components/AxiosErrorAlertMessage";
 import { useGetAllPropertyOwnersQuery } from "../../hooks";
+import { Alert, AlertDescription } from "@/shared/components/ui/alert";
+import { TablePagination } from "@/shared/components/ui/table-pagination";
 
 export const PropertyOwnersTable = () => {
   const { page, rowsPerPage, setPage, setRowsPerPage } = useTablePagination(
@@ -32,26 +24,19 @@ export const PropertyOwnersTable = () => {
     page: page + 1,
   });
 
-  const handleChangePage = (
-    _: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number,
-  ) => {
+  const handleChangePage = (newPage: number) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const newRowsPerPage = parseInt(event.target.value, 10);
+  const handleChangeRowsPerPage = (newRowsPerPage: number) => {
     setRowsPerPage(newRowsPerPage);
   };
   return (
     <React.Fragment>
-      <TableContainer component={Paper} sx={{ borderRadius: 0 }}>
-        <Table sx={{ minWidth: 650 }} aria-label="Таблица SOS-заявок">
+      <div className="overflow-hidden rounded-md border border-border bg-card">
+        <table className="min-w-full text-left">
           <PropertyOwnersTableHeader />
-
-          <TableBody>
+          <tbody>
             {isSuccess &&
               owners.data.map((owner, index) => (
                 <PropertyOwnersTableBodyItem
@@ -60,32 +45,31 @@ export const PropertyOwnersTable = () => {
                   number={index + 1}
                 />
               ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+          </tbody>
+        </table>
+      </div>
       {isError && error && <AxiosErrorAlertMessage error={error} />}
       {isLoading && (
-        <Box sx={{ width: 1, backgroundColor: "#fff", p: 4 }}>
-          <CircularProgress size={24} color="primary" />
-        </Box>
+        <div className="flex w-full items-center justify-center bg-white p-6">
+          <div className="h-6 w-6 animate-spin rounded-full border-2 border-grey-300 border-t-primary" />
+        </div>
       )}
-      {owners && owners.data.length === 0 && (
-        <Alert severity="warning">
-          По заданным фильтрам заявок не найдено.
+      {owners?.data.length === 0 && (
+        <Alert variant="info">
+          <AlertDescription>
+            По заданным фильтрам заявок не найдено.
+          </AlertDescription>
         </Alert>
       )}
-      <Box component={Paper}>
-        <TablePagination
-          rowsPerPageOptions={[5, 15, 30]}
-          component="div"
-          count={(owners?.pages || 1) * rowsPerPage}
-          rowsPerPage={rowsPerPage}
-          labelRowsPerPage="Заявок на странице"
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Box>
+      <TablePagination
+        rowsPerPageOptions={[5, 15, 30]}
+        count={(owners?.pages || 1) * rowsPerPage}
+        rowsPerPage={rowsPerPage}
+        labelRowsPerPage="Заявок на странице"
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
     </React.Fragment>
   );
 };

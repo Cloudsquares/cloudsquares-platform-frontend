@@ -1,59 +1,40 @@
 import { useTranslation } from "react-i18next";
-import { Box, Container, Grid, Typography } from "@mui/material";
 
 import { SelectLanguage } from "../../../../shared/components/SelectLanguage";
-import {
-  languageStyles,
-  linkStyles,
-  selectLanguageWrapperStyles,
-} from "./styles";
 
 const currentYear = new Date().getFullYear();
 
 export const Footer = () => {
   const { t } = useTranslation();
+
   return (
-    <Box
-      component="footer"
+    <footer
       data-testid="footer"
-      sx={{
-        borderTop: "1px solid",
-        borderColor: "#ccc",
-        py: 2,
-        display: { xs: "none", md: "block" },
-      }}
+      className="hidden border-t border-grey-200 py-4 md:block"
     >
-      <Container maxWidth="xl">
-        <Grid container>
-          <Grid size={{ xs: 12, md: 6 }}>
-            <Box>
-              <Typography component="h6" variant="h6">
-                CloudSquares
-              </Typography>
-              <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-                <Typography component="p" variant="body1">
-                  © {currentYear}. {t("footer.made_with")}
-                </Typography>
-                <Box
-                  sx={linkStyles}
-                  component="a"
-                  target="_blank"
-                  href="https://whitedog.kz"
-                >
-                  WhiteDog
-                </Box>
-              </Box>
-            </Box>
-          </Grid>
-          <Grid size={{ xs: 12, md: 6 }}>
-            <Box sx={languageStyles}>
-              <Box sx={selectLanguageWrapperStyles}>
-                <SelectLanguage />
-              </Box>
-            </Box>
-          </Grid>
-        </Grid>
-      </Container>
-    </Box>
+      <div className="mx-auto flex w-full max-w-screen-xl flex-col gap-4 px-4 md:flex-row md:items-center md:justify-between">
+        <div>
+          <h6 className="text-h6 text-foreground">CloudSquares</h6>
+          <div className="flex items-center gap-2">
+            <p className="text-body1 text-labels-secondary">
+              © {currentYear}. {t("footer.made_with")}
+            </p>
+            <a
+              className="font-semibold text-primary underline"
+              target="_blank"
+              rel="noreferrer"
+              href="https://whitedog.kz"
+            >
+              WhiteDog
+            </a>
+          </div>
+        </div>
+        <div className="flex justify-start md:justify-end">
+          <div className="max-w-[200px]">
+            <SelectLanguage />
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 };

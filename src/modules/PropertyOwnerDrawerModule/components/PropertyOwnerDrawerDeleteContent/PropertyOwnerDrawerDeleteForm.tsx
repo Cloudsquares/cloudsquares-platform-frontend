@@ -4,8 +4,9 @@ import {
   PropertyOwner,
 } from "@/shared/interfaces/PropertyOwner";
 import { devLogger, displayUserName } from "@/shared/utils";
-import { Box, Button, Typography } from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
+
+import { Button } from "@/shared/components/ui/button";
 
 interface DeletePropertyOwnerFormData {
   property_id: string;
@@ -46,14 +47,6 @@ export const PropertyOwnerDrawerDeleteForm = ({
       onError,
       onSuccess,
     });
-    // if (
-    //   data.user_name &&
-    //   data.user_name.trim() === displayName.fullName.trim()
-    // ) {
-    //   deactivateUserByIdMutation.mutate({ id: user.id, onSuccess: onSuccess });
-    // } else {
-    //   toast.error("Введите ФИО сотрудника для подтверждения удаления!");
-    // }
   };
 
   const handleResetForm = () => {
@@ -70,42 +63,36 @@ export const PropertyOwnerDrawerDeleteForm = ({
 
   return (
     <FormProvider {...methods}>
-      <Box
-        component="form"
+      <form
         onSubmit={handleSubmit(onSubmit, (errors) =>
           devLogger.error("Ошибки валидации:", errors),
         )}
-        sx={{ p: 2, display: "flex", flexDirection: "column", height: 1 }}
+        className="flex h-full flex-col gap-4"
       >
-        <Box flexGrow={1}>
-          <Typography>
+        <div className="flex-1">
+          <p className="text-body1 text-foreground">
             Вы уверены, что хотите удалить собственника{" "}
             <strong>
               {fullName} (
               {DisplayTextPropertyOwnerRole[editablePropertyOwner.role]})
             </strong>
             ?
-          </Typography>
-        </Box>
-        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
+          </p>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
           <Button
-            variant="contained"
-            color="secondary"
+            type="button"
+            variant="secondary"
             onClick={handleResetForm}
             disabled={disableInput}
           >
             Отмена
           </Button>
-          <Button
-            variant="contained"
-            color="error"
-            type="submit"
-            disabled={disableInput}
-          >
+          <Button type="submit" variant="destructive" disabled={disableInput}>
             Удалить
           </Button>
-        </Box>
-      </Box>
+        </div>
+      </form>
     </FormProvider>
   );
 };

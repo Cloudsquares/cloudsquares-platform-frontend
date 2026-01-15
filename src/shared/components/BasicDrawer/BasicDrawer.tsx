@@ -1,7 +1,15 @@
-import { Box, Drawer, IconButton, Typography } from "@mui/material";
+import React from "react";
 import { MdClose } from "react-icons/md";
 
-import { contentWrapperStyles, headerStyles } from "./styles";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "@/shared/components/ui/dialog";
+import { Button } from "@/shared/components/ui/button";
+import { cn } from "@/shared/utils";
 
 /**
  * Пропсы для компонента `BasicDrawer`.
@@ -26,6 +34,20 @@ interface BasicDrawerProps {
   setIsOpen: (v: boolean) => void;
 }
 
+const drawerPositionClasses = {
+  bottom: "inset-x-0 bottom-0 rounded-t-lg",
+  top: "inset-x-0 top-0 rounded-b-lg",
+  right: "inset-y-0 right-0 h-full w-full max-w-md rounded-l-lg",
+  left: "inset-y-0 left-0 h-full w-full max-w-md rounded-r-lg",
+} satisfies Record<NonNullable<BasicDrawerProps["anchor"]>, string>;
+
+const drawerHeightClasses = {
+  bottom: "h-[95vh]",
+  top: "h-[95vh]",
+  right: "h-full",
+  left: "h-full",
+} satisfies Record<NonNullable<BasicDrawerProps["anchor"]>, string>;
+
 /**
  * Компонент боковой панели (модального окна) с заголовком и кнопкой закрытия.
  *
@@ -39,38 +61,26 @@ export const BasicDrawer = ({
   anchor = "bottom",
   setIsOpen,
 }: BasicDrawerProps) => {
-  /**
-   * Обработчик открытия/закрытия модального окна.
-   * @param newOpen Новое состояние (`true` - открыть, `false` - закрыть)
-   * @returns Функция-обработчик клика
-   */
-  const toggleDrawer = (newOpen: boolean) => () => {
-    setIsOpen(newOpen);
-  };
-
   return (
-    <Drawer
-      open={isOpen}
-      onClose={toggleDrawer(false)}
-      anchor={anchor}
-      slotProps={{ paper: { sx: { borderRadius: "8px 8px 0 0" } } }}
-      transitionDuration={333}
-    >
-      <Box sx={contentWrapperStyles}>
-        <Box sx={headerStyles}>
-          <Typography component="h6" variant="h6">
-            {title}
-          </Typography>
-          <IconButton
-            color="secondary"
-            onClick={toggleDrawer(false)}
-            size="small"
-          >
-            <MdClose color="#1c1c1c" />
-          </IconButton>
-        </Box>
-        <Box sx={{ flexGrow: 1 }}>{children}</Box>
-      </Box>
-    </Drawer>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogContent
+        className={cn(
+          "flex flex-col p-0",
+          drawerPositionClasses[anchor],
+          drawerHeightClasses[anchor],
+        )}
+      >
+        <div className="flex items-center justify-between border-b border-border px-4 py-3">
+          <DialogTitle>{title}</DialogTitle>
+          <DialogClose asChild>
+            <Button type="button" variant="ghost" size="sm">
+              <MdClose className="h-4 w-4 text-foreground" />
+            </Button>
+          </DialogClose>
+        </div>
+        <DialogDescription className="sr-only">{title}</DialogDescription>
+        <div className="flex-1 overflow-auto px-4 py-3">{children}</div>
+      </DialogContent>
+    </Dialog>
   );
 };

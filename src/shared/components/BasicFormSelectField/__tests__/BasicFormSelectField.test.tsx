@@ -1,5 +1,5 @@
 import { TestProviders } from "@/providers";
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -71,7 +71,7 @@ describe("BasicFormSelectField", () => {
     renderComponent();
 
     const trigger = screen.getByRole("combobox");
-    fireEvent.mouseDown(trigger);
+    await user.click(trigger);
 
     const option = await screen.findByRole("option", { name: "Активен" });
     await user.click(option);
@@ -91,7 +91,7 @@ describe("BasicFormSelectField", () => {
     });
 
     const trigger = screen.getByRole("combobox");
-    fireEvent.mouseDown(trigger);
+    await user.click(trigger);
 
     const listbox = await screen.findByRole("listbox");
     const addButton = within(listbox).getByRole("button", {

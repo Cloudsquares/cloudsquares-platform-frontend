@@ -1,21 +1,15 @@
 import React from "react";
-import {
-  Box,
-  Button,
-  IconButton,
-  Menu,
-  MenuItem,
-  Typography,
-} from "@mui/material";
 import { MdMenu } from "react-icons/md";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
+import { Button } from "@/shared/components/ui/button";
 import {
-  menuButtonWrapperStyles,
-  mobileMenuStyles,
-  navigationListStyles,
-} from "./styles";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/shared/components/ui/dropdown-menu";
 
 // TODO: решить нужен ли бургер меню на мобилке или все ссылки будут в профиле
 export const HeaderNavigation = () => {
@@ -29,66 +23,43 @@ export const HeaderNavigation = () => {
     { title: t("header.navigation.customers"), link: "/agency/customers" },
   ];
 
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null,
-  );
-
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
   const handleClickMenuItem = (link: string) => {
-    handleCloseNavMenu();
     navigate(link);
   };
 
   return (
     <React.Fragment>
-      <Box sx={menuButtonWrapperStyles}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="menu-appbar"
-          aria-haspopup="true"
-          onClick={handleOpenNavMenu}
-          color="inherit"
-        >
-          <MdMenu />
-        </IconButton>
-        <Menu
-          id="menu-appbar"
-          anchorEl={anchorElNav}
-          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-          keepMounted
-          transformOrigin={{ vertical: "top", horizontal: "left" }}
-          open={Boolean(anchorElNav)}
-          onClose={handleCloseNavMenu}
-          sx={mobileMenuStyles}
-        >
-          {pages.map(({ title }, index) => (
-            <MenuItem key={index} onClick={handleCloseNavMenu}>
-              <Typography sx={{ textAlign: "center" }}>{title}</Typography>
-            </MenuItem>
-          ))}
-        </Menu>
-      </Box>
-      <Box sx={navigationListStyles}>
-        {pages.map(({ title, link }, index) => (
+      <div className="flex items-center md:hidden">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button type="button" variant="ghost" size="sm" aria-label="menu">
+              <MdMenu />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="start">
+            {pages.map(({ title, link }) => (
+              <DropdownMenuItem
+                key={link}
+                onSelect={() => handleClickMenuItem(link)}
+              >
+                {title}
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+      <div className="hidden items-center gap-2 md:flex">
+        {pages.map(({ title, link }) => (
           <Button
-            key={index}
+            key={link}
             onClick={() => handleClickMenuItem(link)}
-            sx={{ display: "block" }}
-            size="medium"
-            variant="text"
+            variant="ghost"
+            size="md"
           >
             {title}
           </Button>
         ))}
-      </Box>
+      </div>
     </React.Fragment>
   );
 };

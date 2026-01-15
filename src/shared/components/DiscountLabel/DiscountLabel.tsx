@@ -1,6 +1,4 @@
-import { Box, Typography } from "@mui/material";
-import { calculateDiscountInPercent } from "../../utils";
-import { discountWrapperStyles } from "./styles";
+import { calculateDiscountInPercent } from "@/shared/utils";
 
 interface DiscountLabelProps {
   price: number;
@@ -8,23 +6,16 @@ interface DiscountLabelProps {
 }
 
 export const DiscountLabel = ({ price, discount }: DiscountLabelProps) => {
+  const hasDiscount = discount > 0;
+
   return (
-    <Box sx={discountWrapperStyles(!!discount)}>
-      <Typography
-        component="p"
-        variant="subtitle1"
-        color="customColors.success"
-      >
+    <div className={hasDiscount ? "flex items-center gap-2" : "hidden"}>
+      <p className="text-subtitle1 text-success">
         -{calculateDiscountInPercent(price, discount)}%
-      </Typography>
-      <Typography
-        component="p"
-        variant="subtitle1"
-        color="customColors.grey400"
-        sx={{ textDecoration: "line-through" }}
-      >
+      </p>
+      <p className="text-subtitle1 text-grey-400 line-through">
         {price.toLocaleString("ru")} ₽
-      </Typography>
-    </Box>
+      </p>
+    </div>
   );
 };

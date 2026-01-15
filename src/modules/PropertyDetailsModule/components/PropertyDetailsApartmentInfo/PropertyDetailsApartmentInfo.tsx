@@ -1,4 +1,3 @@
-import { Box, Typography } from "@mui/material";
 import { PropertyDetailsInfoList } from "../PropertyDetailsInfoList";
 import { usePropertyDetailsStore } from "../../store";
 import { PropertyDetailsInfoItem } from "../../../../shared/interfaces/PropertyDetails";
@@ -28,13 +27,9 @@ export const PropertyDetailsApartmentInfo = () => {
   };
 
   return (
-    <Box>
-      <Typography component="h5" variant="h5">
-        О квартире
-      </Typography>
-      <Box pt={2}>
-        <PropertyDetailsInfoList data={displayData()} />
-      </Box>
-    </Box>
+    <div className="space-y-2">
+      <h5 className="text-h5 text-foreground">О квартире</h5>
+      <PropertyDetailsInfoList data={displayData()} />
+    </div>
   );
 };

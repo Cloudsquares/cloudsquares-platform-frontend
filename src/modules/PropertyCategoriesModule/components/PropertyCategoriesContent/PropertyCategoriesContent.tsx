@@ -1,24 +1,14 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
 import { PropertyCategoriesList } from "../PropertyCategoriesList";
-import { titleWrapperStyles } from "./styles";
 import { PropertyCategoriesFormDrawer } from "../PropertyCategoriesFormDrawer";
 
 export const PropertyCategoriesContent = () => {
   return (
-    <Container maxWidth={false}>
-      <Grid container spacing={2}>
-        <Grid size={12}>
-          <Box sx={titleWrapperStyles}>
-            <Typography component="h1" variant="h3">
-              Категории недвижимости
-            </Typography>
-          </Box>
-        </Grid>
-        <Grid size={12}>
-          <PropertyCategoriesList />
-          <PropertyCategoriesFormDrawer />
-        </Grid>
-      </Grid>
-    </Container>
+    <div className="mx-auto w-full max-w-screen-xl px-4 py-4">
+      <div className="grid gap-4">
+        <h1 className="text-h3 text-foreground">Категории недвижимости</h1>
+        <PropertyCategoriesList />
+        <PropertyCategoriesFormDrawer />
+      </div>
+    </div>
   );
 };

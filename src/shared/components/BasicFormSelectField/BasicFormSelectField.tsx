@@ -1,14 +1,14 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  FormHelperText,
-  MenuItem,
-  Select,
-  Typography,
-} from "@mui/material";
 import { Controller, FieldErrors, useFormContext, Path } from "react-hook-form";
-import { formControlStyles } from "../../styles";
+
+import { Button } from "@/shared/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+} from "@/shared/components/ui/select";
+import { Label } from "@/shared/components/ui/label";
+import { cn } from "@/shared/utils";
 
 // todo: Сделать по размерам таким же, как <BasicTextField />
 
@@ -46,6 +46,16 @@ interface BasicFormSelectFieldProps<T extends Record<string, unknown>> {
   };
 }
 
+const buttonColorClasses = {
+  inherit: "border-border text-foreground hover:bg-secondary",
+  primary: "border-primary text-primary hover:bg-primary/10",
+  secondary: "border-border text-foreground hover:bg-secondary",
+  success: "border-success text-success hover:bg-success/10",
+  error: "border-error text-error hover:bg-error/10",
+  info: "border-accent text-accent hover:bg-accent/10",
+  warning: "border-accent text-accent hover:bg-accent/10",
+} satisfies Record<string, string>;
+
 /**
  * Компонент выпадающего списка (select) с интеграцией `react-hook-form`.
  *
@@ -63,58 +73,97 @@ export const BasicFormSelectField = <T extends Record<string, unknown>>({
   const { formState, control } = useFormContext<T>();
   const { errors } = formState;
   const fieldError = (errors as FieldErrors<T>)[name];
+  const hasError = Boolean(fieldError?.message);
+
+  const EMPTY_VALUE = "__empty__";
+
+  const triggerId = `${name}-select`;
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+    <div className="flex w-full flex-col gap-2">
       {label && (
-        <Typography component="p" variant="body1" sx={{ textWrap: "nowrap" }}>
+        <Label className="text-body1" htmlFor={triggerId}>
           {label}
-        </Typography>
+        </Label>
       )}
-      <FormControl sx={formControlStyles(Boolean(errors[name]))}>
-        <Controller
-          name={name}
-          control={control}
-          render={({ field }) => (
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => {
+          const selectedValue = field.value as string;
+          const selectedOption = data.find(
+            (item) => item.value === selectedValue,
+          );
+          const buttonColor = buttonOptions?.buttonColor ?? "primary";
+          const normalizedValue =
+            selectedValue === undefined
+              ? undefined
+              : selectedValue === ""
+                ? EMPTY_VALUE
+                : selectedValue;
+
+          return (
             <Select
-              {...field}
-              displayEmpty
-              variant="outlined"
-              size="small"
-              sx={{ minWidth: 200 }}
+              value={normalizedValue}
+              onValueChange={(value: string) =>
+                field.onChange(value === EMPTY_VALUE ? "" : value)
+              }
               disabled={disabled}
             >
-              <MenuItem disabled value="">
-                <Typography color="customColors.colorsGrey">
-                  {placeholder}
-                </Typography>
-              </MenuItem>
+              <SelectTrigger
+                id={triggerId}
+                aria-invalid={hasError}
+                className={cn(
+                  hasError && "border-error focus-visible:ring-error",
+                )}
+              >
+                <span
+                  className={cn(
+                    "truncate",
+                    selectedOption
+                      ? "text-foreground"
+                      : "text-labels-secondary",
+                  )}
+                >
+                  {selectedOption ? selectedOption.label : placeholder}
+                </span>
+              </SelectTrigger>
+              <SelectContent>
+                {data.map((item) => {
+                  const itemValue =
+                    item.value === "" ? EMPTY_VALUE : item.value;
 
-              {data.map((item) => (
-                <MenuItem key={item.value} value={item.value}>
-                  {item.label}
-                </MenuItem>
-              ))}
-              {buttonOptions && (
-                <MenuItem onClick={buttonOptions.onButtonClick}>
-                  <Button
-                    variant="outlined"
-                    color={buttonOptions.buttonColor || "primary"}
-                    sx={{ width: { xs: 1, md: "fit-content" } }}
-                  >
-                    {buttonOptions.buttonLabel}
-                  </Button>
-                </MenuItem>
-              )}
+                  return (
+                    <SelectItem key={itemValue} value={itemValue}>
+                      {item.label}
+                    </SelectItem>
+                  );
+                })}
+                {buttonOptions && (
+                  <div className="border-t border-border px-2 py-2">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className={cn(
+                        "w-full md:w-fit",
+                        buttonColorClasses[buttonColor],
+                      )}
+                      onClick={buttonOptions.onButtonClick}
+                    >
+                      {buttonOptions.buttonLabel}
+                    </Button>
+                  </div>
+                )}
+              </SelectContent>
             </Select>
-          )}
-        />
-        {fieldError && (
-          <FormHelperText sx={{ color: "#d32f2f" }}>
-            {fieldError?.message as string}
-          </FormHelperText>
-        )}
-      </FormControl>
-    </Box>
+          );
+        }}
+      />
+      {fieldError && (
+        <p className="text-caption1 text-error">
+          {fieldError?.message as string}
+        </p>
+      )}
+    </div>
   );
 };

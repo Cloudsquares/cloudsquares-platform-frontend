@@ -1,16 +1,20 @@
 import React from "react";
-import {
-  Avatar,
-  Box,
-  IconButton,
-  Menu,
-  MenuItem,
-  Tooltip,
-  Typography,
-} from "@mui/material";
 import { useUserProfile } from "../../../../shared/permissions/hooks";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/shared/components/ui/dropdown-menu";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/shared/components/ui/tooltip";
 
 export const HeaderProfile = () => {
   const { t } = useTranslation();
@@ -36,62 +40,50 @@ export const HeaderProfile = () => {
     },
   ];
 
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null,
-  );
-
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  const fullName = [profile?.last_name, profile?.first_name]
+    .filter(Boolean)
+    .join(" ");
+  const initials = profile?.first_name?.[0] ?? "?";
 
   const handleClickMenuItem = (link: string) => {
-    handleCloseUserMenu();
     navigate(link);
   };
 
   return (
-    <Box sx={{ flexGrow: 0 }}>
-      <Tooltip title={t("header.profile_menu.tooltip_title")}>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 2,
-            cursor: "pointer",
-          }}
-          onClick={handleOpenUserMenu}
-        >
-          <Typography component="p" variant="body1" fontWeight={700}>
-            {[profile?.last_name, profile?.first_name].join(" ")}
-          </Typography>
-          <IconButton sx={{ p: 0 }}>
-            <Avatar
-              alt={profile?.first_name}
-              src="/static/images/avatar/1.jpg"
-            />
-          </IconButton>
-        </Box>
-      </Tooltip>
-      <Menu
-        sx={{ mt: "50px" }}
-        id="menu-appbar"
-        anchorEl={anchorElUser}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        keepMounted
-        transformOrigin={{ vertical: "top", horizontal: "right" }}
-        open={Boolean(anchorElUser)}
-        onClose={handleCloseUserMenu}
-      >
-        {settings.map(({ link, title }, index) => (
-          <MenuItem key={index} onClick={() => handleClickMenuItem(link)}>
-            {title}
-          </MenuItem>
-        ))}
-      </Menu>
-    </Box>
+    <div className="flex items-center">
+      <TooltipProvider>
+        <DropdownMenu>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <DropdownMenuTrigger asChild>
+                <button
+                  type="button"
+                  className="flex items-center gap-3 text-body1 text-foreground"
+                  aria-label={t("header.profile_menu.tooltip_title")}
+                >
+                  <span className="font-semibold">{fullName}</span>
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-grey-200 text-body3 text-foreground">
+                    {initials}
+                  </span>
+                </button>
+              </DropdownMenuTrigger>
+            </TooltipTrigger>
+            <TooltipContent>
+              {t("header.profile_menu.tooltip_title")}
+            </TooltipContent>
+          </Tooltip>
+          <DropdownMenuContent align="end">
+            {settings.map(({ link, title }) => (
+              <DropdownMenuItem
+                key={title}
+                onSelect={() => handleClickMenuItem(link)}
+              >
+                {title}
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </TooltipProvider>
+    </div>
   );
 };

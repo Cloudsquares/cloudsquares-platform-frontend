@@ -35,11 +35,11 @@ describe("BasicNavListToDrawer", () => {
   it("вызывает правильную функцию onClick при клике на элемент", () => {
     renderComponent();
 
-    fireEvent.click(screen.getByText("Пункт 1"));
+    fireEvent.click(screen.getByRole("button", { name: "Пункт 1" }));
     expect(mockOnClick1).toHaveBeenCalledTimes(1);
     expect(mockOnClick2).not.toHaveBeenCalled();
 
-    fireEvent.click(screen.getByText("Пункт 2"));
+    fireEvent.click(screen.getByRole("button", { name: "Пункт 2" }));
     expect(mockOnClick2).toHaveBeenCalledTimes(1);
   });
 

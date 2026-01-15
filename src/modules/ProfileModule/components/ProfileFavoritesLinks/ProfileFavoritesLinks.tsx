@@ -1,41 +1,29 @@
 import { Link } from "react-router-dom";
-import { Box, Paper, Typography } from "@mui/material";
 
 import { FaHome } from "react-icons/fa";
 import { IoDocuments } from "react-icons/io5";
 
-import {
-  profileFavoritesLinkItemStyles,
-  profileFavoritesLinksStyles,
-} from "./styles";
-
 export const ProfileFavoritesLinks = () => {
   return (
-    <Box sx={profileFavoritesLinksStyles}>
-      <Box component={Paper} sx={profileFavoritesLinkItemStyles}>
-        <Box component={Link} to="/properties">
+    <div className="grid grid-cols-2 gap-4">
+      <div className="rounded-lg border border-border bg-card p-4">
+        <Link
+          to="/properties"
+          className="flex items-center gap-3 text-foreground"
+        >
           <FaHome size={20} color="#1c1c1c" />
-          <Typography
-            component="p"
-            variant="body2"
-            color="customColors.labelsPrimary"
-          >
-            Недвижимость
-          </Typography>
-        </Box>
-      </Box>
-      <Box component={Paper} sx={profileFavoritesLinkItemStyles}>
-        <Box component={Link} to="/requests">
+          <span className="text-body2 text-labels-primary">Недвижимость</span>
+        </Link>
+      </div>
+      <div className="rounded-lg border border-border bg-card p-4">
+        <Link
+          to="/requests"
+          className="flex items-center gap-3 text-foreground"
+        >
           <IoDocuments size={20} color="#1c1c1c" />
-          <Typography
-            component="p"
-            variant="body2"
-            color="customColors.labelsPrimary"
-          >
-            Заявки
-          </Typography>
-        </Box>
-      </Box>
-    </Box>
+          <span className="text-body2 text-labels-primary">Заявки</span>
+        </Link>
+      </div>
+    </div>
   );
 };

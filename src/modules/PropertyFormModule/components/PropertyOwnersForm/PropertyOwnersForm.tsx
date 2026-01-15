@@ -1,5 +1,4 @@
 import toast from "react-hot-toast";
-import { Box, Button, Typography } from "@mui/material";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import {
@@ -16,6 +15,7 @@ import {
   PropertyOwnersDataFormData,
 } from "../../validations";
 import { usePropertyFormStore } from "../../store";
+import { Button } from "@/shared/components/ui/button";
 
 interface PropertyOwnersFormProps {
   mode: PropertyFormMode;
@@ -64,7 +64,7 @@ export const PropertyOwnersForm = ({
         devLogger.error("PropertyOwnersForm: unexpected form mode", mode);
         return;
     }
-    // TODO: Add edit mode handling
+
     if (property_id)
       createPropertyOwnerMutation.mutate({
         data,
@@ -83,99 +83,76 @@ export const PropertyOwnersForm = ({
 
   return (
     <FormProvider {...methods}>
-      <Box
-        component="form"
+      <form
         onSubmit={handleSubmit(onSubmitForm, (errors) =>
           devLogger.error("Ошибки валидации:", errors),
         )}
-        sx={{ py: 2, display: "flex", flexDirection: "column", height: 1 }}
+        className="flex h-full flex-col gap-4 py-4"
       >
-        <Box flexGrow={1}>
-          <Box pb={2}>
-            <Typography component="h4" variant="h4">
-              {DisplayTextPropertyFormMode[mode]} собственника
-            </Typography>
-          </Box>
-          <Box pb={2}>
-            <BasicTextField<PropertyOwnersDataFormData>
-              name="first_name"
-              label="Имя*"
-              placeholder="Введите название объекта"
-              disabled={disableInput}
-            />
-          </Box>
-          <Box pb={2}>
-            <BasicTextField<PropertyOwnersDataFormData>
-              name="last_name"
-              label="Фамилия"
-              placeholder="Введите название объекта"
-              disabled={disableInput}
-            />
-          </Box>
-          <Box pb={2}>
-            <BasicTextField<PropertyOwnersDataFormData>
-              name="middle_name"
-              label="Отчество"
-              placeholder="Введите название объекта"
-              disabled={disableInput}
-            />
-          </Box>
-          <Box pb={2}>
-            <BasicTextField<PropertyOwnersDataFormData>
-              name="phone"
-              label="Телефон*"
-              placeholder="+7 705 123 45 67"
-              disabled={disableInput}
-            />
-          </Box>
-          <Box pb={2}>
-            <BasicTextField<PropertyOwnersDataFormData>
-              name="email"
-              label="E-mail"
-              placeholder="Введите почту"
-              disabled={disableInput}
-            />
-          </Box>
-          <Box pb={2}>
-            <BasicTextField<PropertyOwnersDataFormData>
-              name="notes"
-              type="textarea"
-              multiline
-              minRows={4}
-              label="Заметка"
-              placeholder="Эту заметку увидят только сотрудники"
-              disabled={disableInput}
-            />
-          </Box>
-          <Box pb={2}>
-            <BasicFormSelectField
-              name="role"
-              placeholder="Роль собственника"
-              data={propertyOwnerRoleSelectOptions()}
-            />
-          </Box>
-        </Box>
-        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
+        <div className="flex-1 space-y-4">
+          <h4 className="text-h4 text-foreground">
+            {DisplayTextPropertyFormMode[mode]} собственника
+          </h4>
+          <BasicTextField<PropertyOwnersDataFormData>
+            name="first_name"
+            label="Имя*"
+            placeholder="Введите название объекта"
+            disabled={disableInput}
+          />
+          <BasicTextField<PropertyOwnersDataFormData>
+            name="last_name"
+            label="Фамилия"
+            placeholder="Введите название объекта"
+            disabled={disableInput}
+          />
+          <BasicTextField<PropertyOwnersDataFormData>
+            name="middle_name"
+            label="Отчество"
+            placeholder="Введите название объекта"
+            disabled={disableInput}
+          />
+          <BasicTextField<PropertyOwnersDataFormData>
+            name="phone"
+            label="Телефон*"
+            placeholder="+7 705 123 45 67"
+            disabled={disableInput}
+          />
+          <BasicTextField<PropertyOwnersDataFormData>
+            name="email"
+            label="E-mail"
+            placeholder="Введите почту"
+            disabled={disableInput}
+          />
+          <BasicTextField<PropertyOwnersDataFormData>
+            name="notes"
+            type="textarea"
+            multiline
+            minRows={4}
+            label="Заметка"
+            placeholder="Эту заметку увидят только сотрудники"
+            disabled={disableInput}
+          />
+          <BasicFormSelectField
+            name="role"
+            placeholder="Роль собственника"
+            data={propertyOwnerRoleSelectOptions()}
+          />
+        </div>
+        <div className="grid grid-cols-2 gap-4">
           <Button
-            variant="outlined"
-            color="error"
-            size="large"
+            type="button"
+            variant="secondary"
+            size="lg"
             disabled={disableInput}
             onClick={handleResetForm}
           >
             Очистить
           </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-            size="large"
-            disabled={disableInput}
-          >
+          <Button type="submit" size="lg" disabled={disableInput}>
             Создать
           </Button>
-        </Box>
-      </Box>
+        </div>
+      </form>
     </FormProvider>
   );
 };

@@ -1,19 +1,114 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-  --labels-primary: #262626;
+  --font-sans:
+    "Inter", "SF Pro", "SF Pro Display", "Helvetica", "Roboto", sans-serif;
+  --radius: 8px;
+
+  --color-primary: #262626;
+  --color-white: #f8f8f8;
+
+  --color-grey-50: #fafafa;
+  --color-grey-100: #f5f5f5;
+  --color-grey-200: #e5e5e5;
+  --color-grey-300: #d4d4d4;
+  --color-grey-400: #a3a3a3;
+  --color-grey-500: #737373;
+  --color-grey-600: #525252;
+  --color-grey-700: #404040;
+  --color-grey-800: #262626;
+  --color-grey-900: #171717;
+
+  --color-accent: #22c55e;
+  --color-accent-active: #16a34a;
+  --color-accent-hover: #4ade80;
+
+  --color-success: #008000;
+  --color-error: #ff0000;
+
+  --color-labels-primary: #262626;
+  --color-labels-secondary: hsla(240, 6%, 25%, 0.6);
+  --color-labels-tertiary: hsla(240, 6%, 25%, 0.3);
+  --color-labels-quaternary: hsla(240, 6%, 25%, 0.18);
+
+  --background: var(--color-white);
+  --foreground: var(--color-primary);
+  --card: var(--color-grey-50);
+  --card-foreground: var(--foreground);
+  --popover: var(--color-grey-50);
+  --popover-foreground: var(--foreground);
+  --primary: var(--color-primary);
+  --primary-foreground: var(--color-white);
+  --secondary: var(--color-grey-100);
+  --secondary-foreground: var(--foreground);
+  --muted: var(--color-grey-100);
+  --muted-foreground: var(--color-labels-secondary);
+  --accent: var(--color-accent);
+  --accent-foreground: var(--color-white);
+  --destructive: var(--color-error);
+  --destructive-foreground: var(--color-white);
+  --border: var(--color-grey-200);
+  --input: var(--color-grey-200);
+  --ring: var(--color-primary);
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  --font-h1-size: clamp(2.5rem, 5vw, 3rem);
+  --font-h1-line-height: clamp(3rem, 6vw, 3.625rem);
+  --font-h2-size: clamp(2rem, 4vw, 2.5rem);
+  --font-h2-line-height: clamp(2.5rem, 5vw, 3rem);
+  --font-h3-size: clamp(1.75rem, 3vw, 2rem);
+  --font-h3-line-height: clamp(2.125rem, 4vw, 2.375rem);
+  --font-h4-size: clamp(1.5rem, 2.5vw, 1.75rem);
+  --font-h4-line-height: clamp(2rem, 3vw, 2.125rem);
+  --font-h5-size: clamp(1.25rem, 2vw, 1.5rem);
+  --font-h5-line-height: clamp(1.75rem, 2.5vw, 1.875rem);
+  --font-h6-size: clamp(1.125rem, 1.5vw, 1.25rem);
+  --font-h6-line-height: clamp(1.5rem, 2vw, 1.625rem);
+  --font-subtitle1-size: clamp(1rem, 1.5vw, 1.125rem);
+  --font-subtitle1-line-height: clamp(1.5rem, 2vw, 1.75rem);
+  --font-subtitle2-size: clamp(0.875rem, 1.25vw, 1rem);
+  --font-subtitle2-line-height: clamp(1.25rem, 1.75vw, 1.5rem);
+  --font-body1-size: clamp(1rem, 1.25vw, 1.125rem);
+  --font-body1-line-height: clamp(1.5rem, 2vw, 1.75rem);
+  --font-body2-size: clamp(1rem, 1.25vw, 1.125rem);
+  --font-body2-line-height: clamp(1.5rem, 2vw, 1.75rem);
+  --font-body3-size: clamp(0.875rem, 1vw, 1rem);
+  --font-body3-line-height: clamp(1.25rem, 1.5vw, 1.5rem);
+  --font-body4-size: clamp(0.875rem, 1vw, 1rem);
+  --font-body4-line-height: clamp(1.25rem, 1.5vw, 1.5rem);
+  --font-caption1-size: clamp(0.75rem, 0.9vw, 0.875rem);
+  --font-caption1-line-height: clamp(1rem, 1.25vw, 1.125rem);
+  --font-caption2-size: clamp(0.75rem, 0.9vw, 0.875rem);
+  --font-caption2-line-height: clamp(1rem, 1.25vw, 1.125rem);
+  --font-caption3-size: clamp(0.625rem, 0.75vw, 0.75rem);
+  --font-caption3-line-height: clamp(0.875rem, 1vw, 1rem);
+
+  --labels-primary: var(--color-labels-primary);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
 }
 
 body {
   font-size: 16px;
   display: flex;
   flex-direction: column;
-  color: var(--labels-primary);
-  font-family:
-    "Inter", "SF Pro", "SF Pro Display", "Helvetica", "Roboto", sans-serif;
   padding: 0;
   margin: 0;
-  background-color: #f8f8f8;
 }
 
 * {
@@ -86,4 +181,20 @@ h6 {
   @media (max-width: 600px) {
     padding-bottom: 0;
   }
+}
+
+@keyframes autofillFix {
+  0%,
+  100% {
+    font-size: 1rem;
+    font-family: var(--font-sans);
+    background: #fff;
+    color: #000;
+  }
+}
+
+input:-webkit-autofill {
+  animation-name: autofillFix;
+  animation-duration: 0.01s;
+  animation-fill-mode: both;
 }

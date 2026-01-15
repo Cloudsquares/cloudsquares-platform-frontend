@@ -28,6 +28,6 @@ describe("DiscountLabel", () => {
     const { container } = renderComponent({ price: 500, discount: 0 });
 
     const wrapper = container.firstChild as HTMLElement;
-    expect(wrapper).toHaveStyle({ display: "none" });
+    expect(wrapper).toHaveClass("hidden");
   });
 });
