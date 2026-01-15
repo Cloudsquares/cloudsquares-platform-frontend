@@ -9,12 +9,13 @@ export interface UserSlim {
   last_name: string | null;
   middle_name: string | null;
 }
-export type UserStatus =
-  | "active"
-  | "banned"
-  | "pending"
-  | "verification_required"
-  | "deactivated";
+export enum UserStatus {
+  active = "active",
+  banned = "banned",
+  pending = "pending",
+  verification_required = "verification_required",
+  deactivated = "deactivated",
+}
 
 export interface UserStatusInfo {
   status: UserStatus;

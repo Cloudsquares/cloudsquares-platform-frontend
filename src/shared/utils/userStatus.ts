@@ -10,11 +10,11 @@ type UserStatusColor = "success" | "warning" | "error" | "info";
  */
 export const getUserStatusLabel = (status: UserStatus): string => {
   const labels: Record<UserStatus, string> = {
-    active: "Активный",
-    banned: "Заблокирован",
-    pending: "Ожидает подтверждения",
-    verification_required: "Требуется верификация",
-    deactivated: "Деактивирован",
+    [UserStatus.active]: "Активный",
+    [UserStatus.banned]: "Заблокирован",
+    [UserStatus.pending]: "Ожидает подтверждения",
+    [UserStatus.verification_required]: "Требуется верификация",
+    [UserStatus.deactivated]: "Деактивирован",
   };
 
   return labels[status];
@@ -28,11 +28,11 @@ export const getUserStatusLabel = (status: UserStatus): string => {
  */
 export const getUserStatusChipColor = (status: UserStatus): UserStatusColor => {
   const colors: Record<UserStatus, UserStatusColor> = {
-    active: "success",
-    banned: "error",
-    pending: "warning",
-    verification_required: "warning",
-    deactivated: "error",
+    [UserStatus.active]: "success",
+    [UserStatus.banned]: "error",
+    [UserStatus.pending]: "warning",
+    [UserStatus.verification_required]: "warning",
+    [UserStatus.deactivated]: "error",
   };
 
   return colors[status];
@@ -46,11 +46,11 @@ export const getUserStatusChipColor = (status: UserStatus): UserStatusColor => {
  */
 export const getUserStatusPriority = (status: UserStatus): number => {
   const priorities: Record<UserStatus, number> = {
-    active: 0,
-    pending: 1,
-    verification_required: 2,
-    banned: 3,
-    deactivated: 4,
+    [UserStatus.active]: 0,
+    [UserStatus.pending]: 1,
+    [UserStatus.verification_required]: 2,
+    [UserStatus.banned]: 3,
+    [UserStatus.deactivated]: 4,
   };
 
   return priorities[status];
@@ -63,5 +63,5 @@ export const getUserStatusPriority = (status: UserStatus): number => {
  * @returns {boolean} True, если пользователь активен.
  */
 export const isActiveUserStatus = (status: UserStatus): boolean => {
-  return status === "active";
+  return status === UserStatus.active;
 };

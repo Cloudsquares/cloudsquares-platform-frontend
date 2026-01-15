@@ -1,6 +1,6 @@
 import { MdDelete, MdEdit } from "react-icons/md";
 import { Box, Chip, IconButton, Paper, Typography } from "@mui/material";
-import { User } from "@/shared/interfaces";
+import { User, UserStatus } from "@/shared/interfaces";
 import {
   displayUserName,
   formatDateTime,
@@ -80,11 +80,12 @@ export const UsersListItem = ({ user }: UsersListItemProps) => {
         {user.user_status.description && (
           <Box component="li">Причина: {user.user_status.description}</Box>
         )}
-        {user.user_status.status === "deactivated" && user.user_status.changed_at && (
-          <Box component="li">
-            Деактивирован: {formatDateTime(user.user_status.changed_at, true)}
-          </Box>
-        )}
+        {user.user_status.status === UserStatus.deactivated &&
+          user.user_status.changed_at && (
+            <Box component="li">
+              Деактивирован: {formatDateTime(user.user_status.changed_at, true)}
+            </Box>
+          )}
       </Box>
     </Box>
   );
