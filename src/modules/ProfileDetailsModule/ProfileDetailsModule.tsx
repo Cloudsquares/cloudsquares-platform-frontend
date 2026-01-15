@@ -1,5 +1,4 @@
 import React from "react";
-import { Container, Grid } from "@mui/material";
 
 import { useProfileDetailsStore } from "./store/useProfileDetailsStore";
 import { ProfileDetailsAvatar } from "./components/ProfileDetailsAvatar";
@@ -29,16 +28,12 @@ export const ProfileDetailsModule = () => {
         shownBackArrowButton
         backButtonLink="/profile"
       />
-      <Container maxWidth={false}>
-        <Grid container spacing={2}>
-          <Grid size={12}>
-            <ProfileDetailsAvatar />
-          </Grid>
-          <Grid size={12}>
-            <BasicNavListToDrawer list={navList} />
-          </Grid>
-        </Grid>
-      </Container>
+      <div className="mx-auto w-full max-w-screen-xl px-4 py-4">
+        <div className="grid gap-4">
+          <ProfileDetailsAvatar />
+          <BasicNavListToDrawer list={navList} />
+        </div>
+      </div>
       <ProfileDetailsEditUserDrawer />
       <ProfileDetailsLogoutDrawer />
     </React.Fragment>

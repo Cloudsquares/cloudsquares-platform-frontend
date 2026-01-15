@@ -1,7 +1,6 @@
 import toast from "react-hot-toast";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Box, Button, Typography } from "@mui/material";
 
 import { useProfileDetailsStore } from "../../store/useProfileDetailsStore";
 import {
@@ -12,8 +11,8 @@ import { useUserProfile } from "../../../../shared/permissions/hooks";
 import { devLogger } from "../../../../shared/utils";
 import { BasicTextField } from "../../../../shared/components/BasicTextField";
 import { usePatchUserProfileMutation } from "../../hooks";
-import { phoneInputWrapperStyles } from "./styles";
 import { CountryCodeDisplayFlag } from "../../../../shared/interfaces/Country";
+import { Button } from "@/shared/components/ui/button";
 
 export const ProfileDetailsEditUserForm = () => {
   const profile = useUserProfile();
@@ -52,69 +51,57 @@ export const ProfileDetailsEditUserForm = () => {
 
   return (
     <FormProvider {...methods}>
-      <Box
-        component="form"
+      <form
         onSubmit={handleSubmit(onSubmit, (errors) =>
           devLogger.error("Ошибки валидации:", errors),
         )}
-        sx={{ p: 2, display: "flex", flexDirection: "column", height: 1 }}
+        className="flex h-full flex-col gap-4 p-4"
       >
-        <Box flexGrow={1}>
-          <Box pb={2}>
-            <Box sx={{ position: "relative" }}>
-              <Box
-                sx={phoneInputWrapperStyles}
-                onClick={() =>
-                  toast.error(
-                    "Изменить сотовый номер Вы можете через запрос в тех. поддержку",
-                  )
-                }
-              />
-              <BasicTextField<UserProfileFormData>
-                name="phone"
-                label="Телефон"
-                placeholder="+7 705 123 45 67"
-                disabled
-              />
-            </Box>
-          </Box>
-          <Box pb={2}>
-            <BasicTextField<UserProfileFormData>
-              name="first_name"
-              label="Имя"
-              placeholder="Введите имя"
-              disabled={patchUserProfileMutation.isPending}
+        <div className="flex-1 space-y-4">
+          <div className="relative">
+            <div
+              className="absolute inset-0 z-10"
+              onClick={() =>
+                toast.error(
+                  "Изменить сотовый номер Вы можете через запрос в тех. поддержку",
+                )
+              }
             />
-          </Box>
-          <Box pb={2}>
             <BasicTextField<UserProfileFormData>
-              name="last_name"
-              label="Фамилия"
-              placeholder="Введите фамилию"
-              disabled={patchUserProfileMutation.isPending}
+              name="phone"
+              label="Телефон"
+              placeholder="+7 705 123 45 67"
+              disabled
             />
-          </Box>
-          <Box pb={2}>
-            <BasicTextField<UserProfileFormData>
-              name="middle_name"
-              label="Отчество"
-              placeholder="Введите отчество"
-              disabled={patchUserProfileMutation.isPending}
-            />
-          </Box>
-          <Box pb={1}>
-            <BasicTextField<UserProfileFormData>
-              name="email"
-              label="E-mail"
-              placeholder="Введите почту"
-              disabled={patchUserProfileMutation.isPending}
-            />
-          </Box>
+          </div>
+          <BasicTextField<UserProfileFormData>
+            name="first_name"
+            label="Имя"
+            placeholder="Введите имя"
+            disabled={patchUserProfileMutation.isPending}
+          />
+          <BasicTextField<UserProfileFormData>
+            name="last_name"
+            label="Фамилия"
+            placeholder="Введите фамилию"
+            disabled={patchUserProfileMutation.isPending}
+          />
+          <BasicTextField<UserProfileFormData>
+            name="middle_name"
+            label="Отчество"
+            placeholder="Введите отчество"
+            disabled={patchUserProfileMutation.isPending}
+          />
+          <BasicTextField<UserProfileFormData>
+            name="email"
+            label="E-mail"
+            placeholder="Введите почту"
+            disabled={patchUserProfileMutation.isPending}
+          />
           {profile && (
-            <Typography
-              component="p"
-              variant="body2"
-              width="fit-content"
+            <button
+              type="button"
+              className="w-fit text-body2 text-labels-secondary"
               onClick={() =>
                 toast.error(
                   "Изменить страну Вы можете через запрос в тех. поддержку",
@@ -122,28 +109,23 @@ export const ProfileDetailsEditUserForm = () => {
               }
             >
               Страна: {CountryCodeDisplayFlag[profile.country_code]}
-            </Typography>
+            </button>
           )}
-        </Box>
-        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
           <Button
-            variant="contained"
-            color="secondary"
+            type="button"
+            variant="secondary"
             onClick={handleResetForm}
             disabled={patchUserProfileMutation.isPending}
           >
             Закрыть
           </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-            disabled={patchUserProfileMutation.isPending}
-          >
+          <Button type="submit" disabled={patchUserProfileMutation.isPending}>
             Сохранить
           </Button>
-        </Box>
-      </Box>
+        </div>
+      </form>
     </FormProvider>
   );
 };
