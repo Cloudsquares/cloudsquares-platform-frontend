@@ -1,14 +1,6 @@
 import React from "react";
 import toast from "react-hot-toast";
 import { useSearchParams } from "react-router-dom";
-import {
-  Alert,
-  Box,
-  Button,
-  CircularProgress,
-  Paper,
-  Typography,
-} from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -16,10 +8,11 @@ import {
   LoginFormDataTypes,
   LoginFormValidationSchema,
 } from "../../validations";
-import { loginFormStyles } from "./styles";
 import { useLoginMutation } from "../../hooks";
 import { useRegistrationStore } from "../../../RegistrationModule/store/useRegistrationStore";
 import { BasicTextField } from "../../../../shared/components/BasicTextField";
+import { Alert, AlertDescription } from "@/shared/components/ui/alert";
+import { Button } from "@/shared/components/ui/button";
 
 /**
  * Форма входа в систему.
@@ -73,19 +66,18 @@ export const LoginForm = () => {
   return (
     <FormProvider {...methods}>
       {showSessionEndAlert && (
-        <Alert severity="error" sx={{ mb: 1 }}>
-          Ваша сессия истекла, пожалуйста, войдите снова.
+        <Alert variant="destructive" className="mb-4">
+          <AlertDescription>
+            Ваша сессия истекла, пожалуйста, войдите снова.
+          </AlertDescription>
         </Alert>
       )}
-      <Box component={Paper}>
-        <Box
-          component="form"
+      <div className="rounded-lg border border-border bg-card">
+        <form
           onSubmit={handleSubmit(handleFormSubmit)}
-          sx={loginFormStyles}
+          className="flex flex-col gap-4 px-6 py-6 md:px-10"
         >
-          <Typography component="h1" variant="h4">
-            Добро пожаловать!
-          </Typography>
+          <h1 className="text-h4 text-foreground">Добро пожаловать!</h1>
 
           <BasicTextField<LoginFormDataTypes>
             name="phone"
@@ -104,10 +96,9 @@ export const LoginForm = () => {
             autoComplete="current-password"
             disabled={loginMutation.isPending}
           />
-          <Typography
-            component="p"
-            variant="body2"
-            sx={{ textDecoration: "underline" }}
+          <button
+            type="button"
+            className="text-left text-body2 text-foreground underline"
             onClick={() =>
               toast.error(
                 "Пожалуйста, обратитесь в тех. поддержку, мы восстановим Ваш пароль!",
@@ -115,38 +106,33 @@ export const LoginForm = () => {
             }
           >
             Забыли пароль?
-          </Typography>
-          <Box>
+          </button>
+          <div className="flex flex-col gap-3">
             <Button
               type="submit"
-              variant="contained"
-              color="primary"
-              size="large"
-              fullWidth
+              size="lg"
+              className="w-full"
               disabled={loginMutation.isPending}
             >
               {loginMutation.isPending ? (
-                <CircularProgress size={28} />
+                <span className="h-7 w-7 animate-spin rounded-full border-2 border-grey-300 border-t-primary" />
               ) : (
                 "Войти в систему"
               )}
             </Button>
-            <Typography component="p" variant="body2" my={2} textAlign="center">
-              или
-            </Typography>
+            <p className="text-center text-body2 text-labels-secondary">или</p>
             <Button
-              variant="contained"
-              color="primary"
-              size="large"
-              fullWidth
+              type="button"
+              size="lg"
+              className="w-full"
               disabled={loginMutation.isPending}
               onClick={() => setShowRegistrationDrawer(true)}
             >
               Создать аккаунт
             </Button>
-          </Box>
-        </Box>
-      </Box>
+          </div>
+        </form>
+      </div>
     </FormProvider>
   );
 };

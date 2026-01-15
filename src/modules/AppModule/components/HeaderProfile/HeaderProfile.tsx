@@ -68,7 +68,9 @@ export const HeaderProfile = () => {
                 </button>
               </DropdownMenuTrigger>
             </TooltipTrigger>
-            <TooltipContent>{t("header.profile_menu.tooltip_title")}</TooltipContent>
+            <TooltipContent>
+              {t("header.profile_menu.tooltip_title")}
+            </TooltipContent>
           </Tooltip>
           <DropdownMenuContent align="end">
             {settings.map(({ link, title }) => (

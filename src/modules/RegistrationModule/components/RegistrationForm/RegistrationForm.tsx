@@ -1,4 +1,3 @@
-import { Alert, Box, Button } from "@mui/material";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 
@@ -15,6 +14,8 @@ import { CountryCode } from "../../../../shared/interfaces/Country";
 import { PasswordRulesHint } from "../../../../shared/components/PasswordRulesHint";
 import { BasicTextField } from "../../../../shared/components/BasicTextField";
 import { devLogger } from "../../../../shared/utils";
+import { Alert, AlertDescription } from "@/shared/components/ui/alert";
+import { Button } from "@/shared/components/ui/button";
 
 /**
  * Форма регистрации агентского администратора и агентства.
@@ -61,15 +62,14 @@ export const RegistrationForm = () => {
 
   return (
     <FormProvider {...methods}>
-      <Box
-        component="form"
+      <form
         onSubmit={handleSubmit(onSubmit, (errors) =>
           devLogger.error("Ошибки валидации:", errors),
         )}
-        sx={{ p: 2, display: "flex", flexDirection: "column", height: 1 }}
+        className="flex h-full flex-col gap-4 p-4"
       >
-        <Box flexGrow={1}>
-          <Box sx={{ pb: 2 }}>
+        <div className="flex-1 space-y-4">
+          <div className="space-y-4">
             <BasicFormSelectField
               name="country_code"
               label="Страна:"
@@ -77,53 +77,47 @@ export const RegistrationForm = () => {
               data={countrySelectOptions()}
               disabled={postNewUserMutation.isPending}
             />
-            <Alert severity="info" sx={{ mt: 2 }}>
-              Ваша страна проживания и/или деятельности. От выбранной страны
-              будут зависеть некоторые системные настройки согласно
-              законодательству выбранной страны.
+            <Alert variant="info">
+              <AlertDescription>
+                Ваша страна проживания и/или деятельности. От выбранной страны
+                будут зависеть некоторые системные настройки согласно
+                законодательству выбранной страны.
+              </AlertDescription>
             </Alert>
-          </Box>
-          <Box pb={1}>
-            <BasicTextField<RegistrationFormData>
-              name="phone"
-              label="Телефон"
-              placeholder="+7 705 123 45 67"
-              inputName="tel"
-              autoComplete="tel"
-              disabled={postNewUserMutation.isPending}
-            />
-          </Box>
-          <Box pb={1}>
-            <BasicTextField<RegistrationFormData>
-              name="first_name"
-              label="Ваше имя"
-              placeholder="Введите имя"
-              inputName="name"
-              autoComplete="name"
-              disabled={postNewUserMutation.isPending}
-            />
-          </Box>
-          <Box pb={1}>
-            <BasicTextField<RegistrationFormData>
-              name="agency_title"
-              label="Название агентства"
-              placeholder="Введите название агентства"
-              inputName="organization"
-              autoComplete="organization"
-              disabled={postNewUserMutation.isPending}
-            />
-          </Box>
-          <Box pb={1}>
-            <BasicTextField<RegistrationFormData>
-              name="email"
-              label="E-mail"
-              placeholder="Введите почту"
-              inputName="email"
-              autoComplete="email"
-              disabled={postNewUserMutation.isPending}
-            />
-          </Box>
-          <Box pb={1}>
+          </div>
+          <BasicTextField<RegistrationFormData>
+            name="phone"
+            label="Телефон"
+            placeholder="+7 705 123 45 67"
+            inputName="tel"
+            autoComplete="tel"
+            disabled={postNewUserMutation.isPending}
+          />
+          <BasicTextField<RegistrationFormData>
+            name="first_name"
+            label="Ваше имя"
+            placeholder="Введите имя"
+            inputName="name"
+            autoComplete="name"
+            disabled={postNewUserMutation.isPending}
+          />
+          <BasicTextField<RegistrationFormData>
+            name="agency_title"
+            label="Название агентства"
+            placeholder="Введите название агентства"
+            inputName="organization"
+            autoComplete="organization"
+            disabled={postNewUserMutation.isPending}
+          />
+          <BasicTextField<RegistrationFormData>
+            name="email"
+            label="E-mail"
+            placeholder="Введите почту"
+            inputName="email"
+            autoComplete="email"
+            disabled={postNewUserMutation.isPending}
+          />
+          <div>
             <BasicTextField<RegistrationFormData>
               name="password"
               label="Пароль"
@@ -134,41 +128,34 @@ export const RegistrationForm = () => {
               disabled={postNewUserMutation.isPending}
             />
             <PasswordRulesHint
-              password={password}
-              touched={!!passwordStarted}
+              password={password ?? ""}
+              touched={Boolean(passwordStarted)}
             />
-          </Box>
-          <Box pb={1}>
-            <BasicTextField<RegistrationFormData>
-              name="password_confirmation"
-              label="Повторите пароль"
-              placeholder="Введите пароль повторно"
-              type="password"
-              inputName="new-password"
-              autoComplete="new-password"
-              disabled={postNewUserMutation.isPending}
-            />
-          </Box>
-        </Box>
-        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
+          </div>
+          <BasicTextField<RegistrationFormData>
+            name="password_confirmation"
+            label="Повторите пароль"
+            placeholder="Введите пароль повторно"
+            type="password"
+            inputName="new-password"
+            autoComplete="new-password"
+            disabled={postNewUserMutation.isPending}
+          />
+        </div>
+        <div className="grid grid-cols-2 gap-4">
           <Button
-            variant="contained"
-            color="secondary"
+            type="button"
+            variant="secondary"
             onClick={handleResetForm}
             disabled={postNewUserMutation.isPending}
           >
             Закрыть
           </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-            disabled={postNewUserMutation.isPending}
-          >
+          <Button type="submit" disabled={postNewUserMutation.isPending}>
             Сохранить
           </Button>
-        </Box>
-      </Box>
+        </div>
+      </form>
     </FormProvider>
   );
 };

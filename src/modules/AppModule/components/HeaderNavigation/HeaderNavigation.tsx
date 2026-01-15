@@ -32,12 +32,7 @@ export const HeaderNavigation = () => {
       <div className="flex items-center md:hidden">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button
-              type="button"
-              variant="ghost"
-              size="sm"
-              aria-label="menu"
-            >
+            <Button type="button" variant="ghost" size="sm" aria-label="menu">
               <MdMenu />
             </Button>
           </DropdownMenuTrigger>

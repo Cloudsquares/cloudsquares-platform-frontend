@@ -10,6 +10,7 @@ const alertVariants = cva(
       variant: {
         default: "border-border bg-background text-foreground",
         destructive: "border-error/50 bg-error/5 text-error",
+        info: "border-accent/50 bg-accent/10 text-foreground",
       },
     },
     defaultVariants: {
