@@ -137,7 +137,7 @@ export const RegistrationForm = () => {
             label="Повторите пароль"
             placeholder="Введите пароль повторно"
             type="password"
-            inputName="new-password"
+            inputName="new-password-confirmation"
             autoComplete="new-password"
             disabled={postNewUserMutation.isPending}
           />

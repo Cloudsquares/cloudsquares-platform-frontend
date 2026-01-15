@@ -16,7 +16,9 @@ describe("BasicDrawer", () => {
   it("отображает заголовок и содержимое", () => {
     render(<BasicDrawer {...defaultProps} />);
 
-    expect(screen.getByText("Тестовый заголовок")).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Тестовый заголовок" }),
+    ).toBeInTheDocument();
     expect(screen.getByTestId("drawer-children")).toBeInTheDocument();
   });
 

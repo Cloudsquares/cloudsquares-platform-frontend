@@ -5,6 +5,7 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogTitle,
 } from "@/shared/components/ui/dialog";
 import { Button } from "@/shared/components/ui/button";
@@ -77,6 +78,9 @@ export const BasicDrawer = ({
             </Button>
           </DialogClose>
         </div>
+        <DialogDescription className="sr-only">
+          {title}
+        </DialogDescription>
         <div className="flex-1 overflow-auto px-4 py-3">{children}</div>
       </DialogContent>
     </Dialog>
