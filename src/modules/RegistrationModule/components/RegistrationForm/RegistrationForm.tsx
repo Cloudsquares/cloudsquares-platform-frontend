@@ -16,6 +16,14 @@ import { PasswordRulesHint } from "../../../../shared/components/PasswordRulesHi
 import { BasicTextField } from "../../../../shared/components/BasicTextField";
 import { devLogger } from "../../../../shared/utils";
 
+/**
+ * Форма регистрации агентского администратора и агентства.
+ *
+ * Собирает данные, нормализует телефон и отправляет запрос
+ * через `usePostNewUserMutation`.
+ *
+ * @returns JSX-форма регистрации
+ */
 export const RegistrationForm = () => {
   const setShowRegistrationDrawer = useRegistrationStore(
     (state) => state.setShowRegistrationDrawer,
@@ -26,9 +34,9 @@ export const RegistrationForm = () => {
     defaultValues: {
       country_code: CountryCode.KZ,
       first_name: "",
+      agency_title: "",
       phone: "+7",
       email: "",
-      role: "agent_admin",
     },
   });
 
@@ -92,6 +100,16 @@ export const RegistrationForm = () => {
               placeholder="Введите имя"
               inputName="name"
               autoComplete="name"
+              disabled={postNewUserMutation.isPending}
+            />
+          </Box>
+          <Box pb={1}>
+            <BasicTextField<RegistrationFormData>
+              name="agency_title"
+              label="Название агентства"
+              placeholder="Введите название агентства"
+              inputName="organization"
+              autoComplete="organization"
               disabled={postNewUserMutation.isPending}
             />
           </Box>

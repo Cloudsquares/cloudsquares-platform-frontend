@@ -1,6 +1,9 @@
 import { z } from "zod";
 import { phoneRegex } from "../../../shared/constants";
 
+/**
+ * Zod-схема валидации формы регистрации агентства.
+ */
 export const useRegistrationFormValidationSchema = z
   .object({
     country_code: z
@@ -32,7 +35,10 @@ export const useRegistrationFormValidationSchema = z
       .optional()
       .or(z.literal("")),
 
-    role: z.string(), // TODO: роль зависит от места и способы регистрации, обновить это в будущем
+    agency_title: z
+      .string()
+      .min(1, { message: "Введите название агентства" })
+      .max(255, { message: "Слишком длинное значение" }),
 
     email: z
       .email({ message: "Некорректный формат email" })
