@@ -1,8 +1,10 @@
-import { useNavigate } from "react-router-dom";
-import { Alert, Box, Button } from "@mui/material";
+import { usePropertyDetailsStore } from "@/modules/PropertyDetailsModule/store";
+import { usePropertyOwnerDrawersStore } from "@/modules/PropertyOwnerDrawerModule/store";
 import { BasicDrawer } from "@/shared/components/BasicDrawer";
 import { PropertyOwnerCard } from "@/shared/components/PropertyOwnerCard";
-import { usePropertyDetailsStore } from "../../store";
+import { BasicDrawerMode } from "@/shared/interfaces/Shared";
+import { Alert, Box, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export const PropertyDetailsOwnersDrawer = () => {
   const showOwnersDrawer = usePropertyDetailsStore(
@@ -13,6 +15,9 @@ export const PropertyDetailsOwnersDrawer = () => {
   );
   const currentProperty = usePropertyDetailsStore(
     (state) => state.currentProperty,
+  );
+  const openPropertyOwnerDrawerWithMode = usePropertyOwnerDrawersStore(
+    (state) => state.openPropertyOwnerDrawerWithMode,
   );
 
   const showPropertyOwners =
@@ -40,8 +45,20 @@ export const PropertyDetailsOwnersDrawer = () => {
                 <PropertyOwnerCard
                   key={owner.id}
                   owner={owner}
-                  onDelete={() => {}}
-                  onEdit={() => {}}
+                  onDelete={() =>
+                    openPropertyOwnerDrawerWithMode(
+                      BasicDrawerMode.delete,
+                      owner,
+                      currentProperty.id,
+                    )
+                  }
+                  onEdit={() =>
+                    openPropertyOwnerDrawerWithMode(
+                      BasicDrawerMode.edit,
+                      owner,
+                      currentProperty.id,
+                    )
+                  }
                 />
               ))}
             </Box>

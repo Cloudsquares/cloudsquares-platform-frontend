@@ -1,3 +1,7 @@
+import { useDeactivateUserByIdMutation } from "@/modules/UsersModule/hooks";
+import { BasicTextField } from "@/shared/components/BasicTextField";
+import { User } from "@/shared/interfaces";
+import { devLogger, displayUserName } from "@/shared/utils";
 import {
   Box,
   Button,
@@ -6,11 +10,7 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import { User } from "../../../../shared/interfaces";
-import { devLogger, displayUserName } from "../../../../shared/utils";
-import { BasicTextField } from "../../../../shared/components/BasicTextField";
 import { FormProvider, useForm } from "react-hook-form";
-import { useDeactivateUserByIdMutation } from "../../hooks";
 import toast from "react-hot-toast";
 
 interface UsersDeleteFormProps {

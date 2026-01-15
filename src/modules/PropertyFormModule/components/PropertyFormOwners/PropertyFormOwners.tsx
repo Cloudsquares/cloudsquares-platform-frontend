@@ -1,12 +1,15 @@
-import { useParams } from "react-router-dom";
 import { Alert, Box, Skeleton, Typography } from "@mui/material";
+import { useParams } from "react-router-dom";
 
-import { PropertyFormMode } from "@/shared/interfaces/PropertyForm";
-import { useGetAllPropertyOwnersByPropertyIDQuery } from "@/shared/hooks/propertyOwners";
 import { AxiosErrorAlertMessage } from "@/shared/components/AxiosErrorAlertMessage";
 import { PropertyOwnerCard } from "@/shared/components/PropertyOwnerCard";
+import { useGetAllPropertyOwnersByPropertyIDQuery } from "@/shared/hooks/propertyOwners";
 import { Property } from "@/shared/interfaces/Property";
+import { PropertyFormMode } from "@/shared/interfaces/PropertyForm";
 
+import { PropertyOwnerDrawerModule } from "@/modules/PropertyOwnerDrawerModule";
+import { usePropertyOwnerDrawersStore } from "@/modules/PropertyOwnerDrawerModule/store";
+import { BasicDrawerMode } from "@/shared/interfaces/Shared";
 import { PropertyOwnersForm } from "../PropertyOwnersForm";
 import { skeletonWrapperStyles } from "./styles";
 
@@ -18,6 +21,9 @@ interface PropertyFormOwnersProps {
 export const PropertyFormOwners = ({ mode }: PropertyFormOwnersProps) => {
   const { id } = useParams<{ id: string }>();
   const propertyId = id ?? "";
+  const openPropertyOwnerDrawerWithMode = usePropertyOwnerDrawersStore(
+    (state) => state.openPropertyOwnerDrawerWithMode,
+  );
 
   const { data, isLoading, error } =
     useGetAllPropertyOwnersByPropertyIDQuery(propertyId);
@@ -62,8 +68,20 @@ export const PropertyFormOwners = ({ mode }: PropertyFormOwnersProps) => {
               <PropertyOwnerCard
                 key={owner.id}
                 owner={owner}
-                onDelete={() => {}}
-                onEdit={() => {}}
+                onDelete={() =>
+                  openPropertyOwnerDrawerWithMode(
+                    BasicDrawerMode.delete,
+                    owner,
+                    propertyId,
+                  )
+                }
+                onEdit={() =>
+                  openPropertyOwnerDrawerWithMode(
+                    BasicDrawerMode.edit,
+                    owner,
+                    propertyId,
+                  )
+                }
               />
             ))}
           </Box>
@@ -72,8 +90,13 @@ export const PropertyFormOwners = ({ mode }: PropertyFormOwnersProps) => {
       {!id && isEditMode ? (
         <Alert severity="error">ID недвижимости не определен!</Alert>
       ) : (
-        <PropertyOwnersForm mode={mode} property_id={id} onSuccess={() => {}} />
+        <PropertyOwnersForm
+          mode={PropertyFormMode.create}
+          property_id={id}
+          onSuccess={() => {}}
+        />
       )}
+      <PropertyOwnerDrawerModule />
     </Box>
   );
 };

@@ -1,19 +1,19 @@
 import {
-  Card,
-  CardContent,
-  Typography,
-  Stack,
-  Chip,
-  Box,
-  IconButton,
-  Tooltip,
-} from "@mui/material";
-import { MdEdit, MdDelete } from "react-icons/md";
-import {
-  PropertyOwner,
   DisplayTextPropertyOwnerRole,
+  PropertyOwner,
 } from "@/shared/interfaces/PropertyOwner";
 import { displayUserName } from "@/shared/utils";
+import {
+  Box,
+  Card,
+  CardContent,
+  Chip,
+  IconButton,
+  Stack,
+  Tooltip,
+  Typography,
+} from "@mui/material";
+import { MdDelete, MdEdit } from "react-icons/md";
 
 interface PropertyOwnerCardProps {
   owner: PropertyOwner;

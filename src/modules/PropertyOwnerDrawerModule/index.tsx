@@ -1,0 +1,1 @@
+export { PropertyOwnerDrawerModule } from "./PropertyOwnerDrawerModule";

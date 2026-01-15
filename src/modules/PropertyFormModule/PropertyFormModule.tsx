@@ -1,15 +1,15 @@
-import { Box } from "@mui/material";
-import { useParams } from "react-router-dom";
-import { useGetPropertyDetailsQuery } from "@/shared/hooks/propertyDetails";
-import { PropertyFormMode } from "@/shared/interfaces/PropertyForm";
 import { AxiosErrorAlertMessage } from "@/shared/components/AxiosErrorAlertMessage";
 import { AxiosLoadingCircularProgress } from "@/shared/components/AxiosLoadingCircularProgress";
+import { useGetPropertyDetailsQuery } from "@/shared/hooks/propertyDetails";
+import { PropertyFormMode } from "@/shared/interfaces/PropertyForm";
+import { Box } from "@mui/material";
+import { useParams } from "react-router-dom";
 
 import { PropertyBasicDataForm } from "./components/PropertyBasicDataForm";
-import { PropertyFormSteps, usePropertyFormStore } from "./store";
+import { PropertyFormOwners } from "./components/PropertyFormOwners";
 import { PropertyFormStepCounter } from "./components/PropertyFormStepCounter";
 import { usePropertyFormStepSync } from "./hooks";
-import { PropertyFormOwners } from "./components/PropertyFormOwners";
+import { PropertyFormSteps, usePropertyFormStore } from "./store";
 
 interface PropertyFormModuleProps {
   mode: PropertyFormMode;
