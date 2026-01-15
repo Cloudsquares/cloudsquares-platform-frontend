@@ -1,4 +1,4 @@
-import { apiSharedUsers } from "../../../shared/api";
+import { axiosBaseWrap } from "../../../configs/api";
 import { PostNewUserResponseData } from "../../../shared/interfaces";
 import { RegistrationFormData } from "../validations";
 
@@ -12,6 +12,19 @@ export const apiRegistrationModule = {
    * @returns Ответ с данными нового пользователя
    */
   postNewUser(data: RegistrationFormData): Promise<PostNewUserResponseData> {
-    return apiSharedUsers.postNewUser(data);
+    const { agency_title, ...userData } = data;
+    const payload = {
+      user: userData,
+      agency: {
+        title: agency_title,
+      },
+    };
+
+    return axiosBaseWrap
+      .post<PostNewUserResponseData>("/auth/register-agent-with-agency", payload)
+      .then((response) => response.data)
+      .catch((error) => {
+        throw error;
+      });
   },
 };

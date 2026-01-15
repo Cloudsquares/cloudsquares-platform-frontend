@@ -26,9 +26,9 @@ export const RegistrationForm = () => {
     defaultValues: {
       country_code: CountryCode.KZ,
       first_name: "",
+      agency_title: "",
       phone: "+7",
       email: "",
-      role: "agent_admin",
     },
   });
 
@@ -92,6 +92,16 @@ export const RegistrationForm = () => {
               placeholder="Введите имя"
               inputName="name"
               autoComplete="name"
+              disabled={postNewUserMutation.isPending}
+            />
+          </Box>
+          <Box pb={1}>
+            <BasicTextField<RegistrationFormData>
+              name="agency_title"
+              label="Название агентства"
+              placeholder="Введите название агентства"
+              inputName="organization"
+              autoComplete="organization"
               disabled={postNewUserMutation.isPending}
             />
           </Box>
