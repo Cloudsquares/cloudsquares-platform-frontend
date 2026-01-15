@@ -2,7 +2,6 @@ import { AxiosErrorAlertMessage } from "@/shared/components/AxiosErrorAlertMessa
 import { AxiosLoadingCircularProgress } from "@/shared/components/AxiosLoadingCircularProgress";
 import { useGetPropertyDetailsQuery } from "@/shared/hooks/propertyDetails";
 import { PropertyFormMode } from "@/shared/interfaces/PropertyForm";
-import { Box } from "@mui/material";
 import { useParams } from "react-router-dom";
 
 import { PropertyBasicDataForm } from "./components/PropertyBasicDataForm";
@@ -18,35 +17,33 @@ interface PropertyFormModuleProps {
 export const PropertyFormModule = ({ mode }: PropertyFormModuleProps) => {
   const { id: idOrSlug } = useParams<{ id: string }>();
   const step = usePropertyFormStore((state) => state.step);
-  // Синхронизация шага с URL / режимом
   usePropertyFormStepSync(mode);
 
   const { data, isLoading, error } = useGetPropertyDetailsQuery(idOrSlug);
 
   if (mode === PropertyFormMode.edit && error) {
     return (
-      <Box p={2}>
+      <div className="p-4">
         <AxiosErrorAlertMessage error={error} />
-      </Box>
+      </div>
     );
   }
 
   if (isLoading) {
-    // TODO: add skeleton
     return <AxiosLoadingCircularProgress />;
   }
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
+    <div className="flex h-full flex-col">
       <PropertyFormStepCounter />
-      <Box flexGrow={1}>
+      <div className="flex-1">
         {step === PropertyFormSteps.basic_data && (
           <PropertyBasicDataForm mode={mode} editableProperty={data} />
         )}
         {step === PropertyFormSteps.property_owners && (
           <PropertyFormOwners mode={mode} editableProperty={data} />
         )}
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 };

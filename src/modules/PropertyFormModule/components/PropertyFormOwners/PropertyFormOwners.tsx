@@ -1,4 +1,3 @@
-import { Alert, Box, Skeleton, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 
 import { AxiosErrorAlertMessage } from "@/shared/components/AxiosErrorAlertMessage";
@@ -6,12 +5,13 @@ import { PropertyOwnerCard } from "@/shared/components/PropertyOwnerCard";
 import { useGetAllPropertyOwnersByPropertyIDQuery } from "@/shared/hooks/propertyOwners";
 import { Property } from "@/shared/interfaces/Property";
 import { PropertyFormMode } from "@/shared/interfaces/PropertyForm";
+import { Alert, AlertDescription } from "@/shared/components/ui/alert";
+import { Skeleton } from "@/shared/components/ui/skeleton";
 
 import { PropertyOwnerDrawerModule } from "@/modules/PropertyOwnerDrawerModule";
 import { usePropertyOwnerDrawersStore } from "@/modules/PropertyOwnerDrawerModule/store";
 import { BasicDrawerMode } from "@/shared/interfaces/Shared";
 import { PropertyOwnersForm } from "../PropertyOwnersForm";
-import { skeletonWrapperStyles } from "./styles";
 
 interface PropertyFormOwnersProps {
   mode: PropertyFormMode;
@@ -31,39 +31,36 @@ export const PropertyFormOwners = ({ mode }: PropertyFormOwnersProps) => {
   const isEditMode = mode === PropertyFormMode.edit;
 
   return (
-    <Box display="grid" gap={2}>
-      <Box>
+    <div className="grid gap-4">
+      <div className="space-y-4">
         {isEditMode && (
-          <Typography component="h4" variant="h4" mb={1.5}>
+          <h4 className="text-h4 text-foreground">
             Собственники {owners.length ? `(${owners.length})` : ""}
-          </Typography>
+          </h4>
         )}
 
         {isLoading && (
-          <Box sx={skeletonWrapperStyles}>
-            <Skeleton variant="rounded" height={150} />
-            <Skeleton variant="rounded" height={150} />
-            <Skeleton variant="rounded" height={150} />
-            <Skeleton variant="rounded" height={150} />
-          </Box>
+          <div className="grid gap-4 md:grid-cols-2">
+            <Skeleton className="h-[150px]" />
+            <Skeleton className="h-[150px]" />
+            <Skeleton className="h-[150px]" />
+            <Skeleton className="h-[150px]" />
+          </div>
         )}
 
         {error && <AxiosErrorAlertMessage error={error} />}
 
         {isEditMode && !isLoading && !error && owners.length === 0 && (
-          <Alert severity="info">
-            Собственников пока нет, Вы можете добавить их при помощи формы ниже
+          <Alert variant="info">
+            <AlertDescription>
+              Собственников пока нет, Вы можете добавить их при помощи формы
+              ниже
+            </AlertDescription>
           </Alert>
         )}
 
-        {owners?.length > 0 && (
-          <Box
-            display="grid"
-            gap={1.5}
-            sx={{
-              gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
-            }}
-          >
+        {owners.length > 0 && (
+          <div className="grid gap-4 md:grid-cols-2">
             {owners.map((owner) => (
               <PropertyOwnerCard
                 key={owner.id}
@@ -84,11 +81,13 @@ export const PropertyFormOwners = ({ mode }: PropertyFormOwnersProps) => {
                 }
               />
             ))}
-          </Box>
+          </div>
         )}
-      </Box>
+      </div>
       {!id && isEditMode ? (
-        <Alert severity="error">ID недвижимости не определен!</Alert>
+        <Alert variant="destructive">
+          <AlertDescription>ID недвижимости не определен!</AlertDescription>
+        </Alert>
       ) : (
         <PropertyOwnersForm
           mode={PropertyFormMode.create}
@@ -97,6 +96,6 @@ export const PropertyFormOwners = ({ mode }: PropertyFormOwnersProps) => {
         />
       )}
       <PropertyOwnerDrawerModule />
-    </Box>
+    </div>
   );
 };
