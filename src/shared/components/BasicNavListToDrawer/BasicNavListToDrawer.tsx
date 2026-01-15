@@ -1,6 +1,6 @@
-import { Box, Paper } from "@mui/material";
 import { FaAngleRight } from "react-icons/fa";
-import { basicNavListToDrawerListItemStyles } from "./styles";
+
+import { cn } from "@/shared/utils";
 
 export interface BasicNavListToDrawerItem {
   label: string;
@@ -13,24 +13,26 @@ interface BasicNavListToDrawerProps {
 
 export const BasicNavListToDrawer = ({ list }: BasicNavListToDrawerProps) => {
   return (
-    <Box component={Paper} sx={{ py: 0.5 }}>
-      <Box component="ul">
-        {list.map(({ label, onClick }, i) => (
-          <Box
-            key={i}
-            component="li"
-            onClick={onClick}
-            sx={basicNavListToDrawerListItemStyles(i === list.length - 1)}
-          >
-            {label}
-            <Box
-              sx={{ ml: "auto", mr: 1, display: "flex", alignItems: "center" }}
+    <div className="rounded-md border border-border bg-card py-2">
+      <ul>
+        {list.map(({ label, onClick }, index) => (
+          <li key={`${label}-${index}`}>
+            <button
+              type="button"
+              onClick={onClick}
+              className={cn(
+                "flex w-full items-center gap-2 px-4 py-3 text-body2 text-foreground",
+                index < list.length - 1 && "border-b border-grey-200",
+              )}
             >
-              <FaAngleRight data-testid="fa-icon" size={16} color="#1c1c1c" />
-            </Box>
-          </Box>
+              <span>{label}</span>
+              <span className="ml-auto flex items-center">
+                <FaAngleRight data-testid="fa-icon" size={16} color="#1c1c1c" />
+              </span>
+            </button>
+          </li>
         ))}
-      </Box>
-    </Box>
+      </ul>
+    </div>
   );
 };

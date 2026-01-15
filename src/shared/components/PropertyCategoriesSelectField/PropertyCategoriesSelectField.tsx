@@ -1,11 +1,12 @@
 import { useGetAllPropertyCategoriesQuery } from "@/shared/hooks/propertyCategories";
 import { PropertyCategory } from "@/shared/interfaces/PropertyCategory";
 import { useUserProfile } from "@/shared/permissions/hooks";
-import { Skeleton } from "@mui/material";
 import React from "react";
 import { FieldValues, Path } from "react-hook-form";
+
 import { AxiosErrorAlertMessage } from "../AxiosErrorAlertMessage";
 import { BasicFormSelectField } from "../BasicFormSelectField";
+import { Skeleton } from "@/shared/components/ui/skeleton";
 
 interface PropertyCategoriesSelectFieldProps<TFieldValues extends FieldValues> {
   name: Path<TFieldValues>;
@@ -55,7 +56,7 @@ export const PropertyCategoriesSelectField = <
         <AxiosErrorAlertMessage error={propertyCategoriesError} />
       )}
       {!propertyCategoriesData && propertyCategoriesIsLoading && (
-        <Skeleton width="100%" height="43px" variant="rounded" />
+        <Skeleton className="h-11 w-full" />
       )}
       {propertyCategoriesData && (
         <BasicFormSelectField<TFieldValues>

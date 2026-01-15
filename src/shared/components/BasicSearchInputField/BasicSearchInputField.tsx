@@ -97,7 +97,9 @@ export const BasicSearchInputField = ({
           </div>
         )}
       />
-      {errorMessage && <p className="text-caption1 text-error">{errorMessage}</p>}
+      {errorMessage && (
+        <p className="text-caption1 text-error">{errorMessage}</p>
+      )}
     </div>
   );
 };
