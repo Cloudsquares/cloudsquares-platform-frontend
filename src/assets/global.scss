@@ -182,3 +182,19 @@ h6 {
     padding-bottom: 0;
   }
 }
+
+@keyframes autofillFix {
+  0%,
+  100% {
+    font-size: 1rem;
+    font-family: var(--font-sans);
+    background: #fff;
+    color: #000;
+  }
+}
+
+input:-webkit-autofill {
+  animation-name: autofillFix;
+  animation-duration: 0.01s;
+  animation-fill-mode: both;
+}

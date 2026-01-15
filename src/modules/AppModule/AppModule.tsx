@@ -4,17 +4,14 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { ru } from "date-fns/locale";
 import { ThemeProvider } from "@emotion/react";
-import { Box, CircularProgress } from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 import { RouteList } from "../../routelist";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
-import { GlobalAutofillFix } from "./components/GlobalAutofillFix";
 import { ToasterProvider, AuthProvider } from "../../providers";
 import { customTheme } from "../../themes/customTheme";
-import { loadingWrapperStyles } from "./styles";
 
 import { BottomNavigationMenu } from "../../shared/components/Mobile/BottomNavigationMenu";
 
@@ -39,22 +36,21 @@ export const AppModule = () => {
       <QueryClientProvider client={client}>
         <ThemeProvider theme={customTheme}>
           <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ru}>
-            <GlobalAutofillFix />
             {isLoading ? (
-              <Box sx={loadingWrapperStyles}>
-                <CircularProgress size={32} color="primary" />
-              </Box>
+              <div className="flex h-screen items-center justify-center pointer-events-none">
+                <div className="h-8 w-8 animate-spin rounded-full border-2 border-grey-300 border-t-primary" />
+              </div>
             ) : (
-              <Box component="div" className="wrapper">
+              <div className="wrapper">
                 <Header />
-                <Box component="main" className="content">
+                <main className="content">
                   <React.Suspense>
                     <RouteList />
                   </React.Suspense>
                   <BottomNavigationMenu />
-                </Box>
+                </main>
                 <Footer />
-              </Box>
+              </div>
             )}
             <AuthProvider setIsLoading={setIsLoading} />
             <ToasterProvider />
