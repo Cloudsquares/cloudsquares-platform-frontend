@@ -1,6 +1,5 @@
 import React from "react";
 import toast from "react-hot-toast";
-import { Box, Button } from "@mui/material";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 
@@ -23,6 +22,7 @@ import { useCreateNewUserMutation, usePatchUserMutation } from "./hooks";
 import { User } from "../../shared/interfaces";
 import { normalizeEditableUserData } from "./utils";
 import { useCanAccess } from "../../shared/permissions/canAccess";
+import { Button } from "@/shared/components/ui/button";
 
 interface UsersFormModuleProps {
   mode: BasicDrawerMode;
@@ -96,57 +96,46 @@ export const UsersFormModule = ({
 
   return (
     <FormProvider {...methods}>
-      <Box
-        component="form"
+      <form
         onSubmit={handleSubmit(onSubmitForm, (errors) =>
           devLogger.error("Ошибки валидации:", errors),
         )}
-        sx={{ p: 2, display: "flex", flexDirection: "column", height: 1 }}
+        className="flex h-full flex-col gap-4 p-4"
       >
-        <Box flexGrow={1}>
-          <Box pb={2}>
-            <BasicTextField<UsersFormData>
-              name="first_name"
-              label="Имя"
-              placeholder="Введите имя сотрудника"
-              disabled={disableInput}
-            />
-          </Box>
-          <Box pb={2}>
-            <BasicTextField<UsersFormData>
-              name="last_name"
-              label="Фамилия"
-              placeholder="Введите фамилию сотрудника"
-              disabled={disableInput}
-            />
-          </Box>
-          <Box pb={2}>
-            <BasicTextField<UsersFormData>
-              name="middle_name"
-              label="Отчество"
-              placeholder="Введите отчество сотрудника"
-              disabled={disableInput}
-            />
-          </Box>
-          <Box pb={2}>
-            <BasicTextField<UsersFormData>
-              name="email"
-              label="Почта"
-              placeholder="Введите почту сотрудника"
-              disabled={disableInput}
-            />
-          </Box>
-          <Box pb={2}>
-            <BasicTextField<UsersFormData>
-              name="phone"
-              label="Телефон"
-              placeholder="+7 705 123 45 67"
-              disabled={disableInput}
-            />
-          </Box>
+        <div className="flex-1 space-y-4">
+          <BasicTextField<UsersFormData>
+            name="first_name"
+            label="Имя"
+            placeholder="Введите имя сотрудника"
+            disabled={disableInput}
+          />
+          <BasicTextField<UsersFormData>
+            name="last_name"
+            label="Фамилия"
+            placeholder="Введите фамилию сотрудника"
+            disabled={disableInput}
+          />
+          <BasicTextField<UsersFormData>
+            name="middle_name"
+            label="Отчество"
+            placeholder="Введите отчество сотрудника"
+            disabled={disableInput}
+          />
+          <BasicTextField<UsersFormData>
+            name="email"
+            label="Почта"
+            placeholder="Введите почту сотрудника"
+            disabled={disableInput}
+          />
+          <BasicTextField<UsersFormData>
+            name="phone"
+            label="Телефон"
+            placeholder="+7 705 123 45 67"
+            disabled={disableInput}
+          />
           {canEditUserPassword && (
             <React.Fragment>
-              <Box pb={2}>
+              <div>
                 <BasicTextField<UsersFormData>
                   name="password"
                   label="Пароль"
@@ -160,60 +149,48 @@ export const UsersFormModule = ({
                   password={password || ""}
                   touched={!!passwordStarted}
                 />
-              </Box>
-              <Box pb={2}>
-                <BasicTextField<UsersFormData>
-                  name="password_confirmation"
-                  label="Повторите пароль"
-                  placeholder="Введите пароль повторно"
-                  type="password"
-                  inputName="new-password"
-                  autoComplete="new-password"
-                  disabled={disableInput}
-                />
-              </Box>
+              </div>
+              <BasicTextField<UsersFormData>
+                name="password_confirmation"
+                label="Повторите пароль"
+                placeholder="Введите пароль повторно"
+                type="password"
+                inputName="new-password"
+                autoComplete="new-password"
+                disabled={disableInput}
+              />
             </React.Fragment>
           )}
-          <Box sx={{ pb: 2 }}>
-            <BasicFormSelectField
-              name="country_code"
-              label="Страна:"
-              placeholder="Выберите страну"
-              data={countrySelectOptions()}
-              disabled={disableInput}
-            />
-          </Box>
-          <Box sx={{ pb: 2 }}>
-            <BasicFormSelectField
-              name="role"
-              label="Роль:"
-              placeholder="Выберите роль"
-              data={userRoleSelectOptions()}
-              disabled={disableInput}
-            />
-          </Box>
-        </Box>
-        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
+          <BasicFormSelectField
+            name="country_code"
+            label="Страна:"
+            placeholder="Выберите страну"
+            data={countrySelectOptions()}
+            disabled={disableInput}
+          />
+          <BasicFormSelectField
+            name="role"
+            label="Роль:"
+            placeholder="Выберите роль"
+            data={userRoleSelectOptions()}
+            disabled={disableInput}
+          />
+        </div>
+        <div className="grid grid-cols-2 gap-4">
           <Button
-            variant="contained"
-            color="secondary"
-            size="large"
+            type="button"
+            variant="secondary"
+            size="lg"
             onClick={handleResetForm}
             disabled={disableInput}
           >
             Закрыть
           </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-            size="large"
-            disabled={disableInput}
-          >
+          <Button type="submit" size="lg" disabled={disableInput}>
             Сохранить
           </Button>
-        </Box>
-      </Box>
+        </div>
+      </form>
     </FormProvider>
   );
 };

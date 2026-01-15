@@ -1,11 +1,11 @@
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import { Button, TableBody, TableCell, TableRow } from "@mui/material";
 import {
   Customer,
   ServiceTypeDisplayText,
 } from "../../../../shared/interfaces/Customer";
 import { displayUserName } from "../../../../shared/utils";
+import { Button } from "@/shared/components/ui/button";
 
 interface CustomersTableBodyProps {
   data: Customer[];
@@ -24,26 +24,28 @@ export const CustomersTableBody = ({ data }: CustomersTableBodyProps) => {
   };
 
   return (
-    <TableBody>
+    <tbody>
       {data.map((item) => (
-        <TableRow key={item.id}>
-          <TableCell>{item.id}</TableCell>
-          <TableCell>{renderUserName(item)}</TableCell>
-          <TableCell>{item.phone}</TableCell>
-          <TableCell>{item.email}</TableCell>
-          <TableCell>{ServiceTypeDisplayText[item.service_type]}</TableCell>
-          <TableCell>{item.description}</TableCell>
-          <TableCell>
-            <Button
-              variant="contained"
-              size="medium"
-              onClick={handleClickButton}
-            >
+        <tr key={item.id} className="border-b border-grey-200">
+          <td className="px-3 py-2 text-body2 text-foreground">{item.id}</td>
+          <td className="px-3 py-2 text-body2 text-foreground">
+            {renderUserName(item)}
+          </td>
+          <td className="px-3 py-2 text-body2 text-foreground">{item.phone}</td>
+          <td className="px-3 py-2 text-body2 text-foreground">{item.email}</td>
+          <td className="px-3 py-2 text-body2 text-foreground">
+            {ServiceTypeDisplayText[item.service_type]}
+          </td>
+          <td className="px-3 py-2 text-body2 text-foreground">
+            {item.description}
+          </td>
+          <td className="px-3 py-2 text-body2 text-foreground">
+            <Button type="button" size="sm" onClick={handleClickButton}>
               {t("customers.table.body.show_relations")}
             </Button>
-          </TableCell>
-        </TableRow>
+          </td>
+        </tr>
       ))}
-    </TableBody>
+    </tbody>
   );
 };

@@ -37,6 +37,9 @@ interface CustomTableCellProps {
   /** Выравнивание текста внутри ячейки */
   align?: "inherit" | "left" | "center" | "right" | "justify";
 
+  /** HTML-тег для ячейки таблицы */
+  as?: "td" | "th";
+
   /** Опциональное выпадающее меню с действиями */
   options?: CustomTableCellOptions[] | null;
 }
@@ -70,17 +73,20 @@ export const CustomTableCell = ({
   width,
   fw,
   align = "center",
+  as = "td",
   options,
 }: CustomTableCellProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const Cell = as;
 
   return (
-    <td
+    <Cell
       className={cn(
         "px-3 py-2 text-body2 text-foreground",
         alignClasses[align],
       )}
       style={{ width, fontWeight: fw }}
+      scope={as === "th" ? "col" : undefined}
     >
       <div
         className={cn("flex items-center gap-2", alignContainerClasses[align])}
@@ -116,6 +122,6 @@ export const CustomTableCell = ({
           </DropdownMenu>
         )}
       </div>
-    </td>
+    </Cell>
   );
 };

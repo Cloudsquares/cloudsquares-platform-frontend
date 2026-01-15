@@ -1,4 +1,3 @@
-import { Box, TableRow } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -6,8 +5,6 @@ import {
   PropertyOwner,
 } from "../../../../shared/interfaces/PropertyOwner";
 import { CustomTableCell } from "../../../../shared/components/CustomTabCell";
-
-import { tableRowStyles } from "./styles";
 import { displayUserName } from "../../../../shared/utils";
 
 /**
@@ -39,14 +36,13 @@ export const PropertyOwnersTableBodyItem = ({
   const { shortName } = displayUserName({ first_name, last_name, middle_name });
 
   return (
-    <Box
-      component={TableRow}
+    <tr
       onClick={() =>
         navigate("/properties/owners/" + owner.id, {
           state: { ownerDetails: owner },
         })
       }
-      sx={tableRowStyles}
+      className="cursor-pointer transition-colors hover:bg-primary/10"
     >
       <CustomTableCell text={number.toString()} fw={400} />
       <CustomTableCell text={shortName} fw={400} />
@@ -58,6 +54,6 @@ export const PropertyOwnersTableBodyItem = ({
       />
       <CustomTableCell text={owner.notes} fw={400} />
       <CustomTableCell text={"???"} fw={400} />
-    </Box>
+    </tr>
   );
 };

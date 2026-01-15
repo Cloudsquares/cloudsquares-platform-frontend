@@ -1,5 +1,4 @@
 import React from "react";
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
 
 import { useUsersStore } from "./store";
 import { UsersList } from "./components/UsersList";
@@ -7,6 +6,7 @@ import { UsersFormDrawer } from "./components/UsersFormDrawer";
 import { BasicPageHeader } from "../../shared/components/Mobile/BasicPageHeader";
 import { BasicDrawerMode } from "../../shared/interfaces/Shared";
 import { useCanAccess } from "../../shared/permissions/canAccess";
+import { Button } from "@/shared/components/ui/button";
 
 export const UsersModule = () => {
   const openDrawerWithMode = useUsersStore((state) => state.openDrawerWithMode);
@@ -15,27 +15,23 @@ export const UsersModule = () => {
   return (
     <React.Fragment>
       <BasicPageHeader title="Сотрудники" shownBackArrowButton />
-      <Container maxWidth={false}>
-        <Grid container spacing={2} pt={2}>
-          <Grid size={12}>
-            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-              <Typography component="h1" variant="h2">
-                Сотрудники
-              </Typography>
-              {canCreateNewUser && (
-                <Button
-                  variant="contained"
-                  color="success"
-                  onClick={() => openDrawerWithMode(BasicDrawerMode.create)}
-                >
-                  + Добавить
-                </Button>
-              )}
-            </Box>
-          </Grid>
+      <div className="mx-auto w-full max-w-screen-xl px-4">
+        <div className="grid gap-4 py-4">
+          <div className="flex flex-wrap items-center gap-3">
+            <h1 className="text-h2 text-foreground">Сотрудники</h1>
+            {canCreateNewUser && (
+              <Button
+                type="button"
+                className="bg-success text-white hover:bg-success/90"
+                onClick={() => openDrawerWithMode(BasicDrawerMode.create)}
+              >
+                + Добавить
+              </Button>
+            )}
+          </div>
           <UsersList />
-        </Grid>
-      </Container>
+        </div>
+      </div>
       <UsersFormDrawer />
     </React.Fragment>
   );

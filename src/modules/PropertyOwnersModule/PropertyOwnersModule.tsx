@@ -1,25 +1,20 @@
 import React from "react";
 import { BasicPageHeader } from "../../shared/components/Mobile/BasicPageHeader";
-import { Container, Grid, Typography } from "@mui/material";
 import { PropertyOwnersTable } from "./components/PropertyOwnersTable";
 
 export const PropertyOwnersModule = () => {
   return (
     <React.Fragment>
       <BasicPageHeader title="База собственников" shownBackArrowButton />
-      <Container maxWidth={false}>
-        <Grid container spacing={2}>
-          <Grid size={12} sx={{ display: { xs: "none", md: "block" } }}>
-            <Typography component="h1" variant="h1">
-              База собственников
-            </Typography>
-          </Grid>
-          <Grid size={12}>Filters and search</Grid>
-          <Grid size={12}>
-            <PropertyOwnersTable />
-          </Grid>
-        </Grid>
-      </Container>
+      <div className="mx-auto w-full max-w-screen-xl px-4">
+        <div className="grid gap-4 py-4">
+          <div className="hidden md:block">
+            <h1 className="text-h1 text-foreground">База собственников</h1>
+          </div>
+          <div>Filters and search</div>
+          <PropertyOwnersTable />
+        </div>
+      </div>
     </React.Fragment>
   );
 };
