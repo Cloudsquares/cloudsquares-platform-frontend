@@ -6,7 +6,9 @@ export const PageNotFound = () => {
       <div className="mx-auto w-full max-w-screen-xl px-4 py-6">
         <div className="grid gap-4 md:grid-cols-2">
           <div className="space-y-4">
-            <h2 className="text-h4 text-foreground">Страница не найдена (404)</h2>
+            <h2 className="text-h4 text-foreground">
+              Страница не найдена (404)
+            </h2>
             <div className="space-y-2">
               <h3 className="text-h5 text-foreground">Что случилось?</h3>
               <p className="text-body1 text-labels-secondary">
@@ -26,8 +28,8 @@ export const PageNotFound = () => {
             <div className="space-y-2">
               <h3 className="text-h5 text-foreground">Что делать?</h3>
               <p className="text-body1 text-labels-secondary">
-                Поскольку мы не знаем, как и откуда вы попали на эту страницу, то
-                рекомендуем вернуться на{" "}
+                Поскольку мы не знаем, как и откуда вы попали на эту страницу,
+                то рекомендуем вернуться на{" "}
                 <Link to="/" className="text-primary underline">
                   главную страницу
                 </Link>
