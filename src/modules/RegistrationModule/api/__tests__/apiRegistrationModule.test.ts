@@ -38,7 +38,12 @@ describe("apiRegistrationModule", () => {
         middle_name: formData.middle_name,
         role: "agent_admin",
         country_code: formData.country_code,
-        is_active: true,
+        user_status: {
+          status: "active",
+          description: null,
+          changed_at: "2025-01-01T00:00:00.000Z",
+          changed_by_id: null,
+        },
         email: formData.email,
         agency: null,
         created_at: "2025-01-01T00:00:00.000Z",
