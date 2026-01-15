@@ -1,7 +1,9 @@
 import React from "react";
-import { format, parseISO } from "date-fns";
-import { DatePicker } from "@mui/x-date-pickers";
+import { format } from "date-fns";
 import { Controller, useFormContext } from "react-hook-form";
+
+import { Input } from "@/shared/components/ui/input";
+import { Label } from "@/shared/components/ui/label";
 
 interface BasicDatePickerFieldProps {
   name: string;
@@ -26,28 +28,34 @@ export const BasicDatePickerField: React.FC<BasicDatePickerFieldProps> = ({
     formState: { errors },
   } = useFormContext();
 
+  const minDate = disablePast ? format(new Date(), "yyyy-MM-dd") : undefined;
+  const fieldError = errors[name];
+
   return (
-    <Controller
-      name={name}
-      control={control}
-      render={({ field }) => (
-        <DatePicker
-          {...field}
-          disablePast={disablePast}
-          label={label}
-          value={field.value ? parseISO(field.value) : null}
-          onChange={(date) =>
-            field.onChange(date ? format(date, "yyyy-MM-dd") : "")
-          }
-          slotProps={{
-            textField: {
-              error: !!errors[name],
-              helperText: errors[name]?.message as string,
-              placeholder: "Выберите дату",
-            },
-          }}
-        />
+    <div className="flex w-full flex-col gap-2">
+      <Label htmlFor={name}>{label}</Label>
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => (
+          <Input
+            {...field}
+            ref={field.ref}
+            id={name}
+            type="date"
+            placeholder="Выберите дату"
+            hasError={Boolean(fieldError?.message)}
+            min={minDate}
+            value={(field.value as string) ?? ""}
+            onChange={(event) => field.onChange(event.target.value)}
+          />
+        )}
+      />
+      {fieldError?.message && (
+        <p className="text-caption1 text-error">
+          {fieldError.message as string}
+        </p>
       )}
-    />
+    </div>
   );
 };

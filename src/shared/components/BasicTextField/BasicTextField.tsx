@@ -1,12 +1,14 @@
 import * as React from "react";
 import { Controller, useFormContext, FieldErrors } from "react-hook-form";
-import { TextField, InputAdornment } from "@mui/material";
-import { textfieldInputStyles } from "./styles";
 
 import { extractDigits, formatWithSpaces } from "./utils/number";
 import { preventNonDigitKeydown } from "./utils/keys";
 import { getCurrencySymbol } from "./utils/currency";
 import { useUserProfile } from "@/shared/permissions/hooks";
+import { cn } from "@/shared/utils";
+import { Input } from "@/shared/components/ui/input";
+import { Label } from "@/shared/components/ui/label";
+import { Textarea } from "@/shared/components/ui/textarea";
 
 interface BasicTextFieldProps<T extends Record<string, unknown>> {
   name: keyof T & string;
@@ -32,7 +34,7 @@ interface BasicTextFieldProps<T extends Record<string, unknown>> {
   autoComplete?: string;
   multiline?: boolean;
   minRows?: string | number;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
+  onClick?: React.MouseEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   /** Показать ли символ валюты слева (работает, когда type="number") */
   showCurrency?: boolean;
 }
@@ -43,7 +45,7 @@ export const BasicTextField = <T extends Record<string, unknown>>({
   placeholder,
   type,
   disabled,
-  size,
+  size = "medium",
   helperText,
   inputName,
   autoComplete,
@@ -61,18 +63,20 @@ export const BasicTextField = <T extends Record<string, unknown>>({
   const currencySymbol = getCurrencySymbol(profile?.country_code);
 
   const isNumeric = type === "number";
+  const inputId = inputName ?? name;
+  const sizeClassName = size === "small" ? "h-9 text-body3" : "h-11 text-body2";
+  const helperMessage = (fieldError?.message as string) || helperText;
+  const hasError = Boolean(fieldError?.message);
 
   return (
     <Controller
       name={name}
       render={({ field }) => {
-        // Формируем value/handlers единообразно для одного TextField
         const inputRef = field.ref;
         const onBlur = field.onBlur;
 
         const value = (() => {
           if (!isNumeric) return (field.value as string) ?? "";
-          // в форме храним число (или undefined), а показываем строку с пробелами
           if (typeof field.value === "number")
             return formatWithSpaces(field.value);
           if (typeof field.value === "string" && field.value !== "") {
@@ -81,72 +85,92 @@ export const BasicTextField = <T extends Record<string, unknown>>({
           return "";
         })();
 
-        const handleChange: React.ChangeEventHandler<HTMLInputElement> = (
-          e,
+        const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (
+          event,
         ) => {
           if (!isNumeric) {
-            field.onChange(e);
+            field.onChange(event);
             return;
           }
-          const digits = extractDigits(e.target.value);
+          const digits = extractDigits(event.target.value);
           const nextValue = digits === "" ? undefined : Number(digits);
-          // сохраняем ЧИСЛО в react-hook-form
           field.onChange(nextValue as unknown as T[keyof T]);
         };
 
-        // Для чисел рендерим type="text", чтобы можно было показать пробелы и не было step/scroll
+        const handleTextareaChange: React.ChangeEventHandler<
+          HTMLTextAreaElement
+        > = (event) => {
+          field.onChange(event);
+        };
+
         const effectiveType = isNumeric ? "text" : type;
 
+        const sharedInputProps = {
+          id: inputId,
+          name: inputId,
+          autoComplete,
+          placeholder,
+          disabled,
+          onBlur,
+          value,
+          className: cn(sizeClassName, showCurrency && isNumeric && "pr-10"),
+          hasError,
+        };
+
         return (
-          <TextField
-            value={value}
-            onChange={handleChange}
-            inputRef={inputRef}
-            onBlur={onBlur}
-            name={inputName ?? name}
-            autoComplete={autoComplete}
-            label={label}
-            type={effectiveType}
-            placeholder={placeholder}
-            disabled={disabled}
-            size={size}
-            onClick={onClick}
-            error={!!fieldError?.message}
-            helperText={(fieldError?.message as string) || helperText}
-            sx={{ width: 1 }}
-            multiline={multiline}
-            minRows={minRows}
-            slotProps={{
-              input: {
-                // стиль для MUI Input (OutlinedInput/FilledInput)
-                sx: textfieldInputStyles,
-                // адорнмент валюты (только когда нужно и только для "числового" режима)
-                endAdornment:
-                  isNumeric && showCurrency ? (
-                    <InputAdornment
-                      position="end"
-                      sx={{ color: "customColors.labelsPrimary" }}
-                    >
-                      {currencySymbol}
-                    </InputAdornment>
-                  ) : undefined,
-              },
-              htmlInput: {
-                // На мобилке откроется цифровая клавиатура
-                inputMode: isNumeric ? "numeric" : undefined,
-                // Подсказка для моб. клавиатуры
-                // pattern: isNumeric ? "[0-9]*" : undefined,
-                // Фильтруем всё, кроме цифр/служебных
-                onKeyDown: isNumeric ? preventNonDigitKeydown : undefined,
-                // Запрещаем изменение чисел колесиком (на всякий случай даже с type="text")
-                onWheel: isNumeric
-                  ? (e: { currentTarget: HTMLInputElement }) => {
-                      (e.currentTarget as HTMLInputElement).blur();
-                    }
-                  : undefined,
-              },
-            }}
-          />
+          <div className="flex w-full flex-col gap-2">
+            <Label htmlFor={inputId}>{label}</Label>
+            <div className="relative">
+              {multiline ? (
+                <Textarea
+                  {...sharedInputProps}
+                  ref={inputRef}
+                  onClick={
+                    onClick as React.MouseEventHandler<HTMLTextAreaElement>
+                  }
+                  onChange={handleTextareaChange}
+                  rows={(() => {
+                    if (typeof minRows === "number") return minRows;
+                    if (!minRows) return undefined;
+                    const parsed = Number(minRows);
+                    return Number.isNaN(parsed) ? undefined : parsed;
+                  })()}
+                />
+              ) : (
+                <Input
+                  {...sharedInputProps}
+                  ref={inputRef}
+                  type={effectiveType}
+                  onClick={onClick as React.MouseEventHandler<HTMLInputElement>}
+                  onChange={handleInputChange}
+                  inputMode={isNumeric ? "numeric" : undefined}
+                  onKeyDown={isNumeric ? preventNonDigitKeydown : undefined}
+                  onWheel={
+                    isNumeric
+                      ? (event: React.WheelEvent<HTMLInputElement>) => {
+                          event.currentTarget.blur();
+                        }
+                      : undefined
+                  }
+                />
+              )}
+              {isNumeric && showCurrency && (
+                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-body3 text-labels-primary">
+                  {currencySymbol}
+                </span>
+              )}
+            </div>
+            {helperMessage && (
+              <p
+                className={cn(
+                  "text-caption1",
+                  hasError ? "text-error" : "text-labels-secondary",
+                )}
+              >
+                {helperMessage}
+              </p>
+            )}
+          </div>
         );
       }}
     />

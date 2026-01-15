@@ -8,7 +8,15 @@ import tsParser from "@typescript-eslint/parser";
 import pluginQuery from "@tanstack/eslint-plugin-query";
 
 export default tseslint.config(
-  { ignores: ["dist", "node_modules", "coverage", "vite.config.ts"] },
+  {
+    ignores: [
+      "dist",
+      "node_modules",
+      "coverage",
+      "vite.config.ts",
+      "tailwind.config.ts",
+    ],
+  },
   {
     extends: [
       js.configs.recommended,

@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { useForm, FormProvider } from "react-hook-form";
+import { format } from "date-fns";
 
 import { BasicDatePickerField } from "../BasicDatePickerField";
 import { TestProviders } from "../../../../providers";
@@ -29,10 +30,10 @@ const renderWithForm = (defaultValues = {}, props = {}) => {
 };
 
 describe("BasicDatePickerField", () => {
-  it("рендерит компонент с плейсхолдером", () => {
+  it("рендерит компонент с label", () => {
     renderWithForm();
 
-    const input = screen.getByPlaceholderText("Выберите дату");
+    const input = screen.getByLabelText("Дата рождения");
     expect(input).toBeInTheDocument();
   });
 
@@ -67,10 +68,11 @@ describe("BasicDatePickerField", () => {
     expect(await screen.findByText("Поле обязательно")).toBeInTheDocument();
   });
 
-  it("передаёт проп disablePast", () => {
+  it("передаёт prop disablePast", () => {
     renderWithForm({}, { disablePast: true });
 
-    const input = screen.getByPlaceholderText("Выберите дату");
+    const input = screen.getByLabelText("Дата рождения") as HTMLInputElement;
     expect(input).toBeInTheDocument();
+    expect(input.min).toBe(format(new Date(), "yyyy-MM-dd"));
   });
 });
