@@ -24,8 +24,7 @@ import { Badge } from "@/modules/TipTapEditorModule/components/tiptap-ui-primiti
 import "@/modules/TipTapEditorModule/components/tiptap-ui/color-highlight-button/color-highlight-button.scss";
 
 export interface ColorHighlightButtonProps
-  extends Omit<ButtonProps, "type">,
-    UseColorHighlightConfig {
+  extends Omit<ButtonProps, "type">, UseColorHighlightConfig {
   /**
    * Optional text to display alongside the icon.
    */

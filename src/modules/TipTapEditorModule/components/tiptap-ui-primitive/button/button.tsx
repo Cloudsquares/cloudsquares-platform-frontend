@@ -17,8 +17,7 @@ import "@/modules/TipTapEditorModule/components/tiptap-ui-primitive/button/butto
 import "@/modules/TipTapEditorModule/components/tiptap-ui-primitive/button/button-group.scss";
 import "@/modules/TipTapEditorModule/components/tiptap-ui-primitive/button/button.scss";
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   showTooltip?: boolean;
   tooltip?: React.ReactNode;

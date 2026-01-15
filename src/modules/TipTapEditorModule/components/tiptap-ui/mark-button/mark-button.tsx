@@ -22,8 +22,7 @@ import { Button } from "@/modules/TipTapEditorModule/components/tiptap-ui-primit
 import { Badge } from "@/modules/TipTapEditorModule/components/tiptap-ui-primitive/badge";
 
 export interface MarkButtonProps
-  extends Omit<ButtonProps, "type">,
-    UseMarkConfig {
+  extends Omit<ButtonProps, "type">, UseMarkConfig {
   /**
    * Optional text to display alongside the icon.
    */

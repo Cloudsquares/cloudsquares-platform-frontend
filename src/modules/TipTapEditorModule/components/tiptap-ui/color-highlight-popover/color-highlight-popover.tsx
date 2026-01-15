@@ -59,7 +59,8 @@ export interface ColorHighlightPopoverContentProps {
  * Пропсы корневого компонента поповера.
  */
 export interface ColorHighlightPopoverProps
-  extends Omit<ButtonProps, "type">,
+  extends
+    Omit<ButtonProps, "type">,
     Pick<
       UseColorHighlightConfig,
       "editor" | "hideWhenUnavailable" | "onApplied"

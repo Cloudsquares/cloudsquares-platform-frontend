@@ -22,8 +22,7 @@ import { Button } from "@/modules/TipTapEditorModule/components/tiptap-ui-primit
 import { Badge } from "@/modules/TipTapEditorModule/components/tiptap-ui-primitive/badge";
 
 export interface UndoRedoButtonProps
-  extends Omit<ButtonProps, "type">,
-    UseUndoRedoConfig {
+  extends Omit<ButtonProps, "type">, UseUndoRedoConfig {
   /**
    * Optional text to display alongside the icon.
    */

@@ -22,8 +22,7 @@ import {
 } from "@/modules/TipTapEditorModule/components/tiptap-ui/list-button";
 
 export interface ListButtonProps
-  extends Omit<ButtonProps, "type">,
-    UseListConfig {
+  extends Omit<ButtonProps, "type">, UseListConfig {
   /**
    * Optional text to display alongside the icon.
    */

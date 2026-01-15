@@ -20,8 +20,7 @@ import { Badge } from "@/modules/TipTapEditorModule/components/tiptap-ui-primiti
 import { useTranslation } from "react-i18next";
 
 export interface BlockquoteButtonProps
-  extends Omit<ButtonProps, "type">,
-    UseBlockquoteConfig {
+  extends Omit<ButtonProps, "type">, UseBlockquoteConfig {
   /**
    * Optional text to display alongside the icon.
    */

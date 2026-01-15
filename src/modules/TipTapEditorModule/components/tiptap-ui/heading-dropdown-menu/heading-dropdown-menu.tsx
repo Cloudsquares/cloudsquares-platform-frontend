@@ -30,8 +30,7 @@ import {
 import { useTranslation } from "react-i18next";
 
 export interface HeadingDropdownMenuProps
-  extends Omit<ButtonProps, "type">,
-    UseHeadingDropdownMenuConfig {
+  extends Omit<ButtonProps, "type">, UseHeadingDropdownMenuConfig {
   /**
    * Whether to render the dropdown menu in a portal
    * @default false

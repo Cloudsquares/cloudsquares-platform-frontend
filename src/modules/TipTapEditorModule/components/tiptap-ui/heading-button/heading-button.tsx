@@ -20,8 +20,7 @@ import { Badge } from "@/modules/TipTapEditorModule/components/tiptap-ui-primiti
 import { useTiptapEditor } from "@/modules/TipTapEditorModule/hooks/use-tiptap-editor";
 
 export interface HeadingButtonProps
-  extends Omit<ButtonProps, "type">,
-    UseHeadingConfig {
+  extends Omit<ButtonProps, "type">, UseHeadingConfig {
   /**
    * Optional text to display alongside the icon.
    */

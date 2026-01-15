@@ -19,8 +19,7 @@ import { Button } from "@/modules/TipTapEditorModule/components/tiptap-ui-primit
 import { Badge } from "@/modules/TipTapEditorModule/components/tiptap-ui-primitive/badge";
 
 export interface CodeBlockButtonProps
-  extends Omit<ButtonProps, "type">,
-    UseCodeBlockConfig {
+  extends Omit<ButtonProps, "type">, UseCodeBlockConfig {
   /**
    * Optional text to display alongside the icon.
    */

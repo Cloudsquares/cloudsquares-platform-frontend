@@ -19,8 +19,7 @@ import { Button } from "@/modules/TipTapEditorModule/components/tiptap-ui-primit
 import { Badge } from "@/modules/TipTapEditorModule/components/tiptap-ui-primitive/badge";
 
 export interface ImageUploadButtonProps
-  extends Omit<ButtonProps, "type">,
-    UseImageUploadConfig {
+  extends Omit<ButtonProps, "type">, UseImageUploadConfig {
   /**
    * Optional text to display alongside the icon.
    */

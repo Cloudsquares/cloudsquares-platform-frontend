@@ -22,8 +22,7 @@ import { Button } from "@/modules/TipTapEditorModule/components/tiptap-ui-primit
 import { Badge } from "@/modules/TipTapEditorModule/components/tiptap-ui-primitive/badge";
 
 export interface TextAlignButtonProps
-  extends Omit<ButtonProps, "type">,
-    UseTextAlignConfig {
+  extends Omit<ButtonProps, "type">, UseTextAlignConfig {
   /**
    * Optional text to display alongside the icon.
    */
