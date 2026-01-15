@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
-import { Box, Button, Paper, Typography } from "@mui/material";
+
+import { Button } from "@/shared/components/ui/button";
+import { Card, CardContent } from "@/shared/components/ui/card";
 
 interface PropertiesCreateCardProps {
   title: string;
@@ -11,18 +13,14 @@ export const PropertiesCreateCard = ({
   description,
 }: PropertiesCreateCardProps) => {
   return (
-    <Box component={Paper} sx={{ p: 2 }}>
-      <Typography component="h6" variant="h6">
-        {title}
-      </Typography>
-      <Typography component="p" variant="body1">
-        {description}
-      </Typography>
-      <Box display="flex" pt={2} component={Link} to="/properties/create">
-        <Button variant="contained" color="primary" fullWidth size="large">
-          Добавить объект
+    <Card>
+      <CardContent className="space-y-2">
+        <h6 className="text-h6 text-foreground">{title}</h6>
+        <p className="text-body1 text-labels-secondary">{description}</p>
+        <Button asChild size="lg" className="w-full">
+          <Link to="/properties/create">Добавить объект</Link>
         </Button>
-      </Box>
-    </Box>
+      </CardContent>
+    </Card>
   );
 };

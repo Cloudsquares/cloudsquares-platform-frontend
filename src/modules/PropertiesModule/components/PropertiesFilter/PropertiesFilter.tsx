@@ -1,11 +1,11 @@
-import { Box, Button } from "@mui/material";
+import { Button } from "@/shared/components/ui/button";
 
 export const PropertiesFilter = () => {
   return (
-    <Box>
-      <Button variant="contained" color="primary" size="large">
+    <div>
+      <Button type="button" size="lg">
         Фильтры
       </Button>
-    </Box>
+    </div>
   );
 };
