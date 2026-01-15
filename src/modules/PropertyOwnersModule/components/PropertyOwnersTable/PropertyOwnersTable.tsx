@@ -54,7 +54,7 @@ export const PropertyOwnersTable = () => {
           <div className="h-6 w-6 animate-spin rounded-full border-2 border-grey-300 border-t-primary" />
         </div>
       )}
-      {owners && owners.data.length === 0 && (
+      {owners?.data.length === 0 && (
         <Alert variant="info">
           <AlertDescription>
             По заданным фильтрам заявок не найдено.

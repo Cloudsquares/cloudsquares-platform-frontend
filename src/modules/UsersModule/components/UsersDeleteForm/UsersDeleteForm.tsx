@@ -36,8 +36,7 @@ export const UsersDeleteForm = ({
 
   const onSubmit = (data: DeleteUserFormData) => {
     if (
-      data.user_name &&
-      data.user_name.trim() === displayName.fullName.trim()
+      data.user_name?.trim() === displayName.fullName.trim()
     ) {
       deactivateUserByIdMutation.mutate({ id: user.id, onSuccess: onSuccess });
     } else {

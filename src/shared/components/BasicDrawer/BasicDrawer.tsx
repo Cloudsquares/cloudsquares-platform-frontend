@@ -78,9 +78,7 @@ export const BasicDrawer = ({
             </Button>
           </DialogClose>
         </div>
-        <DialogDescription className="sr-only">
-          {title}
-        </DialogDescription>
+        <DialogDescription className="sr-only">{title}</DialogDescription>
         <div className="flex-1 overflow-auto px-4 py-3">{children}</div>
       </DialogContent>
     </Dialog>
