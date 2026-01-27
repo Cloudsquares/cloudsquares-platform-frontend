@@ -48,6 +48,19 @@ const drawerHeightClasses = {
   left: "h-full",
 } satisfies Record<NonNullable<BasicDrawerProps["anchor"]>, string>;
 
+const drawerAnimationClasses = {
+  bottom:
+    "data-[state=open]:slide-in-from-bottom-6 data-[state=closed]:slide-out-to-bottom-6",
+  top: "data-[state=open]:slide-in-from-top-6 data-[state=closed]:slide-out-to-top-6",
+  right:
+    "data-[state=open]:slide-in-from-right-6 data-[state=closed]:slide-out-to-right-6",
+  left:
+    "data-[state=open]:slide-in-from-left-6 data-[state=closed]:slide-out-to-left-6",
+} satisfies Record<NonNullable<BasicDrawerProps["anchor"]>, string>;
+
+const drawerTransitionClasses =
+  "data-[state=open]:duration-200 data-[state=closed]:duration-150";
+
 /**
  * Компонент боковой панели (модального окна) с заголовком и кнопкой закрытия.
  *
@@ -68,6 +81,8 @@ export const BasicDrawer = ({
           "flex flex-col p-0",
           drawerPositionClasses[anchor],
           drawerHeightClasses[anchor],
+          drawerAnimationClasses[anchor],
+          drawerTransitionClasses,
         )}
       >
         <div className="flex items-center justify-between border-b border-border px-4 py-3">

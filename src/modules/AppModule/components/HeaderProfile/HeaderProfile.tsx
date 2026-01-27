@@ -15,6 +15,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/shared/components/ui/tooltip";
+import { ThemeSwitcher } from "@/modules/ThemeModule";
 
 export const HeaderProfile = () => {
   const { t } = useTranslation();
@@ -50,7 +51,8 @@ export const HeaderProfile = () => {
   };
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center gap-3">
+      <ThemeSwitcher className="hidden lg:inline-flex" />
       <TooltipProvider>
         <DropdownMenu>
           <Tooltip>

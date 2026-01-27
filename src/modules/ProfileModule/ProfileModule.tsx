@@ -9,6 +9,7 @@ import { BasicNavListToPage } from "../../shared/components/BasicNavListToPage";
 import { ProfileInfoCard } from "./components/ProfileInfoCard";
 import { ProfileFavoritesLinks } from "./components/ProfileFavoritesLinks";
 import { SelectLanguage } from "../../shared/components/SelectLanguage";
+import { ThemeSwitcher } from "../ThemeModule";
 
 const list = [
   { label: "Центр поддержки", link: "/help" },
@@ -31,6 +32,9 @@ export const ProfileModule = () => {
         {isAuthenticated && (
           <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-4 py-4">
+              <div className="md:hidden">
+                <ThemeSwitcher />
+              </div>
               <ProfileInfoCard />
               <ProfileFavoritesLinks />
               <BasicNavListToPage list={list} />
