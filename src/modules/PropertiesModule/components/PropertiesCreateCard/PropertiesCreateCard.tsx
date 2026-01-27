@@ -16,7 +16,7 @@ export const PropertiesCreateCard = ({
     <Card>
       <CardContent className="space-y-2">
         <h6 className="text-h6 text-foreground">{title}</h6>
-        <p className="text-body1 text-labels-secondary">{description}</p>
+        <p className="text-body1 text-muted-foreground">{description}</p>
         <Button asChild size="lg" className="w-full">
           <Link to="/properties/create">Добавить объект</Link>
         </Button>

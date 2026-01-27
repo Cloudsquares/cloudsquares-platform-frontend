@@ -1,4 +1,4 @@
-import { MdPhoto } from "react-icons/md";
+import { Image } from "lucide-react";
 
 import { Skeleton } from "@/shared/components/ui/skeleton";
 
@@ -8,10 +8,10 @@ export const PropertiesListSkeleton = () => {
       {Array.from({ length: 7 }).map((_, index) => (
         <div
           key={index}
-          className="grid gap-4 rounded-lg border border-grey-300 bg-white p-4 lg:grid-cols-[1fr_2fr]"
+          className="grid gap-4 rounded-lg border border-border bg-card p-4 lg:grid-cols-[1fr_2fr]"
         >
-          <div className="flex aspect-video items-center justify-center rounded-lg border border-dashed border-grey-300 bg-grey-100 text-grey-500">
-            <MdPhoto size={64} />
+          <div className="flex aspect-video items-center justify-center rounded-lg border border-dashed border-border bg-muted text-muted-foreground">
+            <Image className="h-16 w-16" />
           </div>
           <div className="grid gap-4 md:grid-cols-[2fr_1fr]">
             <div className="space-y-3">

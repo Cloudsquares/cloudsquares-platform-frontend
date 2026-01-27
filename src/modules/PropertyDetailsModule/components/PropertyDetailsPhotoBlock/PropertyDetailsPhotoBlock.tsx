@@ -1,7 +1,6 @@
 import * as React from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { MdPhoto } from "react-icons/md";
+import { ChevronLeft, ChevronRight, Image } from "lucide-react";
 import { PropertyPhoto } from "../../../../shared/interfaces/Property";
 
 /**
@@ -117,9 +116,9 @@ export const PropertyDetailsPhotoBlock = ({
                   <div
                     role="img"
                     aria-label="Изображение недоступно"
-                    className="flex aspect-video w-full items-center justify-center rounded-lg border border-dashed border-grey-300 bg-grey-100 text-grey-500"
+                    className="flex aspect-video w-full items-center justify-center rounded-lg border border-dashed border-border bg-muted text-muted-foreground"
                   >
-                    <MdPhoto size={48} />
+                    <Image className="h-12 w-12" />
                   </div>
                 )}
               </div>
@@ -131,24 +130,24 @@ export const PropertyDetailsPhotoBlock = ({
       <button
         type="button"
         onClick={scrollPrev}
-        className="absolute left-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white disabled:opacity-50"
+        className="absolute left-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-foreground/60 text-background disabled:opacity-50"
         disabled={showPlaceholder || !canPrev}
         aria-label="Предыдущая фотография"
       >
-        <FaChevronLeft size={16} />
+        <ChevronLeft className="h-4 w-4" />
       </button>
 
       <button
         type="button"
         onClick={scrollNext}
-        className="absolute right-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white disabled:opacity-50"
+        className="absolute right-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-foreground/60 text-background disabled:opacity-50"
         disabled={showPlaceholder || !canNext}
         aria-label="Следующая фотография"
       >
-        <FaChevronRight size={16} />
+        <ChevronRight className="h-4 w-4" />
       </button>
 
-      <div className="absolute bottom-2 left-2 rounded bg-black/70 px-2 py-1 text-caption2 text-white">
+      <div className="absolute bottom-2 left-2 rounded bg-foreground/70 px-2 py-1 text-caption2 text-background">
         {showPlaceholder ? "0/0" : `${selectedIndex + 1}/${photos.length}`}
       </div>
     </div>

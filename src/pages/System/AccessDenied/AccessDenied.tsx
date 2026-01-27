@@ -8,13 +8,13 @@ export const AccessDenied = () => {
           <h1 className="text-h4 text-foreground">Доступ запрещен (401)</h1>
           <div className="space-y-2">
             <h2 className="text-h5 text-foreground">Что случилось?</h2>
-            <p className="text-body1 text-labels-secondary">
+            <p className="text-body1 text-muted-foreground">
               Вы попали на страницу, для просмотра которой у Вас нет прав
             </p>
           </div>
           <div className="space-y-2">
             <h2 className="text-h5 text-foreground">Почему это произошло?</h2>
-            <p className="text-body1 text-labels-secondary">
+            <p className="text-body1 text-muted-foreground">
               В большинстве ситуаций ошибка 401 отображается, если вы открыли
               страницу, к которой у Вас нет прав
             </p>

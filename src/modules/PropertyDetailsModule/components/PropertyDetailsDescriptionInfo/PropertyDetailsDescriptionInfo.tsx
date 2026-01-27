@@ -8,7 +8,7 @@ export const PropertyDetailsDescriptionInfo = () => {
   return (
     <div className="space-y-2 pb-4">
       <h5 className="text-h5 text-foreground">Описание</h5>
-      <div className="text-body2 text-labels-secondary">
+      <div className="text-body2 text-muted-foreground">
         {currentProperty?.description}
       </div>
     </div>

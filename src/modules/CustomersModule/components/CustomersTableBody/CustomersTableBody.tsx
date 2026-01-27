@@ -26,7 +26,7 @@ export const CustomersTableBody = ({ data }: CustomersTableBodyProps) => {
   return (
     <tbody>
       {data.map((item) => (
-        <tr key={item.id} className="border-b border-grey-200">
+        <tr key={item.id} className="border-b border-border">
           <td className="px-3 py-2 text-body2 text-foreground">{item.id}</td>
           <td className="px-3 py-2 text-body2 text-foreground">
             {renderUserName(item)}

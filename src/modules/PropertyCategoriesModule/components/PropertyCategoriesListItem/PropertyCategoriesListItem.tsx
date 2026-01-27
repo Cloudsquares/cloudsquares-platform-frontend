@@ -1,4 +1,4 @@
-import { MdDelete, MdDragIndicator, MdEdit } from "react-icons/md";
+import { GripVertical, Pencil, Trash2 } from "lucide-react";
 import { PropertyCategory } from "@/shared/interfaces/PropertyCategory";
 import { BasicDrawerMode } from "@/shared/interfaces/Shared";
 import { usePropertyCategoriesStore } from "../../store";
@@ -39,12 +39,12 @@ export const PropertyCategoriesListItem = ({
 
   return (
     <div className="flex items-center gap-3 rounded-lg border border-border bg-card p-4">
-      <button type="button" className="text-grey-400">
-        <MdDragIndicator size={24} />
+      <button type="button" className="text-muted-foreground">
+        <GripVertical className="h-6 w-6" />
       </button>
       <div className="flex-1">
         <p className="text-h6 text-foreground">{category.title}</p>
-        <p className="text-body2 text-labels-secondary">
+        <p className="text-body2 text-muted-foreground">
           {isSubcategory ? "Подкатегория" : "Главная категория"}
         </p>
       </div>
@@ -58,7 +58,7 @@ export const PropertyCategoriesListItem = ({
                 size="sm"
                 onClick={handleUpdateButtonClick}
               >
-                <MdEdit size={20} />
+                <Pencil className="h-5 w-5" />
               </Button>
             </TooltipTrigger>
             <TooltipContent>Редактировать</TooltipContent>
@@ -69,10 +69,10 @@ export const PropertyCategoriesListItem = ({
                 type="button"
                 variant="ghost"
                 size="sm"
-                className="text-error hover:text-error"
+                className="text-destructive hover:text-destructive"
                 onClick={handleDeleteButtonClick}
               >
-                <MdDelete size={20} />
+                <Trash2 className="h-5 w-5" />
               </Button>
             </TooltipTrigger>
             <TooltipContent>Удалить</TooltipContent>

@@ -103,7 +103,6 @@
     "npm-check-updates": "^18.3.1",
     "postcss": "^8.4.51",
     "prettier": "^3.8.0",
-    "react-icons": "^5.5.0",
     "release-it": "^19.2.3",
     "rollup-plugin-visualizer": "^6.0.5",
     "sass-embedded": "^1.97.2",

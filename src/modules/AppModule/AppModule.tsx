@@ -30,7 +30,7 @@ export const AppModule = () => {
       <QueryClientProvider client={client}>
         {isLoading ? (
           <div className="flex h-screen items-center justify-center pointer-events-none">
-            <div className="h-8 w-8 animate-spin rounded-full border-2 border-grey-300 border-t-primary" />
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-border border-t-primary" />
           </div>
         ) : (
           <div className="wrapper">

@@ -1,4 +1,4 @@
-import { MdDelete, MdEdit } from "react-icons/md";
+import { Pencil, Trash2 } from "lucide-react";
 import { User, UserStatus } from "@/shared/interfaces";
 import {
   displayUserName,
@@ -61,7 +61,7 @@ export const UsersListItem = ({ user }: UsersListItemProps) => {
               size="sm"
               onClick={handleClickEditIconButton}
             >
-              <MdEdit />
+              <Pencil className="h-4 w-4" />
             </Button>
             {user.role !== UserRole.agent_admin && (
               <Button
@@ -69,16 +69,16 @@ export const UsersListItem = ({ user }: UsersListItemProps) => {
                 variant="ghost"
                 size="sm"
                 onClick={handleClickDeleteIconButton}
-                className="text-error hover:text-error"
+                className="text-destructive hover:text-destructive"
               >
-                <MdDelete />
+                <Trash2 className="h-4 w-4" />
               </Button>
             )}
           </div>
         )}
       </div>
       <h6 className="text-h6 text-foreground">{shortName}</h6>
-      <ul className="space-y-2 pt-2 text-body2 text-labels-secondary">
+      <ul className="space-y-2 pt-2 text-body2 text-muted-foreground">
         <li>Телефон: +{user.phone}</li>
         <li>Почта: {user.email || "Не указана"}</li>
         <li>Роль: {UserRoleDisplayText[user.role]}</li>

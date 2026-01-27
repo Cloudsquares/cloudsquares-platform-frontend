@@ -26,14 +26,14 @@ export const PropertyFormStepCounter: React.FC = () => {
               key={item}
               className={
                 "h-1.5 flex-1 rounded-md transition-colors " +
-                (isPassedOrCurrent ? "bg-primary" : "bg-grey-300")
+                (isPassedOrCurrent ? "bg-primary" : "bg-muted")
               }
             />
           );
         })}
       </div>
 
-      <span className="whitespace-nowrap text-body2 text-labels-secondary">
+      <span className="whitespace-nowrap text-body2 text-muted-foreground">
         {currentIndex + 1}/{total}
       </span>
     </div>

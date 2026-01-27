@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { MdPhoto } from "react-icons/md";
+import { Image } from "lucide-react";
 
 import {
   ListingTypeText,
@@ -35,7 +35,8 @@ interface PropertiesListItemProps {
  * Показывает превью (или заглушку, если фото нет), базовую информацию,
  * адрес, описание, карточку агента и кнопки действий.
  *
- * Если у объекта нет фото, отображается заглушка с иконкой из `react-icons`.
+  * Если у объекта нет фото, отображается заглушка с иконкой.
+
  * Превью и заглушка кликабельны и ведут на страницу деталей объекта.
  */
 export const PropertiesListItem = ({
@@ -58,7 +59,7 @@ export const PropertiesListItem = ({
     "";
 
   return (
-    <div className="grid gap-4 rounded-lg border border-grey-300 bg-white p-4 lg:grid-cols-[1fr_2fr]">
+    <div className="grid gap-4 rounded-lg border border-border bg-card p-4 lg:grid-cols-[1fr_2fr]">
       <div className="flex flex-col gap-2">
         {previewUrl ? (
           <img
@@ -72,9 +73,9 @@ export const PropertiesListItem = ({
             type="button"
             aria-label="Открыть страницу объекта недвижимости"
             onClick={handleOpenDetails}
-            className="flex aspect-video w-full items-center justify-center rounded-lg border border-dashed border-grey-300 bg-grey-100 text-grey-500"
+            className="flex aspect-video w-full items-center justify-center rounded-lg border border-dashed border-border bg-muted text-muted-foreground"
           >
-            <MdPhoto size={64} />
+            <Image className="h-16 w-16" />
           </button>
         )}
       </div>
@@ -83,12 +84,12 @@ export const PropertiesListItem = ({
         <div className="space-y-3">
           <div>
             <h5 className="text-h5 text-foreground">{property.title}</h5>
-            <p className="text-subtitle1 text-labels-secondary">
+            <p className="text-subtitle1 text-muted-foreground">
               {propertyTitle(property)}
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 text-body2 text-labels-secondary">
+          <div className="flex flex-wrap items-center gap-2 text-body2 text-muted-foreground">
             <span>{PropertyStatusText[property.status]}</span>
             <span>{ListingTypeText[property.listing_type]}</span>
             <span>{property.price}</span>
@@ -96,12 +97,14 @@ export const PropertiesListItem = ({
 
           <div className="space-y-2">
             {property.property_location && (
-              <p className="text-body1 text-grey-600">
+              <p className="text-body1 text-muted-foreground">
                 {propertyAddress(property).fullAddress}
               </p>
             )}
             {shortDescription && (
-              <p className="text-body1 text-grey-600">{shortDescription}</p>
+              <p className="text-body1 text-muted-foreground">
+                {shortDescription}
+              </p>
             )}
           </div>
 

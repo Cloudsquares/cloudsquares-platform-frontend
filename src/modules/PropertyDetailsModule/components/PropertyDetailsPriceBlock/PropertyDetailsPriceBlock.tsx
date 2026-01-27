@@ -1,5 +1,4 @@
-import { IoMdDocument } from "react-icons/io";
-import { MdDelete, MdEdit, MdPerson } from "react-icons/md";
+import { FileText, Pencil, Trash2, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 import { PropertyOwnerDrawerModule } from "@/modules/PropertyOwnerDrawerModule";
@@ -29,7 +28,7 @@ export const PropertyDetailsPriceBlock = () => {
     return (
       <div className="space-y-4">
         <div className="space-y-2">
-          <p className="text-body4 text-grey-500">
+          <p className="text-body4 text-muted-foreground">
             {calculatePricePerMeter(currentProperty.price, 42)}₽ за м²
           </p>
           <DiscountLabel
@@ -72,7 +71,7 @@ export const PropertyDetailsPriceBlock = () => {
             }
           >
             <span className="inline-flex items-center gap-2">
-              <MdEdit />
+              <Pencil className="h-4 w-4" />
               Редактировать
             </span>
           </Button>
@@ -84,7 +83,7 @@ export const PropertyDetailsPriceBlock = () => {
             onClick={() => setShowOwnersDrawer(true)}
           >
             <span className="inline-flex items-center gap-2">
-              <MdPerson />
+              <User className="h-4 w-4" />
               Данные собственников
             </span>
           </Button>
@@ -95,7 +94,7 @@ export const PropertyDetailsPriceBlock = () => {
             className="w-full"
           >
             <span className="inline-flex items-center gap-2">
-              <IoMdDocument />
+              <FileText className="h-4 w-4" />
               Заявки на покупку
             </span>
           </Button>
@@ -107,7 +106,7 @@ export const PropertyDetailsPriceBlock = () => {
             onClick={() => setShowDeactivateDrawer(true)}
           >
             <span className="inline-flex items-center gap-2">
-              <MdDelete />
+              <Trash2 className="h-4 w-4" />
               Удалить
             </span>
           </Button>

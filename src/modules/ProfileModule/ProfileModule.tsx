@@ -40,7 +40,7 @@ export const ProfileModule = () => {
         <div className="grid gap-2 py-4 md:grid-cols-2">
           <div className="space-y-2">
             <SelectLanguage />
-            <p className="text-body2 text-grey-400">
+            <p className="text-body2 text-muted-foreground">
               {t("version")} {version}
             </p>
           </div>

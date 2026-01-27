@@ -11,13 +11,13 @@ export const PageNotFound = () => {
             </h2>
             <div className="space-y-2">
               <h3 className="text-h5 text-foreground">Что случилось?</h3>
-              <p className="text-body1 text-labels-secondary">
+              <p className="text-body1 text-muted-foreground">
                 Вы попали на страницу, которой не существует
               </p>
             </div>
             <div className="space-y-2">
               <h3 className="text-h5 text-foreground">Почему это произошло?</h3>
-              <p className="text-body1 text-labels-secondary">
+              <p className="text-body1 text-muted-foreground">
                 В большинстве ситуаций ошибка 404 отображается, если связь с
                 сервером установлена, но информации по заданному запросу нет.
                 Возможно, в адресе опечатка — такое случается при ручном наборе.
@@ -27,7 +27,7 @@ export const PageNotFound = () => {
             </div>
             <div className="space-y-2">
               <h3 className="text-h5 text-foreground">Что делать?</h3>
-              <p className="text-body1 text-labels-secondary">
+              <p className="text-body1 text-muted-foreground">
                 Поскольку мы не знаем, как и откуда вы попали на эту страницу,
                 то рекомендуем вернуться на{" "}
                 <Link to="/" className="text-primary underline">

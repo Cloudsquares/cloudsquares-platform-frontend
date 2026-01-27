@@ -22,7 +22,7 @@ export const TipTapEditorModule = <T extends Record<string, unknown>>({
   const initialContent = React.useMemo(() => buildIntroContent(t), [t]);
 
   return (
-    <div className="tip-tap-editor-module max-h-[1100px] min-h-[500px] overflow-y-auto rounded-md border border-grey-300">
+    <div className="tip-tap-editor-module max-h-[1100px] min-h-[500px] overflow-y-auto rounded-md border border-border">
       {/* Оборачиваем редактор в Controller, чтобы синхронизировать значение с формой */}
       <Controller
         name={name}

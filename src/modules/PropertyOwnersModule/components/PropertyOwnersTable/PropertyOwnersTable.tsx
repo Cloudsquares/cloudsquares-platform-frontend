@@ -50,8 +50,8 @@ export const PropertyOwnersTable = () => {
       </div>
       {isError && error && <AxiosErrorAlertMessage error={error} />}
       {isLoading && (
-        <div className="flex w-full items-center justify-center bg-white p-6">
-          <div className="h-6 w-6 animate-spin rounded-full border-2 border-grey-300 border-t-primary" />
+        <div className="flex w-full items-center justify-center bg-background p-6">
+          <div className="h-6 w-6 animate-spin rounded-full border-2 border-border border-t-primary" />
         </div>
       )}
       {owners?.data.length === 0 && (

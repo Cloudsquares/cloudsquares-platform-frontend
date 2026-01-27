@@ -10,13 +10,13 @@ export const Footer = () => {
   return (
     <footer
       data-testid="footer"
-      className="hidden border-t border-grey-200 py-4 md:block"
+      className="hidden border-t border-border py-4 md:block"
     >
       <div className="mx-auto flex w-full max-w-screen-xl flex-col gap-4 px-4 md:flex-row md:items-center md:justify-between">
         <div>
           <h6 className="text-h6 text-foreground">CloudSquares</h6>
           <div className="flex items-center gap-2">
-            <p className="text-body1 text-labels-secondary">
+            <p className="text-body1 text-muted-foreground">
               © {currentYear}. {t("footer.made_with")}
             </p>
             <a

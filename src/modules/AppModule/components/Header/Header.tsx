@@ -14,7 +14,7 @@ export const Header = () => {
   return (
     <header
       data-testid="header"
-      className="hidden border-b border-grey-200 bg-white lg:block"
+      className="hidden border-b border-border bg-background lg:block"
     >
       <div className="flex items-center justify-between px-6 py-4">
         <div className="flex items-center gap-4">
