@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { Box } from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -55,13 +54,13 @@ export const SearchInputForm = ({
 
   return (
     <FormProvider {...methods}>
-      <Box>
+      <div>
         <BasicSearchInputField
           onChange={sendRequest}
           name="searchQuery"
           placeholder={placeholder}
         />
-      </Box>
+      </div>
     </FormProvider>
   );
 };

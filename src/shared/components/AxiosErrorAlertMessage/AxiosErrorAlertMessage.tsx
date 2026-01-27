@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 
-import { Alert } from "@mui/material";
 import { ApiErrorResponse } from "../../interfaces";
+import { Alert, AlertDescription } from "@/shared/components/ui/alert";
 
 /**
  * Пропсы для компонента `AxiosErrorAlertMessage`.
@@ -31,11 +31,13 @@ export const AxiosErrorAlertMessage = ({
   console.error(message, "Code: ", code);
 
   return (
-    <Alert severity="error">
-      Ошибка получения данных с сервера.{" "}
-      <strong>
-        {message} | Code: {code}
-      </strong>
+    <Alert variant="destructive">
+      <AlertDescription>
+        Ошибка получения данных с сервера.{" "}
+        <strong>
+          {message} | Code: {code}
+        </strong>
+      </AlertDescription>
     </Alert>
   );
 };

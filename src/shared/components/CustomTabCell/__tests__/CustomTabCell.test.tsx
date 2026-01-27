@@ -1,5 +1,6 @@
 import React from "react";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { CustomTableCell } from "../CustomTabCell";
 import { TestProviders } from "../../../../providers";
 
@@ -26,7 +27,8 @@ describe("CustomTableCell", () => {
     expect(screen.queryByRole("button")).not.toBeInTheDocument();
   });
 
-  it("рендерит кнопку опций и открывает меню по клику", () => {
+  it("рендерит кнопку опций и открывает меню по клику", async () => {
+    const user = userEvent.setup();
     renderComponent({
       options: [
         { label: "Просмотр", onClick: jest.fn() },
@@ -35,12 +37,12 @@ describe("CustomTableCell", () => {
     });
 
     const button = screen.getByRole("button");
-    expect(button).not.toHaveAttribute("aria-expanded");
+    expect(button).toHaveAttribute("aria-expanded", "false");
 
-    fireEvent.click(button);
+    await user.click(button);
 
     expect(button).toHaveAttribute("aria-expanded", "true");
-    expect(screen.getByRole("menu")).toBeInTheDocument();
+    expect(await screen.findByRole("menu")).toBeInTheDocument();
     expect(screen.getAllByRole("menuitem")).toHaveLength(2);
     expect(
       screen.getByRole("menuitem", { name: "Просмотр" }),
@@ -48,6 +50,7 @@ describe("CustomTableCell", () => {
   });
 
   it("вызывает обработчик и закрывает меню после выбора опции", async () => {
+    const user = userEvent.setup();
     const onOptionClick = jest.fn();
 
     renderComponent({
@@ -55,15 +58,15 @@ describe("CustomTableCell", () => {
     });
 
     const button = screen.getByRole("button");
-    fireEvent.click(button);
+    await user.click(button);
 
     const option = await screen.findByRole("menuitem", { name: "Удалить" });
-    fireEvent.click(option);
+    await user.click(option);
 
     expect(onOptionClick).toHaveBeenCalledTimes(1);
 
     await waitFor(() => {
-      expect(button).not.toHaveAttribute("aria-expanded");
+      expect(button).toHaveAttribute("aria-expanded", "false");
       expect(screen.queryByRole("menu")).not.toBeInTheDocument();
     });
   });

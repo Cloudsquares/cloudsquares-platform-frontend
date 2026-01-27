@@ -1,7 +1,7 @@
-import { Box, Paper, Typography } from "@mui/material";
 import { FaAngleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { basicNavListToPageListItemStyles, iconWrapperStyles } from "./styles";
+
+import { cn } from "@/shared/utils";
 
 export interface BasicNavListToPageItem {
   label: string;
@@ -14,28 +14,25 @@ interface BasicNavListToPageProps {
 
 export const BasicNavListToPage = ({ list }: BasicNavListToPageProps) => {
   return (
-    <Box component={Paper} sx={{ py: 0.5 }}>
-      <Box component="ul">
-        {list.map(({ label, link }, i) => (
-          <Box key={i} component={Link} to={link}>
-            <Box
-              component="li"
-              sx={basicNavListToPageListItemStyles(i === list.length - 1)}
+    <div className="rounded-md border border-border bg-card py-2">
+      <ul>
+        {list.map(({ label, link }, index) => (
+          <li key={`${label}-${index}`}>
+            <Link
+              to={link}
+              className={cn(
+                "flex items-center gap-2 px-4 py-3 text-body2 text-labels-primary",
+                index < list.length - 1 && "border-b border-grey-200",
+              )}
             >
-              <Typography
-                component="p"
-                variant="body1"
-                color="customColors.labelsPrimary"
-              >
-                {label}
-              </Typography>
-              <Box sx={iconWrapperStyles}>
+              <span>{label}</span>
+              <span className="ml-auto flex items-center">
                 <FaAngleRight data-testid="fa-icon" size={16} color="#1c1c1c" />
-              </Box>
-            </Box>
-          </Box>
+              </span>
+            </Link>
+          </li>
         ))}
-      </Box>
-    </Box>
+      </ul>
+    </div>
   );
 };

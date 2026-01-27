@@ -1,6 +1,5 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Box, Container, Grid, Typography } from "@mui/material";
 import { version } from "../../../package.json";
 
 import { useIsAuthenticated } from "../../shared/permissions/hooks";
@@ -19,6 +18,7 @@ const list = [
 export const ProfileModule = () => {
   const { t } = useTranslation();
   const isAuthenticated = useIsAuthenticated();
+
   return (
     <React.Fragment>
       <BasicPageHeader
@@ -26,34 +26,26 @@ export const ProfileModule = () => {
         shownBackArrowButton
         backButtonLink="/"
       />
-      <Container>
+      <div className="mx-auto w-full max-w-screen-xl px-4">
         {!isAuthenticated && <NotAuthInfoBlock />}
         {isAuthenticated && (
-          <Grid container spacing={2}>
-            <Grid size={{ xs: 12, md: 6 }}>
-              <Box sx={{ py: 2, width: 1 }}>
-                <ProfileInfoCard />
-              </Box>
-              <Box sx={{ pb: 2, width: 1 }}>
-                <ProfileFavoritesLinks />
-              </Box>
-              <Box sx={{ width: 1 }}>
-                <BasicNavListToPage list={list} />
-              </Box>
-            </Grid>
-          </Grid>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="space-y-4 py-4">
+              <ProfileInfoCard />
+              <ProfileFavoritesLinks />
+              <BasicNavListToPage list={list} />
+            </div>
+          </div>
         )}
-        <Grid container spacing={2}>
-          <Grid size={{ xs: 12, md: 6 }}>
-            <Box sx={{ pt: 2 }}>
-              <SelectLanguage />
-            </Box>
-            <Typography component="p" variant="body2" mt={1} color="#aaa">
+        <div className="grid gap-2 py-4 md:grid-cols-2">
+          <div className="space-y-2">
+            <SelectLanguage />
+            <p className="text-body2 text-grey-400">
               {t("version")} {version}
-            </Typography>
-          </Grid>
-        </Grid>
-      </Container>
+            </p>
+          </div>
+        </div>
+      </div>
     </React.Fragment>
   );
 };

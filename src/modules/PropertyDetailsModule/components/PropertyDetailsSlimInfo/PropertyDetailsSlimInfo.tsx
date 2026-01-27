@@ -1,6 +1,4 @@
-import { Box, Typography } from "@mui/material";
 import { ListingTypeText } from "../../../../shared/interfaces/Property";
-import { contentStyles } from "./styles";
 import { usePropertyDetailsStore } from "../../store";
 import { PropertyDetailsInfoItem } from "../../../../shared/interfaces/PropertyDetails";
 
@@ -18,31 +16,23 @@ export const PropertyDetailsSlimInfo = () => {
           value: ListingTypeText[currentProperty.listing_type],
         },
         { label: "Категория", value: currentProperty.category.title },
-        { label: "Комнат", value: 2 }, // TODO: REMOVE HARDCODE
-        { label: "Площадь", value: 42.5 }, // TODO: REMOVE HARDCODE
-        { label: "Кухня", value: 5 }, // TODO: REMOVE HARDCODE
-        { label: "Этаж", value: "3/9" }, // TODO: REMOVE HARDCODE
-        { label: "Год постройки", value: 2010 }, // TODO: REMOVE HARDCODE
+        { label: "Комнат", value: 2 },
+        { label: "Площадь", value: 42.5 },
+        { label: "Кухня", value: 5 },
+        { label: "Этаж", value: "3/9" },
+        { label: "Год постройки", value: 2010 },
       ];
 
     return [];
   };
   return (
-    <Box sx={contentStyles}>
+    <div className="grid grid-cols-3 gap-y-4 rounded-md border border-grey-200 px-4 py-3 md:grid-cols-8">
       {displayedData().map(({ label, value }, index) => (
-        <Box key={index}>
-          <Typography
-            component="p"
-            variant="body3"
-            color="customColors.grey500"
-          >
-            {label}
-          </Typography>
-          <Typography component="p" variant="body2">
-            {value}
-          </Typography>
-        </Box>
+        <div key={index}>
+          <p className="text-body3 text-grey-500">{label}</p>
+          <p className="text-body2 text-foreground">{value}</p>
+        </div>
       ))}
-    </Box>
+    </div>
   );
 };

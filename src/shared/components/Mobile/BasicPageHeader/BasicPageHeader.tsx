@@ -1,8 +1,7 @@
-import { Box, IconButton, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { IoArrowBackSharp } from "react-icons/io5";
 
-import { basicPageHeaderStyles } from "./styles";
+import { Button } from "@/shared/components/ui/button";
 
 /**
  * Пропсы для компонента BasicPageHeader.
@@ -38,27 +37,28 @@ export const BasicPageHeader = ({
    */
   const handleBackClick = () => {
     if (backButtonLink) {
-      // Если есть переданный fallback
       navigate(backButtonLink);
     } else if (window.history.length > 1) {
-      // Если в истории есть ссылки, то вернуться назад
       return navigate(-1);
     } else {
-      // Иначе возвращаем на главную
       return navigate("/");
     }
   };
 
   return (
-    <Box sx={basicPageHeaderStyles}>
+    <div className="flex w-full items-center border-b border-grey-300 bg-white px-4 py-3 lg:hidden">
       {shownBackArrowButton && (
-        <IconButton onClick={handleBackClick} sx={{ mr: 1 }}>
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          onClick={handleBackClick}
+          className="mr-2"
+        >
           <IoArrowBackSharp size={16} color="#1c1c1c" />
-        </IconButton>
+        </Button>
       )}
-      <Typography component="h5" variant="h5">
-        {title}
-      </Typography>
-    </Box>
+      <h5 className="text-h5 text-foreground">{title}</h5>
+    </div>
   );
 };

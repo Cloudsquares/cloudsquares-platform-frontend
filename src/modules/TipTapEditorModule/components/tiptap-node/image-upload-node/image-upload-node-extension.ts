@@ -122,8 +122,7 @@ export const ImageUploadNode = Node.create<ImageUploadNodeOptions>({
         const { nodeAfter } = selection.$from;
 
         if (
-          nodeAfter &&
-          nodeAfter.type.name === "imageUpload" &&
+          nodeAfter?.type.name === "imageUpload" &&
           editor.isActive("imageUpload")
         ) {
           const nodeEl = editor.view.nodeDOM(selection.$from.pos);

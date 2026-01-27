@@ -1,21 +1,23 @@
-import { Box, Skeleton } from "@mui/material";
-import { cardStyles } from "../PropertyCategoriesListItem/styles";
+import { Skeleton } from "@/shared/components/ui/skeleton";
 
 export const PropertyCategoriesListSkeleton = () => {
   return (
     <>
       {Array.from({ length: 6 }).map((_, index) => (
-        <Box sx={cardStyles} key={index}>
-          <Skeleton variant="rounded" width={48} height={48} />
-          <Box flexGrow={1} gap={1} display="flex" flexDirection="column">
-            <Skeleton variant="rounded" width={200} height={20} />
-            <Skeleton variant="rounded" width={100} height={20} />
-          </Box>
-          <Box sx={{ display: "flex", gap: 1 }}>
-            <Skeleton variant="rounded" width={24} height={24} />
-            <Skeleton variant="rounded" width={24} height={24} />
-          </Box>
-        </Box>
+        <div
+          className="flex items-center gap-3 rounded-lg border border-border bg-card p-4"
+          key={index}
+        >
+          <Skeleton className="h-12 w-12" />
+          <div className="flex flex-1 flex-col gap-2">
+            <Skeleton className="h-5 w-48" />
+            <Skeleton className="h-5 w-24" />
+          </div>
+          <div className="flex gap-2">
+            <Skeleton className="h-6 w-6" />
+            <Skeleton className="h-6 w-6" />
+          </div>
+        </div>
       ))}
     </>
   );

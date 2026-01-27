@@ -1,5 +1,4 @@
 import React from "react";
-import { Grid } from "@mui/material";
 
 import { PropertiesListItem } from "../PropertiesListItem";
 import { useGetAllPropertiesOfAgencyQuery } from "../../hooks";
@@ -19,38 +18,42 @@ export const PropertiesList = () => {
 
   if (propertiesError)
     return (
-      <Grid size={{ xs: 12, md: 6, lg: 4 }}>
+      <div className="w-full md:w-1/2 lg:w-1/3">
         <AxiosErrorAlertMessage error={propertiesError} />
-      </Grid>
+      </div>
     );
 
   if (propertiesIsSuccess && properties.length === 0)
     return (
-      <Grid size={{ xs: 12, md: 6, lg: 4 }}>
+      <div className="w-full md:w-1/2 lg:w-1/3">
         <PropertiesCreateCard
           title="Каталог пуст"
           description="Добавьте объекты недвижимости в систему и они появятся здесь"
         />
-      </Grid>
+      </div>
     );
 
   return (
     <React.Fragment>
       {propertiesIsLoading && <PropertiesListSkeleton />}
-      {properties &&
-        propertiesIsSuccess &&
-        properties.map((property) => (
-          <Grid size={12} key={property.id}>
-            <PropertiesListItem property={property} showActionButton />
-          </Grid>
-        ))}
-      {!propertiesIsLoading && !propertiesError && (
-        <Grid size={{ xs: 12, lg: 6 }}>
-          <PropertiesCreateCard
-            title="Новый объект"
-            description="Добавьте объекты недвижимости в систему и они появятся здесь"
-          />
-        </Grid>
+      {properties && propertiesIsSuccess && (
+        <div className="space-y-4">
+          {properties.map((property) => (
+            <PropertiesListItem
+              key={property.id}
+              property={property}
+              showActionButton
+            />
+          ))}
+          {!propertiesIsLoading && !propertiesError && (
+            <div className="w-full md:w-1/2">
+              <PropertiesCreateCard
+                title="Новый объект"
+                description="Добавьте объекты недвижимости в систему и они появятся здесь"
+              />
+            </div>
+          )}
+        </div>
       )}
     </React.Fragment>
   );

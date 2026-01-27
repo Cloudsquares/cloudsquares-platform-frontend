@@ -1,5 +1,4 @@
 import React from "react";
-import { Grid } from "@mui/material";
 import { useGetAllUsersQuery } from "../../hooks";
 import { AxiosErrorAlertMessage } from "@/shared/components/AxiosErrorAlertMessage";
 import { getUserStatusPriority } from "@/shared/utils";
@@ -33,12 +32,13 @@ export const UsersList = () => {
     <React.Fragment>
       {isLoading && <UsersListSkeleton />}
       {error && <AxiosErrorAlertMessage error={error} />}
-      {isSuccess &&
-        sortedUsers.map((user) => (
-          <Grid size={{ xs: 12, md: 6, lg: 4 }} key={user.id}>
-            <UsersListItem user={user} />
-          </Grid>
-        ))}
+      {isSuccess && (
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {sortedUsers.map((user) => (
+            <UsersListItem key={user.id} user={user} />
+          ))}
+        </div>
+      )}
     </React.Fragment>
   );
 };

@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { Box, Button, Typography } from "@mui/material";
 
 import { useProfileDetailsStore } from "../../store/useProfileDetailsStore";
 import { useLoginStore } from "../../../LoginModule/store";
 import { BasicDrawer } from "../../../../shared/components/BasicDrawer";
+import { Button } from "@/shared/components/ui/button";
 
 export const ProfileDetailsLogoutDrawer = () => {
   const navigate = useNavigate();
@@ -22,29 +22,29 @@ export const ProfileDetailsLogoutDrawer = () => {
       isOpen={showLogoutDrawer}
       setIsOpen={setShowLogoutDrawer}
     >
-      <Box sx={{ p: 2, display: "flex", flexDirection: "column", height: 1 }}>
-        <Box flexGrow={1}>
-          <Typography component="p" variant="body1" mb={2}>
+      <div className="flex h-full flex-col gap-4 p-4">
+        <div className="flex-1">
+          <p className="text-body1 text-foreground">
             Вы уверены, что хотите выйти из текущего аккаунта?
-          </Typography>
-        </Box>
-        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
+          </p>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
           <Button
-            variant="contained"
-            color="primary"
+            type="button"
+            variant="secondary"
             onClick={() => setShowLogoutDrawer(false)}
           >
             Отмена
           </Button>
           <Button
-            variant="contained"
-            color="error"
+            type="button"
+            variant="destructive"
             onClick={handleLogoutButtonClick}
           >
             Да, выйти
           </Button>
-        </Box>
-      </Box>
+        </div>
+      </div>
     </BasicDrawer>
   );
 };

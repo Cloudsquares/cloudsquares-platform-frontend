@@ -1,5 +1,4 @@
 import toast from "react-hot-toast";
-import { Box, Button } from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { BasicDrawerMode } from "@/shared/interfaces/Shared";
@@ -19,6 +18,7 @@ import {
 } from "./hooks";
 import { PropertyCategoriesDeleteForm } from "./components";
 import { useDeletePropertyCategoryMutation } from "./hooks/useDeletePropertyCategoryMutation";
+import { Button } from "@/shared/components/ui/button";
 
 interface PropertyCategoryFormModuleProps {
   mode: BasicDrawerMode;
@@ -141,58 +141,47 @@ export const PropertyCategoryFormModule = ({
 
   return (
     <FormProvider {...methods}>
-      <Box
-        component="form"
+      <form
         onSubmit={handleSubmit(onSubmitForm, (errors) =>
           devLogger.error("Ошибки валидации:", errors),
         )}
-        sx={{ p: 2, display: "flex", flexDirection: "column", height: 1 }}
+        className="flex h-full flex-col gap-4 p-4"
       >
         {mode === BasicDrawerMode.delete ? (
           <PropertyCategoriesDeleteForm
             editablePropertyCategory={editablePropertyCategory}
           />
         ) : (
-          <Box flexGrow={1}>
-            <Box pb={2}>
-              <BasicTextField<PropertyCategoriesDataFormData>
-                name="title"
-                label="Название"
-                placeholder="Введите название категории"
-                disabled={disableInput}
-              />
-            </Box>
-            <Box pb={2}>
-              <PropertyCategoriesSelectField<PropertyCategoriesDataFormData>
-                isOptional
-                name="parent_id"
-                placeholder="Выберите родительскую категорию"
-              />
-            </Box>
-          </Box>
+          <div className="flex-1 space-y-4">
+            <BasicTextField<PropertyCategoriesDataFormData>
+              name="title"
+              label="Название"
+              placeholder="Введите название категории"
+              disabled={disableInput}
+            />
+            <PropertyCategoriesSelectField<PropertyCategoriesDataFormData>
+              isOptional
+              name="parent_id"
+              placeholder="Выберите родительскую категорию"
+            />
+          </div>
         )}
 
-        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
+        <div className="grid grid-cols-2 gap-4">
           <Button
-            variant="contained"
-            color="secondary"
-            size="large"
+            type="button"
+            variant="secondary"
+            size="lg"
             onClick={handleResetForm}
             disabled={disableInput}
           >
             Отменить
           </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-            size="large"
-            disabled={disableInput}
-          >
+          <Button type="submit" size="lg" disabled={disableInput}>
             {mode === BasicDrawerMode.delete ? "Удалить" : "Сохранить"}
           </Button>
-        </Box>
-      </Box>
+        </div>
+      </form>
     </FormProvider>
   );
 };

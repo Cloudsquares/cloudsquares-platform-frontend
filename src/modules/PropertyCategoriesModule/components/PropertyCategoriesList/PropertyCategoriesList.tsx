@@ -1,4 +1,3 @@
-import { Box } from "@mui/material";
 import { useUserProfile } from "@/shared/permissions/hooks";
 import { useGetAllPropertyCategoriesQuery } from "@/shared/hooks/propertyCategories";
 import { AxiosErrorAlertMessage } from "@/shared/components/AxiosErrorAlertMessage";
@@ -21,7 +20,7 @@ export const PropertyCategoriesList = () => {
   } = useGetAllPropertyCategoriesQuery(userProfile?.agency?.id);
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+    <div className="flex flex-col gap-4">
       {propertyCategoriesIsError && propertyCategoriesError && (
         <AxiosErrorAlertMessage error={propertyCategoriesError} />
       )}
@@ -33,6 +32,6 @@ export const PropertyCategoriesList = () => {
       ))}
 
       {canCreateNewPropertyCategory && <PropertyCategoriesCreateButton />}
-    </Box>
+    </div>
   );
 };

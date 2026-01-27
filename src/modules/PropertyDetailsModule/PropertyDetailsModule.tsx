@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Box, Container, Grid, Typography } from "@mui/material";
 
 import { useGetPropertyDetailsQuery } from "@/shared/hooks/propertyDetails";
 import { BasicPageHeader } from "@/shared/components/Mobile/BasicPageHeader";
@@ -45,13 +44,10 @@ export const PropertyDetailsModule = () => {
     }
   }, [isSuccess, data, idOrSlug, navigate]);
 
-  // 1) при смене id мгновенно очищаем состояние,
-  // чтобы старая карточка/фото не оставались на экране.
   React.useEffect(() => {
     setCurrentProperty(null);
   }, [idOrSlug, setCurrentProperty]);
 
-  // 2) После успешной загрузки записываем новые данные в Zustand
   React.useEffect(() => {
     if (isSuccess && data) {
       setCurrentProperty(data);
@@ -63,59 +59,44 @@ export const PropertyDetailsModule = () => {
   return (
     <React.Fragment>
       <BasicPageHeader title="Детали недвижимости" shownBackArrowButton />
-      <Container
-        maxWidth={false}
-        sx={{ pb: { xs: "100px", md: 0 }, py: { xs: 2, md: 0 } }}
-      >
-        <Grid container spacing={2}>
-          {error && !isLoading && (
-            <Grid size={{ xs: 12, md: 6, lg: 4 }}>
-              <AxiosErrorAlertMessage error={error} />
-            </Grid>
-          )}
+      <div className="mx-auto w-full max-w-screen-xl px-4 pb-24 pt-4 md:pb-0 md:pt-0">
+        {error && !isLoading && (
+          <div className="w-full md:w-1/2 lg:w-1/3">
+            <AxiosErrorAlertMessage error={error} />
+          </div>
+        )}
 
-          {isLoading && <React.Fragment>loading..</React.Fragment>}
+        {isLoading && <div className="text-body2">loading..</div>}
 
-          {showContent && (
-            <React.Fragment>
-              <Grid size={{ xs: 12, md: 8 }}>
-                <PropertyDetailsPhotoBlock
-                  key={idOrSlug}
-                  entityKey={idOrSlug}
-                  photos={currentProperty!.property_photos ?? []}
-                />
-                <Grid size={12}>
-                  <Box py={2.5}>
-                    <PropertyDetailsSlimInfo />
-                  </Box>
-                  <Box pb={2.5}>
-                    <Typography component="h1" variant="h4">
-                      {currentProperty!.title}
-                    </Typography>
-                  </Box>
-                </Grid>
+        {showContent && (
+          <div className="grid gap-4 lg:grid-cols-[2fr_1fr]">
+            <div className="space-y-6">
+              <PropertyDetailsPhotoBlock
+                key={idOrSlug}
+                entityKey={idOrSlug}
+                photos={currentProperty!.property_photos ?? []}
+              />
+              <div className="space-y-4">
+                <PropertyDetailsSlimInfo />
+                <h1 className="text-h4 text-foreground">
+                  {currentProperty!.title}
+                </h1>
+              </div>
 
-                <Grid container spacing={2}>
-                  <Grid size={{ xs: 12, md: 6 }}>
-                    <PropertyDetailsApartmentInfo />
-                  </Grid>
-                  <Grid size={{ xs: 12, md: 6 }}>
-                    <PropertyDetailsApartmentHouseInfo />
-                  </Grid>
+              <div className="grid gap-4 md:grid-cols-2">
+                <PropertyDetailsApartmentInfo />
+                <PropertyDetailsApartmentHouseInfo />
+                <PropertyDetailsAdditionalOptions />
+                <div className="md:col-span-2">
+                  <PropertyDetailsDescriptionInfo />
+                </div>
+              </div>
+            </div>
 
-                  <PropertyDetailsAdditionalOptions />
-
-                  <Grid size={12}>
-                    <PropertyDetailsDescriptionInfo />
-                  </Grid>
-                </Grid>
-              </Grid>
-
-              <PropertyDetailsPriceBlock />
-            </React.Fragment>
-          )}
-        </Grid>
-      </Container>
+            <PropertyDetailsPriceBlock />
+          </div>
+        )}
+      </div>
       <PropertyDetailsDeactivateDrawer />
     </React.Fragment>
   );

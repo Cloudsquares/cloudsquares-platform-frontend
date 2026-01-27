@@ -1,11 +1,3 @@
-import {
-  Box,
-  Button,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-} from "@mui/material";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { FormProvider, useForm } from "react-hook-form";
@@ -16,6 +8,7 @@ import { PropertiesListItem } from "@/modules/PropertiesModule/components/Proper
 
 import { usePropertyDetailsStore } from "../../store";
 import { useDeactivatePropertyMutation } from "../../hooks";
+import { Button } from "@/shared/components/ui/button";
 
 interface PropertyDetailsDeleteFormProps {
   property: Property;
@@ -62,63 +55,51 @@ export const PropertyDetailsDeleteForm = ({
 
   return (
     <FormProvider {...methods}>
-      <Box
-        component="form"
+      <form
         onSubmit={handleSubmit(onSubmit, (errors) =>
           devLogger.error("Ошибки валидации:", errors),
         )}
-        sx={{ p: 2, display: "flex", flexDirection: "column", height: 1 }}
+        className="flex h-full flex-col gap-4 p-4"
       >
-        <Box flexGrow={1}>
-          <Box pb={2}>
-            <Typography component="p" variant="body1">
-              Вы уверены, что хотите деактивировать объект недвижимости{" "}
-              <Box component="strong" color="customColors.error">
-                {property.title}
-              </Box>
-              ?
-            </Typography>
-          </Box>
-          <Box pb={2}>
-            <Typography component="p" variant="body1">
+        <div className="flex-1 space-y-4">
+          <p className="text-body1 text-foreground">
+            Вы уверены, что хотите деактивировать объект недвижимости{" "}
+            <strong className="text-error">{property.title}</strong>?
+          </p>
+          <div className="space-y-2">
+            <p className="text-body1 text-foreground">
               Деактивация объекта недвижимости приведет к последствиям:
-            </Typography>
-            <List>
-              <ListItem dense>
-                <ListItemText>
-                  - объект недвижимости не будет отображаться в каталоге, будет
-                  перемещен в "Архив";
-                </ListItemText>
-              </ListItem>
-              <ListItem dense>
-                <ListItemText>
-                  - клиенты не смогут оставить заявки на покупку этой
-                  недвижимости;
-                </ListItemText>
-              </ListItem>
-            </List>
-          </Box>
+            </p>
+            <ul className="list-disc space-y-1 pl-5 text-body2 text-labels-secondary">
+              <li>
+                объект недвижимости не будет отображаться в каталоге, будет
+                перемещен в "Архив";
+              </li>
+              <li>
+                клиенты не смогут оставить заявки на покупку этой недвижимости;
+              </li>
+            </ul>
+          </div>
           <PropertiesListItem property={property} />
-        </Box>
-        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
           <Button
-            variant="contained"
-            color="secondary"
+            type="button"
+            variant="secondary"
             onClick={handleResetForm}
             disabled={deactivatePropertyMutation.isPending}
           >
             Закрыть
           </Button>
           <Button
-            variant="contained"
-            color="error"
             type="submit"
+            variant="destructive"
             disabled={deactivatePropertyMutation.isPending}
           >
             Деактивировать
           </Button>
-        </Box>
-      </Box>
+        </div>
+      </form>
     </FormProvider>
   );
 };

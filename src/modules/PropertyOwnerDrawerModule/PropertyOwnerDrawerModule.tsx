@@ -1,3 +1,5 @@
+import React from "react";
+
 import { PropertyOwnerDrawerDeleteForm } from "@/modules/PropertyOwnerDrawerModule/components/PropertyOwnerDrawerDeleteContent";
 import { usePropertyOwnerDrawersStore } from "@/modules/PropertyOwnerDrawerModule/store";
 import { BasicDrawer } from "@/shared/components/BasicDrawer";
@@ -6,8 +8,7 @@ import {
   DisplayTextBasicDrawerMode,
 } from "@/shared/interfaces/Shared";
 import { devLogger } from "@/shared/utils";
-import { Alert, Box } from "@mui/material";
-import React from "react";
+import { Alert, AlertDescription } from "@/shared/components/ui/alert";
 
 export const PropertyOwnerDrawerModule = () => {
   const mode = usePropertyOwnerDrawersStore((state) => state.mode);
@@ -42,12 +43,18 @@ export const PropertyOwnerDrawerModule = () => {
       isOpen={showPropertyOwnerDrawer}
       setIsOpen={setShowPropertyOwnerDrawer}
     >
-      <Box height={1}>
+      <div className="h-full p-4">
         {!editablePropertyOwner && (
-          <Alert severity="error">Собственник не определен!</Alert>
+          <Alert variant="destructive">
+            <AlertDescription>Собственник не определен!</AlertDescription>
+          </Alert>
         )}
         {!property_id && (
-          <Alert severity="error">Объект недвижимости не определен!</Alert>
+          <Alert variant="destructive">
+            <AlertDescription>
+              Объект недвижимости не определен!
+            </AlertDescription>
+          </Alert>
         )}
         {isDelete && editablePropertyOwner && property_id && (
           <PropertyOwnerDrawerDeleteForm
@@ -57,7 +64,7 @@ export const PropertyOwnerDrawerModule = () => {
             onSuccess={() => setShowPropertyOwnerDrawer(false)}
           />
         )}
-      </Box>
+      </div>
     </BasicDrawer>
   );
 };

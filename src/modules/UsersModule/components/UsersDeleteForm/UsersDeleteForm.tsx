@@ -2,16 +2,10 @@ import { useDeactivateUserByIdMutation } from "@/modules/UsersModule/hooks";
 import { BasicTextField } from "@/shared/components/BasicTextField";
 import { User } from "@/shared/interfaces";
 import { devLogger, displayUserName } from "@/shared/utils";
-import {
-  Box,
-  Button,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-} from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+
+import { Button } from "@/shared/components/ui/button";
 
 interface UsersDeleteFormProps {
   user: User;
@@ -42,8 +36,7 @@ export const UsersDeleteForm = ({
 
   const onSubmit = (data: DeleteUserFormData) => {
     if (
-      data.user_name &&
-      data.user_name.trim() === displayName.fullName.trim()
+      data.user_name?.trim() === displayName.fullName.trim()
     ) {
       deactivateUserByIdMutation.mutate({ id: user.id, onSuccess: onSuccess });
     } else {
@@ -58,76 +51,58 @@ export const UsersDeleteForm = ({
 
   return (
     <FormProvider {...methods}>
-      <Box
-        component="form"
+      <form
         onSubmit={handleSubmit(onSubmit, (errors) =>
           devLogger.error("Ошибки валидации:", errors),
         )}
-        sx={{ p: 2, display: "flex", flexDirection: "column", height: 1 }}
+        className="flex h-full flex-col gap-4 p-4"
       >
-        <Box flexGrow={1}>
-          <Box pb={2}>
-            <Typography component="p" variant="body1">
-              Вы уверены, что хотите удалить сотрудника{" "}
-              <Box component="strong" color="customColors.error">
-                {displayName.fullName}
-              </Box>
-              ?
-            </Typography>
-          </Box>
-          <Box pb={2}>
-            <Typography component="p" variant="body1">
+        <div className="flex-1 space-y-4">
+          <p className="text-body1 text-foreground">
+            Вы уверены, что хотите удалить сотрудника{" "}
+            <strong className="text-error">{displayName.fullName}</strong>?
+          </p>
+          <div className="space-y-2">
+            <p className="text-body1 text-foreground">
               Удаление сотрудника приведет к необратимым последствиям:
-            </Typography>
-            <List>
-              <ListItem dense>
-                <ListItemText>
-                  - сотрудник утратит доступ к системе;
-                </ListItemText>
-              </ListItem>
-              <ListItem dense>
-                <ListItemText>
-                  - все данные, где задействован сотрудник, останутся без
-                  изменений;
-                </ListItemText>
-              </ListItem>
-              <ListItem dense>
-                <ListItemText>
-                  - объекты недвижимости, где был задействован сотрудник,
-                  необходимо вручную отредактировать и назначить нового
-                  ответственного сотрудника;
-                </ListItemText>
-              </ListItem>
-            </List>
-          </Box>
-          <Box>
-            <Typography component="p" variant="body2">
+            </p>
+            <ul className="list-disc space-y-1 pl-5 text-body2 text-labels-secondary">
+              <li>сотрудник утратит доступ к системе;</li>
+              <li>
+                все данные, где задействован сотрудник, останутся без изменений;
+              </li>
+              <li>
+                объекты недвижимости, где был задействован сотрудник, необходимо
+                вручную отредактировать и назначить нового ответственного
+                сотрудника;
+              </li>
+            </ul>
+          </div>
+          <div className="space-y-2">
+            <p className="text-body2 text-foreground">
               Для подтверждения, введите ниже{" "}
-              <Box component="strong">{displayName.fullName}</Box>
-            </Typography>
-            <Box pt={2}>
-              <BasicTextField
-                name="user_name"
-                label="Подтверждение удаления сотрудника"
-                placeholder="Введите ФИО сотрудника"
-                disabled={deactivateUserByIdMutation.isPending}
-              />
-            </Box>
-          </Box>
-        </Box>
-        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
+              <strong>{displayName.fullName}</strong>
+            </p>
+            <BasicTextField
+              name="user_name"
+              label="Подтверждение удаления сотрудника"
+              placeholder="Введите ФИО сотрудника"
+              disabled={deactivateUserByIdMutation.isPending}
+            />
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
           <Button
-            variant="contained"
-            color="secondary"
+            type="button"
+            variant="secondary"
             onClick={handleResetForm}
             disabled={deactivateUserByIdMutation.isPending}
           >
             Закрыть
           </Button>
           <Button
-            variant="contained"
-            color="error"
             type="submit"
+            variant="destructive"
             disabled={
               deactivateUserByIdMutation.isPending ||
               watch("user_name") !== displayName.fullName
@@ -135,8 +110,8 @@ export const UsersDeleteForm = ({
           >
             Удалить
           </Button>
-        </Box>
-      </Box>
+        </div>
+      </form>
     </FormProvider>
   );
 };

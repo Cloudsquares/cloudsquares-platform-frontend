@@ -1,5 +1,4 @@
 import React from "react";
-import { Container, Grid, Typography } from "@mui/material";
 
 import { CustomersTable } from "./components/CustomersTable";
 import { useTablePagination } from "../../shared/hooks";
@@ -66,25 +65,19 @@ export const CustomersModule = () => {
   return (
     <React.Fragment>
       <BasicPageHeader title="База клиентов" shownBackArrowButton />
-      <Container maxWidth={false}>
-        <Grid container spacing={2}>
-          <Grid size={12}>
-            <Typography component="h1" variant="h4">
-              База клиентов
-            </Typography>
-          </Grid>
-          <Grid size={12}>
-            <CustomersTable
-              data={tempResponse.data}
-              page={page}
-              rowsPerPage={rowsPerPage}
-              onPageChange={setPage}
-              onRowsPerPageChange={setRowsPerPage}
-              totalPages={tempResponse.totalPages}
-            />
-          </Grid>
-        </Grid>
-      </Container>
+      <div className="mx-auto w-full max-w-screen-xl px-4">
+        <div className="grid gap-4 py-4">
+          <h1 className="text-h4 text-foreground">База клиентов</h1>
+          <CustomersTable
+            data={tempResponse.data}
+            page={page}
+            rowsPerPage={rowsPerPage}
+            onPageChange={setPage}
+            onRowsPerPageChange={setRowsPerPage}
+            totalPages={tempResponse.totalPages}
+          />
+        </div>
+      </div>
     </React.Fragment>
   );
 };

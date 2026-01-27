@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Container, Grid, Typography } from "@mui/material";
 
 import { useHomeStore } from "./store";
 import { HomeAgencyInfoDrawer } from "./components/HomeAgencyInfoDrawer";
@@ -34,37 +33,25 @@ export const HomeModule = () => {
   return (
     <React.Fragment>
       <BasicPageHeader title="Панель управления" />
-      <Container maxWidth={false}>
-        <Grid container spacing={2}>
-          <Grid size={{ xs: 12, md: 6, lg: 4 }}>
-            <Box py={2}>
-              <Typography component="h5" variant="h6">
-                Мое агентство
-              </Typography>
-              <Box py={1}>
-                <BasicNavListToDrawer list={agencyLinks} />
-              </Box>
-            </Box>
-            <Box pb={2}>
-              <Typography component="h5" variant="h6">
-                Недвижимость
-              </Typography>
-              <Box py={1}>
-                <BasicNavListToPage list={propertiesLinks} />
-              </Box>
-            </Box>
-            <Box>
-              <Typography component="h5" variant="h6">
-                Заявки
-              </Typography>
-              <Box py={1}>
-                <BasicNavListToPage list={requestsLinks} />
-              </Box>
-            </Box>
-          </Grid>
-        </Grid>
+      <div className="mx-auto w-full max-w-screen-xl px-4 py-4">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <h5 className="text-h6 text-foreground">Мое агентство</h5>
+              <BasicNavListToDrawer list={agencyLinks} />
+            </div>
+            <div className="space-y-2">
+              <h5 className="text-h6 text-foreground">Недвижимость</h5>
+              <BasicNavListToPage list={propertiesLinks} />
+            </div>
+            <div className="space-y-2">
+              <h5 className="text-h6 text-foreground">Заявки</h5>
+              <BasicNavListToPage list={requestsLinks} />
+            </div>
+          </div>
+        </div>
         <HomeAgencyInfoDrawer />
-      </Container>
+      </div>
     </React.Fragment>
   );
 };

@@ -1,15 +1,19 @@
-import { TableCell, TableHead, TableRow } from "@mui/material";
 import { useListTableHeaderColumns } from "../../hooks";
 
 export const CustomersTableHead = () => {
   const headColumns = useListTableHeaderColumns();
   return (
-    <TableHead>
-      <TableRow>
+    <thead className="bg-grey-100">
+      <tr>
         {headColumns.map((column, index) => (
-          <TableCell key={index}>{column}</TableCell>
+          <th
+            key={index}
+            className="px-3 py-2 text-left text-body2 font-semibold text-labels-secondary"
+          >
+            {column}
+          </th>
         ))}
-      </TableRow>
-    </TableHead>
+      </tr>
+    </thead>
   );
 };

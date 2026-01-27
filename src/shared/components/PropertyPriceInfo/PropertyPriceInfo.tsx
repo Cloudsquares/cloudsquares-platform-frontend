@@ -1,6 +1,6 @@
-import { Box, Typography } from "@mui/material";
-import { Property } from "../../interfaces/Property";
-import { calculatePricePerMeter } from "../../utils";
+import { Property } from "@/shared/interfaces/Property";
+import { calculatePricePerMeter } from "@/shared/utils";
+
 import { DiscountLabel } from "../DiscountLabel";
 
 interface PropertyPriceInfoProps {
@@ -10,14 +10,14 @@ interface PropertyPriceInfoProps {
 // TODO: Проверить, точно ли нужен этот компонент в shared?
 export const PropertyPriceInfo = ({ property }: PropertyPriceInfoProps) => {
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
+    <div className="flex flex-col gap-2">
       <DiscountLabel price={property.price} discount={property.discount} />
-      <Typography component="h6" variant="h4">
+      <p className="text-h4 text-foreground">
         {(property.price - property.discount).toLocaleString("ru")} ₽
-      </Typography>
-      <Typography component="p" variant="body1">
+      </p>
+      <p className="text-body1 text-labels-secondary">
         {calculatePricePerMeter(property.price, 42)} ₽ за м²
-      </Typography>
-    </Box>
+      </p>
+    </div>
   );
 };

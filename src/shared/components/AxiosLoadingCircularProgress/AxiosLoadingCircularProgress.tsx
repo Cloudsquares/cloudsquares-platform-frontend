@@ -1,9 +1,10 @@
-import { Box, CircularProgress } from "@mui/material";
-
 export const AxiosLoadingCircularProgress = () => {
   return (
-    <Box p={2} data-testid="componentAxiosLoadingCircularProgress">
-      <CircularProgress color="primary" size={24} />
-    </Box>
+    <div
+      className="flex items-center justify-center p-4"
+      data-testid="componentAxiosLoadingCircularProgress"
+    >
+      <div className="h-6 w-6 animate-spin rounded-full border-2 border-grey-300 border-t-primary" />
+    </div>
   );
 };

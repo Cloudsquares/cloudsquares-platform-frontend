@@ -1,5 +1,5 @@
 import { PropertyCategory } from "@/shared/interfaces/PropertyCategory";
-import { Alert, Box, Typography } from "@mui/material";
+import { Alert, AlertDescription } from "@/shared/components/ui/alert";
 
 interface PropertyCategoriesDeleteFormProps {
   editablePropertyCategory: PropertyCategory | null;
@@ -10,23 +10,19 @@ export const PropertyCategoriesDeleteForm = ({
 }: PropertyCategoriesDeleteFormProps) => {
   if (!editablePropertyCategory) {
     return (
-      <Box p={2}>
-        <Alert severity="error">Удаляемый объект не определен</Alert>
-      </Box>
+      <Alert variant="destructive">
+        <AlertDescription>Удаляемый объект не определен</AlertDescription>
+      </Alert>
     );
   }
 
   return (
-    <Box flexGrow={1}>
-      <Box pb={2}>
-        <Typography component="p" variant="body1">
-          Вы уверены, что хотите удалить категорию под названием{" "}
-          <Box component="strong" color="customColors.error">
-            {editablePropertyCategory.title}
-          </Box>
-          ?
-        </Typography>
-      </Box>
-    </Box>
+    <div className="flex-1">
+      <p className="text-body1 text-foreground">
+        Вы уверены, что хотите удалить категорию под названием{" "}
+        <strong className="text-error">{editablePropertyCategory.title}</strong>
+        ?
+      </p>
+    </div>
   );
 };

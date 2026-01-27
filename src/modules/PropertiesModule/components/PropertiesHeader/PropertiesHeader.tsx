@@ -1,22 +1,16 @@
-import { Box, Typography } from "@mui/material";
 import { PropertiesSearchWrapper } from "../PropertiesSearchWrapper";
 import { PropertiesFilter } from "../PropertiesFilter";
-import { headerStyles, wrapperStyles } from "./styles";
 
 export const PropertiesHeader = () => {
   return (
-    <Box sx={headerStyles}>
-      <Typography
-        component="h1"
-        variant="h3"
-        sx={{ display: { xs: "none", lg: "block" } }}
-      >
+    <div className="grid items-center gap-4 pt-4 lg:grid-cols-2 lg:pt-0">
+      <h1 className="hidden text-h3 text-foreground lg:block">
         Каталог недвижимости
-      </Typography>
-      <Box sx={wrapperStyles}>
+      </h1>
+      <div className="flex flex-wrap items-center justify-end gap-4">
         <PropertiesSearchWrapper />
         <PropertiesFilter />
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 };

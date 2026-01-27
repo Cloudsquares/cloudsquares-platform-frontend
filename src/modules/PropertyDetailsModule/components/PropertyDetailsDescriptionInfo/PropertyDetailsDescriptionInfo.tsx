@@ -1,4 +1,3 @@
-import { Box, Typography } from "@mui/material";
 import { usePropertyDetailsStore } from "../../store";
 
 export const PropertyDetailsDescriptionInfo = () => {
@@ -7,11 +6,11 @@ export const PropertyDetailsDescriptionInfo = () => {
   );
 
   return (
-    <Box pb={2}>
-      <Typography component="h5" variant="h5">
-        Описание
-      </Typography>
-      <Box pt={2}>{currentProperty?.description}</Box>
-    </Box>
+    <div className="space-y-2 pb-4">
+      <h5 className="text-h5 text-foreground">Описание</h5>
+      <div className="text-body2 text-labels-secondary">
+        {currentProperty?.description}
+      </div>
+    </div>
   );
 };

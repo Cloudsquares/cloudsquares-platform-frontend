@@ -1,15 +1,8 @@
 import React from "react";
-import {
-  Box,
-  Paper,
-  Table,
-  TableContainer,
-  TablePagination,
-} from "@mui/material";
 import { Customer } from "../../../../shared/interfaces/Customer";
-import { tablePaginationSlotPropsStyles } from "../../../../shared/styles";
 import { CustomersTableHead } from "../CustomersTableHead";
 import { CustomersTableBody } from "../CustomersTableBody";
+import { TablePagination } from "@/shared/components/ui/table-pagination";
 
 interface CustomersTableProps {
   data: Customer[];
@@ -28,41 +21,31 @@ export const CustomersTable = ({
   onPageChange,
   onRowsPerPageChange,
 }: CustomersTableProps) => {
-  const handleChangePage = (
-    _: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number,
-  ) => {
+  const handleChangePage = (newPage: number) => {
     onPageChange(newPage);
   };
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const newRowsPerPage = parseInt(event.target.value, 10);
+  const handleChangeRowsPerPage = (newRowsPerPage: number) => {
     onRowsPerPageChange(newRowsPerPage);
   };
 
   return (
     <React.Fragment>
-      <TableContainer component={Paper}>
-        <Table>
+      <div className="overflow-hidden rounded-md border border-border bg-card">
+        <table className="min-w-full text-left">
           <CustomersTableHead />
           <CustomersTableBody data={data} />
-        </Table>
-      </TableContainer>
-      <Box component={Paper} mt={1.5}>
-        <TablePagination
-          rowsPerPageOptions={[5, 15, 30]}
-          component="div"
-          count={totalPages * rowsPerPage}
-          rowsPerPage={rowsPerPage}
-          labelRowsPerPage=""
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-          slotProps={tablePaginationSlotPropsStyles}
-        />
-      </Box>
+        </table>
+      </div>
+      <TablePagination
+        rowsPerPageOptions={[5, 15, 30]}
+        count={totalPages * rowsPerPage}
+        rowsPerPage={rowsPerPage}
+        labelRowsPerPage=""
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
     </React.Fragment>
   );
 };

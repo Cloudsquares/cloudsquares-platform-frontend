@@ -1,18 +1,8 @@
 import * as React from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { Box, IconButton, Typography } from "@mui/material";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { MdPhoto } from "react-icons/md";
 import { PropertyPhoto } from "../../../../shared/interfaces/Property";
-import {
-  counterStyles,
-  emblaContainerStyles,
-  emblaSlideStyles,
-  iconButtonNextStyles,
-  iconButtonPrevStyles,
-  imageStyles,
-  photoWrapperStyles,
-} from "./styles";
 
 /**
  * Пропсы блока фото деталей объекта.
@@ -49,11 +39,9 @@ export const PropertyDetailsPhotoBlock = ({
   loading = false,
   entityKey,
 }: PropertyDetailsPhotoBlockProps) => {
-  // Если идёт загрузка или фото нет — считаем, что показываем плейсхолдер.
   const hasPhotos = Array.isArray(photos) && photos.length > 0;
   const showPlaceholder = loading || !hasPhotos;
 
-  // Ключ карусели меняется при изменении списка фото или при явной смене сущности.
   const carouselKey = React.useMemo(() => {
     if (showPlaceholder) return `placeholder-${entityKey ?? "no-id"}`;
     const ids = photos.map((p) => p.id).join("_");
@@ -83,7 +71,6 @@ export const PropertyDetailsPhotoBlock = ({
     [emblaApi],
   );
 
-  // Сброс индекса при смене карусели/набора фото
   React.useEffect(() => {
     setSelectedIndex(0);
   }, [carouselKey]);
@@ -108,80 +95,62 @@ export const PropertyDetailsPhotoBlock = ({
   }, [emblaApi, carouselKey]);
 
   return (
-    <Box sx={photoWrapperStyles}>
-      {/* Ключ на враппере принудительно пересоздаёт карусель при смене данных */}
-      <Box
-        key={carouselKey}
-        ref={emblaRef}
-        className="embla"
-        sx={{ overflow: "hidden", width: "100%" }}
-      >
-        <Box className="embla__container" sx={emblaContainerStyles}>
+    <div className="relative overflow-hidden">
+      <div key={carouselKey} ref={emblaRef} className="embla overflow-hidden">
+        <div className="flex touch-pan-y gap-4" style={{ marginLeft: "-8px" }}>
           {(showPlaceholder ? [null] : photos).map((photo, idx) => {
             const key = photo ? photo.id : "placeholder";
             const url = (photo as PropertyPhoto | null)?.file_url;
 
             return (
-              <Box
+              <div
                 key={`${key}-${idx}`}
-                className="embla__slide"
-                sx={emblaSlideStyles}
+                className="flex-[0_0_100%] md:flex-[0_0_80%] rounded-lg"
               >
                 {url ? (
-                  <Box
-                    component="img"
+                  <img
                     src={url}
                     alt="Property photo"
-                    sx={imageStyles}
+                    className="block h-[30rem] w-full rounded-lg object-cover"
                   />
                 ) : (
-                  <Box
+                  <div
                     role="img"
                     aria-label="Изображение недоступно"
-                    sx={{
-                      width: 1,
-                      aspectRatio: "16 / 9",
-                      borderRadius: 2,
-                      bgcolor: "action.hover",
-                      color: "text.secondary",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      border: (theme) => `1px dashed ${theme.palette.divider}`,
-                    }}
+                    className="flex aspect-video w-full items-center justify-center rounded-lg border border-dashed border-grey-300 bg-grey-100 text-grey-500"
                   >
                     <MdPhoto size={48} />
-                  </Box>
+                  </div>
                 )}
-              </Box>
+              </div>
             );
           })}
-        </Box>
-      </Box>
+        </div>
+      </div>
 
-      <IconButton
+      <button
+        type="button"
         onClick={scrollPrev}
-        sx={iconButtonPrevStyles}
+        className="absolute left-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white disabled:opacity-50"
         disabled={showPlaceholder || !canPrev}
         aria-label="Предыдущая фотография"
       >
         <FaChevronLeft size={16} />
-      </IconButton>
+      </button>
 
-      <IconButton
+      <button
+        type="button"
         onClick={scrollNext}
-        sx={iconButtonNextStyles}
+        className="absolute right-2 top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-white disabled:opacity-50"
         disabled={showPlaceholder || !canNext}
         aria-label="Следующая фотография"
       >
         <FaChevronRight size={16} />
-      </IconButton>
+      </button>
 
-      <Box sx={counterStyles}>
-        <Typography variant="caption">
-          {showPlaceholder ? "0/0" : `${selectedIndex + 1}/${photos.length}`}
-        </Typography>
-      </Box>
-    </Box>
+      <div className="absolute bottom-2 left-2 rounded bg-black/70 px-2 py-1 text-caption2 text-white">
+        {showPlaceholder ? "0/0" : `${selectedIndex + 1}/${photos.length}`}
+      </div>
+    </div>
   );
 };

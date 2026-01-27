@@ -1,4 +1,3 @@
-import { Box, Button } from "@mui/material";
 import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
@@ -13,6 +12,7 @@ import { usePatchAgencyInfoMutation } from "../../hooks";
 import { devLogger } from "../../../../shared/utils";
 import { useUserProfile } from "../../../../shared/permissions/hooks";
 import { BasicTextField } from "../../../../shared/components/BasicTextField";
+import { Button } from "@/shared/components/ui/button";
 
 export const HomeAgencyInfoEditForm = () => {
   const profile = useUserProfile();
@@ -52,42 +52,34 @@ export const HomeAgencyInfoEditForm = () => {
 
   return (
     <FormProvider {...methods}>
-      <Box
-        component="form"
+      <form
         onSubmit={handleSubmit(onSubmit, (errors) =>
           devLogger.error("Ошибки валидации:", errors),
         )}
-        sx={{ p: 2, display: "flex", flexDirection: "column", height: 1 }}
+        className="flex h-full flex-col gap-4 p-4"
       >
-        <Box flexGrow={1}>
-          <Box pb={2}>
-            <BasicTextField<AgencyInfoFormData>
-              name="title"
-              label="Название"
-              placeholder="Введите название агентства"
-              disabled={patchAgencyInfoMutation.isPending}
-            />
-          </Box>
-        </Box>
-        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
+        <div className="flex-1 space-y-4">
+          <BasicTextField<AgencyInfoFormData>
+            name="title"
+            label="Название"
+            placeholder="Введите название агентства"
+            disabled={patchAgencyInfoMutation.isPending}
+          />
+        </div>
+        <div className="grid grid-cols-2 gap-4">
           <Button
-            variant="contained"
-            color="secondary"
+            type="button"
+            variant="secondary"
             onClick={handleResetForm}
             disabled={patchAgencyInfoMutation.isPending}
           >
             Закрыть
           </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-            disabled={patchAgencyInfoMutation.isPending}
-          >
+          <Button type="submit" disabled={patchAgencyInfoMutation.isPending}>
             Сохранить
           </Button>
-        </Box>
-      </Box>
+        </div>
+      </form>
     </FormProvider>
   );
 };

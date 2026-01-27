@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Box, Button, Typography } from "@mui/material";
 import { MdPhoto } from "react-icons/md";
 
 import {
@@ -15,13 +14,7 @@ import {
 } from "@/shared/utils";
 import { PropertyPriceInfo } from "@/shared/components/PropertyPriceInfo";
 import { AgentCompactCard } from "@/shared/components/AgentCompactCard";
-import {
-  cardButtonWrapperStyles,
-  cardStyles,
-  contentStyles,
-  imageThumbnailStyles,
-  priceInfoWrapperStyles,
-} from "./styles";
+import { Button } from "@/shared/components/ui/button";
 
 // TODO: перевести компонент в shared/components так как используется в нескольких модулях.
 // TODO: убрать description из карточки
@@ -59,128 +52,83 @@ export const PropertiesListItem = ({
     navigate("/properties/" + property.slug);
   }, [navigate, property.slug]);
 
-  // Берём превью, при его отсутствии попробуем основную ссылку на файл,
-  // иначе отрисуем заглушку.
   const previewUrl =
     property.property_photos?.[0]?.file_preview_url ??
     property.property_photos?.[0]?.file_url ??
     "";
 
   return (
-    <Box sx={cardStyles}>
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-        {/* Превью фото или заглушка */}
+    <div className="grid gap-4 rounded-lg border border-grey-300 bg-white p-4 lg:grid-cols-[1fr_2fr]">
+      <div className="flex flex-col gap-2">
         {previewUrl ? (
-          <Box
-            component="img"
+          <img
             src={previewUrl}
             alt="Фото недвижимости"
-            sx={{ width: 1, borderRadius: 4, cursor: "pointer" }}
+            className="w-full cursor-pointer rounded-lg"
             onClick={handleOpenDetails}
           />
         ) : (
-          <Box
-            role="button"
-            tabIndex={0}
+          <button
+            type="button"
             aria-label="Открыть страницу объекта недвижимости"
             onClick={handleOpenDetails}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") handleOpenDetails();
-            }}
-            sx={imageThumbnailStyles}
+            className="flex aspect-video w-full items-center justify-center rounded-lg border border-dashed border-grey-300 bg-grey-100 text-grey-500"
           >
             <MdPhoto size={64} />
-          </Box>
+          </button>
         )}
-      </Box>
+      </div>
 
-      <Box sx={contentStyles}>
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
-          <Typography component="h5" variant="h5">
-            {property.title}
-          </Typography>
-          <Typography component="p" variant="subtitle1">
-            {propertyTitle(property)}
-          </Typography>
+      <div className="grid gap-4 md:grid-cols-[2fr_1fr]">
+        <div className="space-y-3">
+          <div>
+            <h5 className="text-h5 text-foreground">{property.title}</h5>
+            <p className="text-subtitle1 text-labels-secondary">
+              {propertyTitle(property)}
+            </p>
+          </div>
 
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            <Typography component="p" variant="body2">
-              {PropertyStatusText[property.status]}
-            </Typography>
-            <Typography component="p" variant="body2">
-              {ListingTypeText[property.listing_type]}
-            </Typography>
-            <Typography component="p" variant="body2">
-              {property.price}
-            </Typography>
-          </Box>
+          <div className="flex flex-wrap items-center gap-2 text-body2 text-labels-secondary">
+            <span>{PropertyStatusText[property.status]}</span>
+            <span>{ListingTypeText[property.listing_type]}</span>
+            <span>{property.price}</span>
+          </div>
 
-          <Box>
+          <div className="space-y-2">
             {property.property_location && (
-              <Typography
-                component="p"
-                variant="body1"
-                color="customColors.grey600"
-                my={1}
-              >
+              <p className="text-body1 text-grey-600">
                 {propertyAddress(property).fullAddress}
-              </Typography>
+              </p>
             )}
             {shortDescription && (
-              <Typography
-                component="p"
-                variant="body1"
-                color="customColors.grey600"
-              >
-                {shortDescription}
-              </Typography>
+              <p className="text-body1 text-grey-600">{shortDescription}</p>
             )}
-          </Box>
+          </div>
 
           {property.agent && (
-            <Box py={2}>
+            <div className="py-2">
               <AgentCompactCard agent={property.agent} />
-            </Box>
+            </div>
           )}
 
           {showActionButton && (
-            <Box sx={cardButtonWrapperStyles}>
-              <Box
-                component={Link}
-                to={`/requests/buy?property=${property.id}`}
-              >
-                <Button variant="outlined" size="large" fullWidth>
+            <div className="grid gap-3 sm:grid-cols-[1.25fr_1fr]">
+              <Button asChild variant="secondary" size="lg">
+                <Link to={`/requests/buy?property=${property.id}`}>
                   Открыть заявки
-                </Button>
-              </Box>
-              <Box component={Link} to={`/properties/${property.slug}`}>
-                <Button variant="contained" size="large" fullWidth>
-                  Открыть детали
-                </Button>
-              </Box>
-            </Box>
+                </Link>
+              </Button>
+              <Button asChild size="lg">
+                <Link to={`/properties/${property.slug}`}>Открыть детали</Link>
+              </Button>
+            </div>
           )}
-        </Box>
+        </div>
 
-        <Box sx={priceInfoWrapperStyles}>
+        <div className="hidden items-start justify-end sm:flex">
           <PropertyPriceInfo property={property} />
-        </Box>
-      </Box>
-    </Box>
+        </div>
+      </div>
+    </div>
   );
 };
-
-/* <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
-    <Box
-      component="img"
-      src={property.property_photos[0].file_preview_url}
-      alt="Фото недвижимости"
-      sx={{ width: 1, borderRadius: 4 }}
-    />
-    <Box
-      component="img"
-      src={property.property_photos[0].file_preview_url}
-      alt="Фото недвижимости"
-      sx={{ width: 1, borderRadius: 4 }}
-    />
-  </Box> */

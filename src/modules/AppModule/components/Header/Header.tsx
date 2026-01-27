@@ -1,46 +1,38 @@
 import { Link } from "react-router-dom";
-import { Box, Button } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 import { HeaderNavigation } from "../HeaderNavigation";
 import { HeaderLogotype } from "../HeaderLogotype";
-import {
-  headerContentStyles,
-  loginWrapperStyles,
-  logoWrapperStyles,
-} from "./styles";
 import { useIsAuthenticated } from "../../../../shared/permissions/hooks";
 import { HeaderProfile } from "../HeaderProfile";
+import { Button } from "@/shared/components/ui/button";
 
 export const Header = () => {
   const { t } = useTranslation();
   const isAuthenticated = useIsAuthenticated();
 
   return (
-    <Box
-      component="header"
+    <header
       data-testid="header"
-      sx={{ display: { xs: "none", lg: "block" } }}
+      className="hidden border-b border-grey-200 bg-white lg:block"
     >
-      <Box sx={headerContentStyles}>
-        <Box sx={logoWrapperStyles}>
+      <div className="flex items-center justify-between px-6 py-4">
+        <div className="flex items-center gap-4">
           <HeaderLogotype />
           <HeaderNavigation />
-        </Box>
+        </div>
         {!isAuthenticated && (
-          <Box sx={loginWrapperStyles}>
-            <Button variant="text" size="medium">
+          <div className="hidden items-center gap-4 md:flex">
+            <Button variant="ghost" size="md">
               {t("request_demo")}
             </Button>
-            <Link to="/login">
-              <Button variant="contained" size="medium">
-                {t("login")}
-              </Button>
-            </Link>
-          </Box>
+            <Button asChild>
+              <Link to="/login">{t("login")}</Link>
+            </Button>
+          </div>
         )}
         {isAuthenticated && <HeaderProfile />}
-      </Box>
-    </Box>
+      </div>
+    </header>
   );
 };

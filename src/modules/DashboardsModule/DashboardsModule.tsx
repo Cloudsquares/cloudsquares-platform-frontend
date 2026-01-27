@@ -1,16 +1,15 @@
 import React from "react";
-import { Container, Grid } from "@mui/material";
 import { BasicPageHeader } from "../../shared/components/Mobile/BasicPageHeader";
 
 export const DashboardsModule = () => {
   return (
     <React.Fragment>
       <BasicPageHeader title="Аналитика" />
-      <Container>
-        <Grid container spacing={2}>
-          <Grid size={12}>Hello Dashboards!</Grid>
-        </Grid>
-      </Container>
+      <div className="mx-auto w-full max-w-screen-xl px-4">
+        <div className="grid gap-4 py-4">
+          <div>Hello Dashboards!</div>
+        </div>
+      </div>
     </React.Fragment>
   );
 };

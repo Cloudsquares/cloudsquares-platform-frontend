@@ -1,5 +1,4 @@
 import React from "react";
-import { Container, Grid } from "@mui/material";
 
 import { PropertiesList } from "./components/PropertiesList";
 import { PropertiesHeader } from "./components/PropertiesHeader";
@@ -13,14 +12,12 @@ export const PropertiesModule = () => {
         shownBackArrowButton
         backButtonLink="/"
       />
-      <Container maxWidth={false}>
-        <Grid container spacing={2}>
-          <Grid size={12}>
-            <PropertiesHeader />
-          </Grid>
+      <div className="mx-auto w-full max-w-screen-xl px-4">
+        <div className="grid gap-4 py-4">
+          <PropertiesHeader />
           <PropertiesList />
-        </Grid>
-      </Container>
+        </div>
+      </div>
     </React.Fragment>
   );
 };

@@ -1,7 +1,5 @@
 import * as React from "react";
-import { Box, Typography } from "@mui/material";
 import { usePropertyFormStore } from "../../store";
-import { chipStyles } from "./styles";
 
 /**
  * Индикатор прогресса пошаговой формы.
@@ -16,29 +14,28 @@ export const PropertyFormStepCounter: React.FC = () => {
   const total = stepsOrder.length;
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        gap: 2,
-        py: { xs: 1, md: 0 },
-      }}
+    <div
+      className="flex items-center gap-4 py-2 md:py-0"
       aria-label={`Шаг ${currentIndex + 1} из ${total}`}
     >
-      <Box sx={{ display: "flex", alignItems: "center", gap: 1, flex: 1 }}>
+      <div className="flex flex-1 items-center gap-2">
         {stepsOrder.map((item, idx) => {
           const isPassedOrCurrent = idx <= currentIndex;
-          return <Box key={item} sx={chipStyles(isPassedOrCurrent)} />;
+          return (
+            <div
+              key={item}
+              className={
+                "h-1.5 flex-1 rounded-md transition-colors " +
+                (isPassedOrCurrent ? "bg-primary" : "bg-grey-300")
+              }
+            />
+          );
         })}
-      </Box>
+      </div>
 
-      <Typography
-        variant="body2"
-        color="text.secondary"
-        sx={{ whiteSpace: "nowrap" }}
-      >
+      <span className="whitespace-nowrap text-body2 text-labels-secondary">
         {currentIndex + 1}/{total}
-      </Typography>
-    </Box>
+      </span>
+    </div>
   );
 };
