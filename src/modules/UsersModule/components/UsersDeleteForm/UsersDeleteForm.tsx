@@ -35,9 +35,7 @@ export const UsersDeleteForm = ({
   const deactivateUserByIdMutation = useDeactivateUserByIdMutation();
 
   const onSubmit = (data: DeleteUserFormData) => {
-    if (
-      data.user_name?.trim() === displayName.fullName.trim()
-    ) {
+    if (data.user_name?.trim() === displayName.fullName.trim()) {
       deactivateUserByIdMutation.mutate({ id: user.id, onSuccess: onSuccess });
     } else {
       toast.error("Введите ФИО сотрудника для подтверждения удаления!");

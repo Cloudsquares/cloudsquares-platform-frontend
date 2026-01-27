@@ -1,5 +1,5 @@
 import React from "react";
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 import { Button } from "@/shared/components/ui/button";
 import {
@@ -103,7 +103,11 @@ export const CustomTableCell = ({
                 size="sm"
                 aria-expanded={isOpen}
               >
-                {isOpen ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
+                {isOpen ? (
+                  <ChevronUp className="h-4 w-4" />
+                ) : (
+                  <ChevronDown className="h-4 w-4" />
+                )}
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">

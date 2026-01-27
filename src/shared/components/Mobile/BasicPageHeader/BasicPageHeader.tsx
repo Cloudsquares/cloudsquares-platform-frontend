@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { IoArrowBackSharp } from "react-icons/io5";
+import { ArrowLeft } from "lucide-react";
 
 import { Button } from "@/shared/components/ui/button";
 
@@ -46,7 +46,7 @@ export const BasicPageHeader = ({
   };
 
   return (
-    <div className="flex w-full items-center border-b border-grey-300 bg-white px-4 py-3 lg:hidden">
+    <div className="flex w-full items-center border-b border-border bg-background px-4 py-3 lg:hidden">
       {shownBackArrowButton && (
         <Button
           type="button"
@@ -55,7 +55,7 @@ export const BasicPageHeader = ({
           onClick={handleBackClick}
           className="mr-2"
         >
-          <IoArrowBackSharp size={16} color="#1c1c1c" />
+          <ArrowLeft className="h-4 w-4 text-foreground" />
         </Button>
       )}
       <h5 className="text-h5 text-foreground">{title}</h5>

@@ -1,6 +1,6 @@
 import React from "react";
 import debounce from "lodash/debounce";
-import { MdSearch } from "react-icons/md";
+import { Search } from "lucide-react";
 import { Controller, useFormContext } from "react-hook-form";
 
 import { Input } from "@/shared/components/ui/input";
@@ -78,9 +78,9 @@ export const BasicSearchInputField = ({
         control={control}
         render={({ field }) => (
           <div className="relative">
-            <MdSearch
+            <Search
               data-testid="SearchIcon"
-              className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-labels-secondary"
+              className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
             />
             <Input
               {...field}

@@ -1,4 +1,4 @@
-import { FaAngleRight } from "react-icons/fa";
+import { ChevronRight } from "lucide-react";
 
 import { cn } from "@/shared/utils";
 
@@ -22,12 +22,15 @@ export const BasicNavListToDrawer = ({ list }: BasicNavListToDrawerProps) => {
               onClick={onClick}
               className={cn(
                 "flex w-full items-center gap-2 px-4 py-3 text-body2 text-foreground",
-                index < list.length - 1 && "border-b border-grey-200",
+                index < list.length - 1 && "border-b border-border",
               )}
             >
               <span>{label}</span>
               <span className="ml-auto flex items-center">
-                <FaAngleRight data-testid="fa-icon" size={16} color="#1c1c1c" />
+                <ChevronRight
+                  data-testid="fa-icon"
+                  className="h-4 w-4 text-foreground"
+                />
               </span>
             </button>
           </li>

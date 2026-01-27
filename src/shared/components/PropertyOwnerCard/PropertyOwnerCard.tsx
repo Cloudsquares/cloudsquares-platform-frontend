@@ -3,7 +3,7 @@ import {
   PropertyOwner,
 } from "@/shared/interfaces/PropertyOwner";
 import { displayUserName } from "@/shared/utils";
-import { MdDelete, MdEdit } from "react-icons/md";
+import { Pencil, Trash2 } from "lucide-react";
 
 import { Badge } from "@/shared/components/ui/badge";
 import { Button } from "@/shared/components/ui/button";
@@ -61,7 +61,7 @@ export const PropertyOwnerCard = ({
                             aria-label="Редактировать владельца"
                             onClick={() => onEdit(owner)}
                           >
-                            <MdEdit className="h-4 w-4" />
+                            <Pencil className="h-4 w-4" />
                           </Button>
                         </TooltipTrigger>
                         <TooltipContent>Редактировать</TooltipContent>
@@ -76,9 +76,9 @@ export const PropertyOwnerCard = ({
                             size="sm"
                             aria-label="Удалить владельца"
                             onClick={() => onDelete(owner)}
-                            className="text-error hover:text-error"
+                            className="text-destructive hover:text-destructive"
                           >
-                            <MdDelete className="h-4 w-4" />
+                            <Trash2 className="h-4 w-4" />
                           </Button>
                         </TooltipTrigger>
                         <TooltipContent>Удалить</TooltipContent>
@@ -92,7 +92,7 @@ export const PropertyOwnerCard = ({
           </div>
 
           {(owner.email || owner.phone) && (
-            <p className="text-body2 text-labels-secondary">
+            <p className="text-body2 text-muted-foreground">
               {owner.email && (
                 <a
                   href={`mailto:${owner.email}`}

@@ -1,5 +1,5 @@
 import React from "react";
-import { MdClose } from "react-icons/md";
+import { X } from "lucide-react";
 
 import {
   Dialog,
@@ -74,7 +74,7 @@ export const BasicDrawer = ({
           <DialogTitle>{title}</DialogTitle>
           <DialogClose asChild>
             <Button type="button" variant="ghost" size="sm">
-              <MdClose className="h-4 w-4 text-foreground" />
+              <X className="h-4 w-4 text-foreground" />
             </Button>
           </DialogClose>
         </div>

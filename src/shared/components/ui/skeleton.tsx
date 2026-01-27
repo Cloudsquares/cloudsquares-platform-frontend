@@ -7,7 +7,7 @@ export type SkeletonProps = React.HTMLAttributes<HTMLDivElement>;
 export const Skeleton = ({ className, ...props }: SkeletonProps) => {
   return (
     <div
-      className={cn("animate-pulse rounded-md bg-grey-200", className)}
+      className={cn("animate-pulse rounded-md bg-muted", className)}
       {...props}
     />
   );
