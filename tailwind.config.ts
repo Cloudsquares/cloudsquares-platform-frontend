@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss";
 import animate from "tailwindcss-animate";
 
 const config = {
-  darkMode: ["class"],
+  darkMode: ["class", '[data-theme="dark"]'],
   content: ["./index.html", "./src/**/*.{ts,tsx,scss}"],
   theme: {
     extend: {
@@ -61,7 +61,9 @@ const config = {
           quaternary: "var(--color-labels-quaternary)",
         },
         success: "var(--color-success)",
+        warning: "var(--color-warning)",
         error: "var(--color-error)",
+        info: "var(--color-info)",
       },
       fontFamily: {
         sans: ["var(--font-sans)", "Inter", "sans-serif"],
