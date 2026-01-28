@@ -26,16 +26,16 @@
   --tt-gray-light-a-900: rgba(29, 30, 32, 0.98);
 
   /* Gray (light mode) */
-  --tt-gray-light-50: rgba(250, 250, 250, 1);
-  --tt-gray-light-100: rgba(244, 244, 245, 1);
-  --tt-gray-light-200: rgba(234, 234, 235, 1);
-  --tt-gray-light-300: rgba(213, 214, 215, 1);
-  --tt-gray-light-400: rgba(166, 167, 171, 1);
-  --tt-gray-light-500: rgba(125, 127, 130, 1);
-  --tt-gray-light-600: rgba(83, 86, 90, 1);
-  --tt-gray-light-700: rgba(64, 65, 69, 1);
-  --tt-gray-light-800: rgba(44, 45, 48, 1);
-  --tt-gray-light-900: rgba(34, 35, 37, 1);
+  --tt-gray-light-50: var(--color-grey-50);
+  --tt-gray-light-100: var(--color-grey-100);
+  --tt-gray-light-200: var(--color-grey-200);
+  --tt-gray-light-300: var(--color-grey-300);
+  --tt-gray-light-400: var(--color-grey-400);
+  --tt-gray-light-500: var(--color-grey-500);
+  --tt-gray-light-600: var(--color-grey-600);
+  --tt-gray-light-700: var(--color-grey-700);
+  --tt-gray-light-800: var(--color-grey-800);
+  --tt-gray-light-900: var(--color-grey-900);
 
   /* Gray alpha (dark mode) */
   --tt-gray-dark-a-50: rgba(232, 232, 253, 0.05);
@@ -50,29 +50,65 @@
   --tt-gray-dark-a-900: rgba(255, 255, 255, 0.96);
 
   /* Gray (dark mode) */
-  --tt-gray-dark-50: rgba(25, 25, 26, 1);
-  --tt-gray-dark-100: rgba(32, 32, 34, 1);
-  --tt-gray-dark-200: rgba(45, 45, 47, 1);
-  --tt-gray-dark-300: rgba(70, 70, 73, 1);
-  --tt-gray-dark-400: rgba(99, 99, 105, 1);
-  --tt-gray-dark-500: rgba(124, 124, 131, 1);
-  --tt-gray-dark-600: rgba(163, 163, 168, 1);
-  --tt-gray-dark-700: rgba(192, 192, 195, 1);
-  --tt-gray-dark-800: rgba(224, 224, 225, 1);
-  --tt-gray-dark-900: rgba(245, 245, 245, 1);
+  --tt-gray-dark-50: var(--color-grey-950);
+  --tt-gray-dark-100: var(--color-grey-900);
+  --tt-gray-dark-200: var(--color-grey-800);
+  --tt-gray-dark-300: var(--color-grey-700);
+  --tt-gray-dark-400: var(--color-grey-600);
+  --tt-gray-dark-500: var(--color-grey-500);
+  --tt-gray-dark-600: var(--color-grey-400);
+  --tt-gray-dark-700: var(--color-grey-300);
+  --tt-gray-dark-800: var(--color-grey-200);
+  --tt-gray-dark-900: var(--color-grey-50);
 
   /* Brand colors */
-  --tt-brand-color-50: rgba(239, 238, 255, 1);
-  --tt-brand-color-100: rgba(222, 219, 255, 1);
-  --tt-brand-color-200: rgba(195, 189, 255, 1);
-  --tt-brand-color-300: rgba(157, 138, 255, 1);
-  --tt-brand-color-400: rgba(122, 82, 255, 1);
-  --tt-brand-color-500: rgba(98, 41, 255, 1);
-  --tt-brand-color-600: rgba(84, 0, 229, 1);
-  --tt-brand-color-700: rgba(75, 0, 204, 1);
-  --tt-brand-color-800: rgba(56, 0, 153, 1);
-  --tt-brand-color-900: rgba(43, 25, 102, 1);
-  --tt-brand-color-950: hsla(257, 100%, 9%, 1);
+  --tt-brand-color-50: color-mix(in srgb, var(--accent) 12%, var(--background));
+  --tt-brand-color-100: color-mix(
+    in srgb,
+    var(--accent) 20%,
+    var(--background)
+  );
+  --tt-brand-color-200: color-mix(
+    in srgb,
+    var(--accent) 30%,
+    var(--background)
+  );
+  --tt-brand-color-300: color-mix(
+    in srgb,
+    var(--accent) 40%,
+    var(--background)
+  );
+  --tt-brand-color-400: color-mix(
+    in srgb,
+    var(--accent) 55%,
+    var(--background)
+  );
+  --tt-brand-color-500: var(--accent);
+  --tt-brand-color-600: color-mix(
+    in srgb,
+    var(--accent) 70%,
+    var(--foreground)
+  );
+  --tt-brand-color-700: color-mix(
+    in srgb,
+    var(--accent) 75%,
+    var(--foreground)
+  );
+  --tt-brand-color-800: color-mix(
+    in srgb,
+    var(--accent) 80%,
+    var(--foreground)
+  );
+  --tt-brand-color-900: color-mix(
+    in srgb,
+    var(--accent) 85%,
+    var(--foreground)
+  );
+  --tt-brand-color-950: color-mix(
+    in srgb,
+    var(--accent) 90%,
+    var(--foreground)
+  );
 
   /* Green */
   --tt-color-green-inc-5: hsla(129, 100%, 97%, 1);
@@ -123,11 +159,7 @@
   ******************/
 
   /* Shadows Light */
-  --tt-shadow-elevated-md:
-    0px 16px 48px 0px rgba(17, 24, 39, 0.04),
-    0px 12px 24px 0px rgba(17, 24, 39, 0.04),
-    0px 6px 8px 0px rgba(17, 24, 39, 0.02),
-    0px 2px 3px 0px rgba(17, 24, 39, 0.02);
+  --tt-shadow-elevated-md: 0 2px 8px rgba(0, 0, 0, 0.06);
 
   /************************************************** 
        Radius variables 
@@ -165,13 +197,18 @@
   .tip-tap-editor-module,
   .tip-tap-editor-module *,
   .tip-tap-editor-module ::before,
-  .tip-tap-editor-module ::after {
+  .tip-tap-editor-module ::after,
+  .tiptap-content,
+  .tiptap-content *,
+  .tiptap-content ::before,
+  .tiptap-content ::after {
     box-sizing: border-box;
     transition: none var(--tt-transition-duration-default)
       var(--tt-transition-easing-default);
   }
 
-  .tip-tap-editor-module li {
+  .tip-tap-editor-module li,
+  .tiptap-content li {
     list-style: inherit;
   }
 }
@@ -182,33 +219,15 @@
   **************************************************/
 
   /* Global colors - Light mode */
-  --tt-bg-color: var(--white);
-  --tt-border-color: var(--tt-gray-light-a-200);
-  --tt-border-color-tint: var(--tt-gray-light-a-100);
-  --tt-sidebar-bg-color: var(--tt-gray-light-100);
-  --tt-scrollbar-color: var(--tt-gray-light-a-200);
-  --tt-cursor-color: var(--tt-brand-color-500);
-  --tt-selection-color: rgba(157, 138, 255, 0.2);
-  --tt-card-bg-color: var(--white);
-  --tt-card-border-color: var(--tt-gray-light-a-100);
-}
-
-// TODO: когда добавим темную тему по всему приложению, убрать обертку из класса .tip-tap-editor-module
-/* Global colors - Dark mode */
-.tip-tap-editor-module.dark {
-  --tt-bg-color: var(--black);
-  --tt-border-color: var(--tt-gray-dark-a-200);
-  --tt-border-color-tint: var(--tt-gray-dark-a-100);
-  --tt-sidebar-bg-color: var(--tt-gray-dark-100);
-  --tt-scrollbar-color: var(--tt-gray-dark-a-200);
-  --tt-cursor-color: var(--tt-brand-color-400);
-  --tt-selection-color: rgba(122, 82, 255, 0.2);
-  --tt-card-bg-color: var(--tt-gray-dark-50);
-  --tt-card-border-color: var(--tt-gray-dark-a-50);
-
-  --tt-shadow-elevated-md:
-    0px 16px 48px 0px rgba(0, 0, 0, 0.5), 0px 12px 24px 0px rgba(0, 0, 0, 0.24),
-    0px 6px 8px 0px rgba(0, 0, 0, 0.22), 0px 2px 3px 0px rgba(0, 0, 0, 0.12);
+  --tt-bg-color: var(--background);
+  --tt-border-color: var(--border);
+  --tt-border-color-tint: color-mix(in srgb, var(--border) 60%, transparent);
+  --tt-sidebar-bg-color: var(--secondary);
+  --tt-scrollbar-color: var(--border);
+  --tt-cursor-color: var(--accent);
+  --tt-selection-color: color-mix(in srgb, var(--accent) 25%, transparent);
+  --tt-card-bg-color: var(--card);
+  --tt-card-border-color: var(--border);
 }
 
 /* Text colors */
@@ -234,7 +253,7 @@
   --tt-color-text-red-contrast: hsla(8, 79%, 79%, 0.4);
 }
 
-.dark {
+:root[data-theme="dark"] {
   --tt-color-text-gray: hsl(0, 0%, 61%);
   --tt-color-text-brown: hsl(18, 35%, 58%);
   --tt-color-text-orange: hsl(25, 53%, 53%);
@@ -258,6 +277,7 @@
 
 /* Highlight colors */
 :root {
+  --tt-color-highlight-accent: var(--color-accent);
   --tt-color-highlight-yellow: #fef9c3;
   --tt-color-highlight-green: #dcfce7;
   --tt-color-highlight-blue: #e0f2fe;
@@ -268,6 +288,11 @@
   --tt-color-highlight-orange: rgb(251, 236, 221);
   --tt-color-highlight-pink: rgb(252, 241, 246);
 
+  --tt-color-highlight-accent-contrast: color-mix(
+    in srgb,
+    var(--color-accent) 85%,
+    var(--background)
+  );
   --tt-color-highlight-yellow-contrast: #fbe604;
   --tt-color-highlight-green-contrast: #c7fad8;
   --tt-color-highlight-blue-contrast: #ceeafd;
@@ -279,7 +304,8 @@
   --tt-color-highlight-pink-contrast: rgba(225, 136, 179, 0.27);
 }
 
-.dark {
+:root[data-theme="dark"] {
+  --tt-color-highlight-accent: var(--color-accent);
   --tt-color-highlight-yellow: #6b6524;
   --tt-color-highlight-green: #509568;
   --tt-color-highlight-blue: #6e92aa;
@@ -290,6 +316,11 @@
   --tt-color-highlight-orange: rgb(92, 59, 35);
   --tt-color-highlight-pink: rgb(78, 44, 60);
 
+  --tt-color-highlight-accent-contrast: color-mix(
+    in srgb,
+    var(--color-accent) 85%,
+    var(--background)
+  );
   --tt-color-highlight-yellow-contrast: #58531e;
   --tt-color-highlight-green-contrast: #47855d;
   --tt-color-highlight-blue-contrast: #5e86a1;

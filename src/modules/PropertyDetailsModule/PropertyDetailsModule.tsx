@@ -69,7 +69,7 @@ export const PropertyDetailsModule = () => {
         {isLoading && <div className="text-body2">loading..</div>}
 
         {showContent && (
-          <div className="grid gap-4 lg:grid-cols-[2fr_1fr]">
+          <div className="grid gap-4 lg:grid-cols-[2fr_1fr] py-6">
             <div className="space-y-6">
               <PropertyDetailsPhotoBlock
                 key={idOrSlug}

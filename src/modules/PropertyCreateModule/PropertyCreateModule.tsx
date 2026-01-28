@@ -7,7 +7,7 @@ export const PropertyCreateModule = () => {
   return (
     <React.Fragment>
       <BasicPageHeader title="Создание объекта" shownBackArrowButton />
-      <div className="mx-auto flex h-full w-full max-w-screen-xl flex-col px-4">
+      <div className="mx-auto flex w-full max-w-screen-xl flex-col px-4">
         <PropertyFormModule mode={PropertyFormMode.create} />
       </div>
     </React.Fragment>

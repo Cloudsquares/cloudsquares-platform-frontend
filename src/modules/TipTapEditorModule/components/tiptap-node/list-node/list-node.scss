@@ -1,4 +1,4 @@
-.tiptap.ProseMirror {
+:where(.tiptap.ProseMirror, .tiptap-content) {
   --tt-checklist-bg-color: var(--tt-gray-light-a-100);
   --tt-checklist-bg-active-color: var(--tt-gray-light-a-900);
   --tt-checklist-border-color: var(--tt-gray-light-a-200);
@@ -6,7 +6,7 @@
   --tt-checklist-check-icon-color: var(--white);
   --tt-checklist-text-active: var(--tt-gray-light-a-500);
 
-  .dark & {
+  :root[data-theme="dark"] & {
     --tt-checklist-bg-color: var(--tt-gray-dark-a-100);
     --tt-checklist-bg-active-color: var(--tt-gray-dark-a-900);
     --tt-checklist-border-color: var(--tt-gray-dark-a-200);
@@ -19,7 +19,7 @@
 /* =====================
      LISTS
      ===================== */
-.tiptap.ProseMirror {
+:where(.tiptap.ProseMirror, .tiptap-content) {
   // Common list styles
   ol,
   ul {
@@ -43,9 +43,12 @@
   }
 
   li {
+    margin: 0;
+
     p {
       margin-top: 0;
-      line-height: 1.6;
+      font-size: var(--font-body1-size);
+      line-height: var(--font-body1-line-height);
     }
   }
 

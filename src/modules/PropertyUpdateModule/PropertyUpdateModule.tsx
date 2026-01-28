@@ -7,7 +7,7 @@ export const PropertyUpdateModule = () => {
   return (
     <React.Fragment>
       <BasicPageHeader title="Обновление объекта" shownBackArrowButton />
-      <div className="mx-auto flex h-full w-full max-w-screen-xl flex-col px-4">
+      <div className="mx-auto flex w-full max-w-screen-xl flex-col px-4">
         <PropertyFormModule mode={PropertyFormMode.edit} />
       </div>
     </React.Fragment>

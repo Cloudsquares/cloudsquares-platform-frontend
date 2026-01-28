@@ -119,6 +119,8 @@ export function ColorHighlightPopoverContent({
   // Если цвета не пришли извне — берём дефолтный локализованный набор.
   const fallbackColors = pickHighlightColorsByValue(
     [
+      "var(--tt-color-highlight-accent)",
+
       "var(--tt-color-highlight-green)",
       "var(--tt-color-highlight-blue)",
       "var(--tt-color-highlight-red)",
@@ -231,6 +233,8 @@ export function ColorHighlightPopover({
     colors ??
     pickHighlightColorsByValue(
       [
+        "var(--tt-color-highlight-accent)",
+
         "var(--tt-color-highlight-green)",
         "var(--tt-color-highlight-blue)",
         "var(--tt-color-highlight-red)",

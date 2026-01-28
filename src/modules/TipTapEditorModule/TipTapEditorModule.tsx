@@ -1,11 +1,9 @@
 import { Controller, Path, useFormContext } from "react-hook-form";
 import { SimpleEditor } from "./components/tiptap-templates/simple/simple-editor";
-import "./styles/_variables.scss";
-import "./styles/_keyframe-animations.scss";
+import "@/modules/TipTapEditorModule/styles/tiptap-content.scss";
 import React from "react";
 import { buildIntroContent } from "./lib/buildIntroContent";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "@/modules/ThemeModule/hooks";
 import { cn } from "@/shared/utils";
 
 interface TipTapEditorModuleProps<T extends Record<string, unknown>> {
@@ -21,14 +19,12 @@ export const TipTapEditorModule = <T extends Record<string, unknown>>({
 }: TipTapEditorModuleProps<T>) => {
   const { control } = useFormContext<T>();
   const { t } = useTranslation();
-  const { resolvedTheme } = useTheme();
   const initialContent = React.useMemo(() => buildIntroContent(t), [t]);
 
   return (
     <div
       className={cn(
-        "tip-tap-editor-module max-h-[1100px] min-h-[500px] overflow-y-auto rounded-md border border-border",
-        resolvedTheme === "dark" && "dark",
+        "tip-tap-editor-module min-h-[500px] rounded-md border border-border",
       )}
     >
       {/* Оборачиваем редактор в Controller, чтобы синхронизировать значение с формой */}

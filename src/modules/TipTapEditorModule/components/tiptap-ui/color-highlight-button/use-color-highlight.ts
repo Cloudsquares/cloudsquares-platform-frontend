@@ -46,6 +46,12 @@ const HIGHLIGHT_COLOR_PRESETS: Array<{
     border: "var(--tt-bg-color-contrast)",
   },
   {
+    i18nKey: "tipTapEditor.toolbar.highlightColors.accent",
+    fallback: "Accent background",
+    value: "var(--tt-color-highlight-accent)",
+    border: "var(--tt-color-highlight-accent-contrast)",
+  },
+  {
     i18nKey: "tipTapEditor.toolbar.highlightColors.gray",
     fallback: "Gray background",
     value: "var(--tt-color-highlight-gray)",

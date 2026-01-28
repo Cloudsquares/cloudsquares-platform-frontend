@@ -1,15 +1,11 @@
-.tiptap.ProseMirror {
-  --blockquote-bg-color: var(--tt-gray-light-900);
-
-  .dark & {
-    --blockquote-bg-color: var(--tt-gray-dark-900);
-  }
+:where(.tiptap.ProseMirror, .tiptap-content) {
+  --blockquote-bg-color: var(--foreground);
 }
 
 /* =====================
      BLOCKQUOTE
      ===================== */
-.tiptap.ProseMirror {
+:where(.tiptap.ProseMirror, .tiptap-content) {
   blockquote {
     position: relative;
     padding-left: 1em;

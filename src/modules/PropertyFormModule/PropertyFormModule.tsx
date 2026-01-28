@@ -34,9 +34,9 @@ export const PropertyFormModule = ({ mode }: PropertyFormModuleProps) => {
   }
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex flex-col">
       <PropertyFormStepCounter />
-      <div className="flex-1">
+      <div>
         {step === PropertyFormSteps.basic_data && (
           <PropertyBasicDataForm mode={mode} editableProperty={data} />
         )}
