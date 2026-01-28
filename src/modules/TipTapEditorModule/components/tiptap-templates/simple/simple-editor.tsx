@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 
 // --- Tiptap Core Extensions ---
 import { StarterKit } from "@tiptap/starter-kit";
-import { Image } from "@tiptap/extension-image";
 import { TaskItem, TaskList } from "@tiptap/extension-list";
 import { TextAlign } from "@tiptap/extension-text-align";
 import { Typography } from "@tiptap/extension-typography";
@@ -23,15 +22,7 @@ import {
 } from "@/modules/TipTapEditorModule/components/tiptap-ui-primitive/toolbar";
 
 // --- Tiptap Node ---
-import { ImageUploadNode } from "@/modules/TipTapEditorModule/components/tiptap-node/image-upload-node/image-upload-node-extension";
 import { HorizontalRule } from "@/modules/TipTapEditorModule/components/tiptap-node/horizontal-rule-node/horizontal-rule-node-extension";
-import "@/modules/TipTapEditorModule/components/tiptap-node/blockquote-node/blockquote-node.scss";
-import "@/modules/TipTapEditorModule/components/tiptap-node/code-block-node/code-block-node.scss";
-import "@/modules/TipTapEditorModule/components/tiptap-node/horizontal-rule-node/horizontal-rule-node.scss";
-import "@/modules/TipTapEditorModule/components/tiptap-node/list-node/list-node.scss";
-import "@/modules/TipTapEditorModule/components/tiptap-node/image-node/image-node.scss";
-import "@/modules/TipTapEditorModule/components/tiptap-node/heading-node/heading-node.scss";
-import "@/modules/TipTapEditorModule/components/tiptap-node/paragraph-node/paragraph-node.scss";
 
 // --- Tiptap UI ---
 import { HeadingDropdownMenu } from "@/modules/TipTapEditorModule/components/tiptap-ui/heading-dropdown-menu";
@@ -67,15 +58,8 @@ import { useCursorVisibility } from "@/modules/TipTapEditorModule/hooks/use-curs
 // --- Components ---
 // import { ThemeToggle } from "@/modules/TipTapEditorModule/components/tiptap-templates/simple/theme-toggle";
 
-// --- Lib ---
-import {
-  handleImageUpload,
-  MAX_FILE_SIZE,
-} from "@/modules/TipTapEditorModule/lib/tiptap-utils";
-
 // --- Styles ---
 import "@/modules/TipTapEditorModule/components/tiptap-templates/simple/simple-editor.scss";
-import { devLogger } from "@/shared/utils";
 
 /**
  * Контент основной панели инструментов (desktop + mobile main).
@@ -264,18 +248,11 @@ export function SimpleEditor({ value, onChange, disabled }: SimpleEditorProps) {
       TaskList,
       TaskItem.configure({ nested: true }),
       Highlight.configure({ multicolor: true }),
-      Image,
+      // TODO: Вернуть поддержку изображений после обновления backend-санитизации.
       Typography,
       Superscript,
       Subscript,
       Selection,
-      ImageUploadNode.configure({
-        accept: "image/*",
-        maxSize: MAX_FILE_SIZE,
-        limit: 3,
-        upload: handleImageUpload,
-        onError: (error) => devLogger.error("Upload failed:", error),
-      }),
     ],
     // Инициализация контента из формы (или интро, если пусто)
     content: value,

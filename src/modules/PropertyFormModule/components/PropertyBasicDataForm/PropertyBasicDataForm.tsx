@@ -103,7 +103,7 @@ export const PropertyBasicDataForm = ({
           onSubmit={handleSubmit(onSubmitForm, (errors) =>
             devLogger.error("Ошибки валидации:", errors),
           )}
-          className="flex h-full flex-col gap-4 py-4"
+          className="flex flex-col gap-4 py-4"
         >
           <div className="flex-1 space-y-4">
             <h4 className="text-h4 text-foreground">Основные данные</h4>

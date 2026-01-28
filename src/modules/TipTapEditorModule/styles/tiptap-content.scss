@@ -1,0 +1,20 @@
+@import "./_variables.scss";
+@import "./_keyframe-animations.scss";
+@import "../components/tiptap-node/blockquote-node/blockquote-node.scss";
+@import "../components/tiptap-node/code-block-node/code-block-node.scss";
+@import "../components/tiptap-node/heading-node/heading-node.scss";
+@import "../components/tiptap-node/horizontal-rule-node/horizontal-rule-node.scss";
+@import "../components/tiptap-node/list-node/list-node.scss";
+@import "../components/tiptap-node/paragraph-node/paragraph-node.scss";
+@import "../components/tiptap-node/image-node/image-node.scss";
+@import "../components/tiptap-node/image-upload-node/image-upload-node.scss";
+
+.tiptap-content {
+  font-family: var(--font-sans);
+  color: var(--foreground);
+  font-size: var(--font-body1-size);
+  line-height: var(--font-body1-line-height);
+  font-weight: var(--font-weight-regular);
+  width: 100%;
+  word-break: break-word;
+}

@@ -1,4 +1,4 @@
-.tiptap.ProseMirror {
+:where(.tiptap.ProseMirror, .tiptap-content) {
   img {
     max-width: 100%;
     height: auto;

@@ -1,4 +1,4 @@
-.tiptap.ProseMirror {
+:where(.tiptap.ProseMirror, .tiptap-content) {
   h1,
   h2,
   h3,
@@ -13,26 +13,30 @@
   }
 
   h1 {
-    font-size: 1.5em;
-    font-weight: 700;
-    margin-top: 3em;
+    font-size: var(--font-h1-size);
+    line-height: var(--font-h1-line-height);
+    font-weight: var(--font-weight-semibold);
+    margin-top: 2.5rem;
   }
 
   h2 {
-    font-size: 1.25em;
-    font-weight: 700;
-    margin-top: 2.5em;
+    font-size: var(--font-h2-size);
+    line-height: var(--font-h2-line-height);
+    font-weight: var(--font-weight-semibold);
+    margin-top: 2rem;
   }
 
   h3 {
-    font-size: 1.125em;
-    font-weight: 600;
-    margin-top: 2em;
+    font-size: var(--font-h3-size);
+    line-height: var(--font-h3-line-height);
+    font-weight: var(--font-weight-medium);
+    margin-top: 1.75rem;
   }
 
   h4 {
-    font-size: 1em;
-    font-weight: 600;
-    margin-top: 2em;
+    font-size: var(--font-h4-size);
+    line-height: var(--font-h4-line-height);
+    font-weight: var(--font-weight-medium);
+    margin-top: 1.5rem;
   }
 }
