@@ -37,7 +37,6 @@ export default defineConfig({
         "dist",
         "src/constants/envs.ts",
         "**/__snapshots__/**",
-        "babel.config.js",
       ],
     },
   },

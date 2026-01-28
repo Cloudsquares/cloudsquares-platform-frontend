@@ -40,12 +40,6 @@ export default defineConfig({
               return "vendor-react";
             if (id.includes("leaflet") || id.includes("react-leaflet"))
               return "vendor-maps";
-            if (
-              id.includes("@mui") ||
-              id.includes("@emotion") ||
-              id.includes("clsx")
-            )
-              return "vendor-mui";
             if (id.includes("zustand")) return "vendor-zustand";
             if (id.includes("@tanstack/react-query"))
               return "vendor-react-query";

@@ -67,9 +67,6 @@
     "zustand": "^5.0.10"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.28.6",
-    "@babel/preset-react": "^7.28.5",
-    "@babel/preset-typescript": "^7.28.5",
     "@eslint/js": "^9.39.2",
     "@hookform/resolvers": "^5.2.2",
     "@tanstack/eslint-plugin-query": "^5.91.2",
@@ -96,7 +93,6 @@
     "eslint-plugin-react-refresh": "^0.4.26",
     "globals": "^16.5.0",
     "husky": "^9.1.7",
-    "identity-obj-proxy": "^3.0.0",
     "npm-check-updates": "^18.3.1",
     "postcss": "^8.4.51",
     "prettier": "^3.8.0",

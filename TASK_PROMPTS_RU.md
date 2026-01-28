@@ -1,7 +1,7 @@
 # TASK_PROMPTS (RU).md
 
 Подборка шаблонов для Codex/AI, чтобы генерировать фронтенд-код **CloudSquares** строго по нашей архитектуре и конфигам.
-Ориентировано на React 19 + TypeScript + Vite 7 + MUI 7, ESLint (flat), Prettier, Vitest, TypeDoc.
+Ориентировано на React 19 + TypeScript + Vite 7 + shadcn/ui + Tailwind, ESLint (flat), Prettier, Vitest, TypeDoc.
 
 ---
 
@@ -27,7 +27,7 @@
 - **Права доступа:** только `@/shared/permissions/*` (хуки + `RequirePermission`). Никакой «ручной» логики ролей в компонентах.
 - **i18n:** заголовок `X-Locale` проставляется axios автоматически; не хардкодим.
 - **Форматирование:** Prettier (printWidth **80**, точки с запятой, двойные кавычки). Не переопределять в файлах.
-- **Vite:** не ломаем имена чанков в `manualChunks` (vendor-react, vendor-maps, vendor-mui, vendor-zustand, vendor-react-query, vendor-hookform, vendor-axios, vendor-date, vendor-icons).
+- **Vite:** не ломаем имена чанков в `manualChunks` (vendor-react, vendor-maps, vendor-zustand, vendor-react-query, vendor-hookform, vendor-axios, vendor-date, vendor-icons).
 - **Документация:** добавляй **Typedoc**-блоки для каждого утилити/хука; `pnpm gen-docs` обновляет `docs/`.
 - **Тесты:** для чистых утилит и нетривиальной логики хуков (Vitest + Testing Library).
 
@@ -36,7 +36,7 @@
 ## 1) Общий шаблон задачи
 
 ```
-Задача: Реализовать <Feature> по пути <path> на React 19 + TypeScript + MUI.
+Задача: Реализовать <Feature> по пути <path> на React 19 + TypeScript + shadcn/ui + Tailwind.
 
 Ограничения:
 - Строгий TS (без `any`), импорты через `@/*`, без глубоких относительных путей.

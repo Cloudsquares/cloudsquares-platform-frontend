@@ -1,7 +1,7 @@
 # TASK_PROMPTS.md
 
 Curated prompts for Codex/AI to generate **CloudSquares** frontend code that follows our architecture and configs.
-Covers React 19 + TypeScript + Vite 7 + MUI 7, ESLint (flat), Prettier, Vitest, TypeDoc.
+Covers React 19 + TypeScript + Vite 7 + shadcn/ui + Tailwind, ESLint (flat), Prettier, Vitest, TypeDoc.
 
 ---
 
@@ -27,7 +27,7 @@ Covers React 19 + TypeScript + Vite 7 + MUI 7, ESLint (flat), Prettier, Vitest, 
 - **Permissions:** gate via `src/shared/permissions/*` (hooks + `RequirePermission`). No inline role logic.
 - **i18n:** axios injects `X-Locale`; never hardcode it.
 - **Formatting:** Prettier (printWidth **80**, semicolons, double quotes). Don’t override in files.
-- **Vite:** do not change `manualChunks` naming (vendor-react, vendor-maps, vendor-mui, vendor-zustand, vendor-react-query, vendor-hookform, vendor-axios, vendor-date, vendor-icons).
+- **Vite:** do not change `manualChunks` naming (vendor-react, vendor-maps, vendor-zustand, vendor-react-query, vendor-hookform, vendor-axios, vendor-date, vendor-icons).
 - **Docs:** add **Typedoc** blocks for every utility/hook; `pnpm gen-docs` updates `docs/`.
 - **Tests:** for pure utilities and non-trivial hook logic (Vitest + Testing Library).
 
@@ -36,7 +36,7 @@ Covers React 19 + TypeScript + Vite 7 + MUI 7, ESLint (flat), Prettier, Vitest, 
 ## 1) General Task Template
 
 ```
-Task: Implement <Feature> at <path> using React 19 + TypeScript + Vite + MUI.
+Task: Implement <Feature> at <path> using React 19 + TypeScript + Vite + shadcn/ui + Tailwind.
 
 Constraints:
 - Strict TS (no `any`), import via `@/*`, no deep relatives.
