@@ -1,10 +1,10 @@
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 
-import { apiLoginModule } from "../../modules/LoginModule/api";
-import { useLoginStore } from "../../modules/LoginModule/store";
-import { LoginResponseData } from "../../modules/LoginModule/interfaces";
-import { ENVIRONMENT } from "../../constants/envs";
+import { apiLoginModule } from "@/modules/LoginModule/api";
+import { useLoginStore } from "@/modules/LoginModule/store";
+import { LoginResponseData } from "@/modules/LoginModule/interfaces";
+import { ENVIRONMENT } from "@/constants/envs";
 
 /**
  * Функция для обновления `access_token`

@@ -3,7 +3,7 @@ import { PropertyFormMode } from "@/shared/interfaces/PropertyForm";
 import { phoneRegex } from "@/shared/constants";
 
 export const createPropertyOwnersDataFormSchema = (mode: PropertyFormMode) => {
-  console.log("Validation Property Owners form mode: ", mode); // temp
+  void mode;
   return z.object({
     first_name: z
       .string()

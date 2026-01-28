@@ -1,6 +1,8 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { FormProvider, useForm } from "react-hook-form";
+import { describe, expect, it, vi } from "vitest";
+
 import { BasicTextField } from "../BasicTextField";
 import { TestProviders } from "../../../../providers";
 
@@ -12,7 +14,7 @@ describe("BasicTextField", () => {
   const label = "Email";
   const placeholder = "Введите email";
 
-  const onClickMock = jest.fn();
+  const onClickMock = vi.fn();
 
   const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const methods = useForm<FormFields>({

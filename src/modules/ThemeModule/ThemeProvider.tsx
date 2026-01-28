@@ -1,21 +1,12 @@
 import * as React from "react";
 
-type ThemeName = "light" | "dark";
-
-type ThemePreference = ThemeName | null;
-
-interface ThemeContextValue {
-  theme: ThemePreference;
-  resolvedTheme: ThemeName;
-  setTheme: (nextTheme: ThemeName | null) => void;
-  toggleTheme: () => void;
-}
+import {
+  ThemeContext,
+  type ThemeName,
+  type ThemePreference,
+} from "./ThemeContext";
 
 const THEME_STORAGE_KEY = "cloudsquares-theme";
-
-const ThemeContext = React.createContext<ThemeContextValue | undefined>(
-  undefined,
-);
 
 const getStoredTheme = (): ThemePreference => {
   if (typeof window === "undefined") return null;
@@ -98,19 +89,4 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   return (
     <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
-};
-
-/**
- * Хук для доступа к состоянию и управлению темой.
- *
- * @returns Контекст темы с текущими значениями и действиями.
- */
-export const useTheme = () => {
-  const context = React.useContext(ThemeContext);
-
-  if (!context) {
-    throw new Error("useTheme must be used within ThemeProvider");
-  }
-
-  return context;
 };

@@ -1,8 +1,10 @@
 import { TestProviders } from "@/providers";
 import { render, screen } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
+
 import { NotAuthInfoBlock } from "../NotAuthInfoBlock";
 
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string) => key,
   }),

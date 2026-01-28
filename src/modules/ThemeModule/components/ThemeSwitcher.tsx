@@ -1,7 +1,7 @@
 import { Moon, Sun } from "lucide-react";
 
 import { cn } from "@/shared/utils";
-import { useTheme } from "../ThemeProvider";
+import { useTheme } from "@/modules/ThemeModule/hooks";
 
 interface ThemeSwitcherProps {
   className?: string;

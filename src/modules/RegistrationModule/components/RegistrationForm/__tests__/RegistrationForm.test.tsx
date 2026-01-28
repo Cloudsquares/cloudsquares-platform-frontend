@@ -1,23 +1,23 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { describe, expect, it, vi, type MockedFunction } from "vitest";
 
 import { RegistrationForm } from "../RegistrationForm";
 import { TestProviders } from "../../../../../providers";
 import { usePostNewUserMutation } from "../../../hooks";
 
-jest.mock("../../../hooks", () => ({
-  usePostNewUserMutation: jest.fn(),
+vi.mock("../../../hooks", () => ({
+  usePostNewUserMutation: vi.fn(),
 }));
 
 describe("RegistrationForm", () => {
-  const mockedUsePostNewUserMutation =
-    usePostNewUserMutation as jest.MockedFunction<
-      typeof usePostNewUserMutation
-    >;
+  const mockedUsePostNewUserMutation = usePostNewUserMutation as MockedFunction<
+    typeof usePostNewUserMutation
+  >;
 
   it("отправляет данные регистрации с нормализованным телефоном", async () => {
     const user = userEvent.setup();
-    const mutate = jest.fn();
+    const mutate = vi.fn();
 
     mockedUsePostNewUserMutation.mockReturnValue({
       mutate,

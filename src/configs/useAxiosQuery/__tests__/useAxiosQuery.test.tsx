@@ -3,6 +3,7 @@ import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import MockAdapter from "axios-mock-adapter";
+import { afterEach, describe, expect, it } from "vitest";
 
 import { useAxiosQuery } from "../useAxiosQuery";
 

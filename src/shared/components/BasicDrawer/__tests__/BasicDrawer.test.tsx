@@ -1,16 +1,18 @@
 import { render, screen, fireEvent } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
 import { BasicDrawer } from "../BasicDrawer";
 
 describe("BasicDrawer", () => {
   const defaultProps = {
     title: "Тестовый заголовок",
     isOpen: true,
-    setIsOpen: jest.fn(),
+    setIsOpen: vi.fn(),
     children: <div data-testid="drawer-children">Контент модального окна</div>,
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("отображает заголовок и содержимое", () => {

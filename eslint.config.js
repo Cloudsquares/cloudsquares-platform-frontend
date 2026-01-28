@@ -3,7 +3,7 @@ import globals from "globals";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
-import pluginJest from "eslint-plugin-jest";
+import pluginVitest from "eslint-plugin-vitest";
 import tsParser from "@typescript-eslint/parser";
 import pluginQuery from "@tanstack/eslint-plugin-query";
 
@@ -14,6 +14,7 @@ export default tseslint.config(
       "node_modules",
       "coverage",
       "vite.config.ts",
+      "vitest.config.ts",
       "tailwind.config.ts",
     ],
   },
@@ -23,12 +24,11 @@ export default tseslint.config(
       ...tseslint.configs.recommended,
       ...pluginQuery.configs["flat/recommended"],
     ],
-    files: ["**/*.{ts,tsx}"],
+    files: ["**/*.{ts,tsx}", "**/*.tsx"],
     languageOptions: {
       ecmaVersion: 2020,
       globals: {
         ...globals.browser,
-        "jest/globals": true,
       },
       parser: tsParser,
       parserOptions: {
@@ -39,7 +39,6 @@ export default tseslint.config(
     plugins: {
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
-      jest: pluginJest,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -70,19 +69,16 @@ export default tseslint.config(
     },
   },
   {
-    // Jest tests
+    // Vitest tests
     files: ["**/*.spec.ts", "**/*.test.ts", "**/*.spec.tsx", "**/*.test.tsx"],
-    plugins: { jest: pluginJest },
-    languageOptions: {
-      globals: pluginJest.environments.globals.globals,
-    },
+    plugins: { vitest: pluginVitest },
     rules: {
-      "jest/no-disabled-tests": "warn", // Предупреждает о пропущенных (test.skip) тестах
-      "jest/no-focused-tests": "error", // Запретить использовать test.only
-      "jest/no-identical-title": "error", // Запретить использовать одинаковые названия для тестов
-      "jest/prefer-to-have-length": "warn", // Напоминает использовать toHaveLength() вместо toBe()
-      "jest/valid-expect": "error", // Проверка на использование expect()
-      "jest/no-commented-out-tests": "warn", // Запретить закомментированные тесты
+      "vitest/no-disabled-tests": "warn", // Предупреждает о пропущенных (test.skip) тестах
+      "vitest/no-focused-tests": "error", // Запретить использовать test.only
+      "vitest/no-identical-title": "error", // Запретить использовать одинаковые названия для тестов
+      "vitest/prefer-to-have-length": "warn", // Напоминает использовать toHaveLength() вместо toBe()
+      "vitest/valid-expect": "error", // Проверка на использование expect()
+      "vitest/no-commented-out-tests": "warn", // Запретить закомментированные тесты
     },
   },
 );

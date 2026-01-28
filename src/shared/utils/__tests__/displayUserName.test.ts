@@ -1,4 +1,5 @@
 import { displayUserName } from "@/shared/utils/displayUserName";
+import { describe, expect, it } from "vitest";
 
 describe("displayUserName", () => {
   it("возвращает дефолтные значения, если данные отсутствуют", () => {

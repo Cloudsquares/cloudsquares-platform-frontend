@@ -5,6 +5,7 @@ import {
   isActiveUserStatus,
 } from "@/shared/utils/userStatus";
 import { UserStatus } from "@/shared/interfaces";
+import { describe, expect, it } from "vitest";
 
 const STATUSES = [
   UserStatus.active,

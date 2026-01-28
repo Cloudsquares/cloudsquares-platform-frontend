@@ -1,4 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
 import {
   BasicNavListToDrawer,
   BasicNavListToDrawerItem,
@@ -6,8 +8,8 @@ import {
 import { TestProviders } from "../../../../providers";
 
 describe("BasicNavListToDrawer", () => {
-  const mockOnClick1 = jest.fn();
-  const mockOnClick2 = jest.fn();
+  const mockOnClick1 = vi.fn();
+  const mockOnClick2 = vi.fn();
 
   const mockList: BasicNavListToDrawerItem[] = [
     { label: "Пункт 1", onClick: mockOnClick1 },
@@ -22,7 +24,7 @@ describe("BasicNavListToDrawer", () => {
     );
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("рендерит все элементы списка", () => {

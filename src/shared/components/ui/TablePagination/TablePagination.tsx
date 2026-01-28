@@ -1,7 +1,7 @@
 import { cn } from "@/shared/utils";
 import { Button } from "@/shared/components/ui";
 
-interface TablePaginationProps {
+export interface TablePaginationProps {
   page: number;
   rowsPerPage: number;
   count: number;

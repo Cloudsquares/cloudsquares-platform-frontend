@@ -5,7 +5,7 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
-    "types": ["node", "jest", "@testing-library/jest-dom"],
+    "types": ["node", "@testing-library/jest-dom"],
     "declaration": true,
     "baseUrl": ".",
     "paths": {
@@ -27,6 +27,11 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.d.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.d.ts",
+    "vitest.setup.ts"
+  ],
   "exclude": ["vite.config.ts", "node_modules", "dist", "coverage"]
 }

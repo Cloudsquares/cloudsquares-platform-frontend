@@ -6,7 +6,7 @@ import { BasicDrawerMode } from "@/shared/interfaces/Shared";
 export const createPropertyCategoriesDataFormSchema = (
   mode: BasicDrawerMode,
 ) => {
-  console.log("Validation form mode: ", mode); // temp
+  void mode;
   return z.object({
     title: z
       .string()

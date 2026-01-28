@@ -1,15 +1,17 @@
-jest.mock("@/shared/utils/decodeToken", () => ({
-  decodeToken: jest.fn(),
-}));
+import { afterAll, afterEach, describe, expect, it, vi } from "vitest";
 
 import { decodeToken } from "@/shared/utils/decodeToken";
 import { isTokenExpired } from "@/shared/utils/isTokenExpired";
 
+vi.mock("@/shared/utils/decodeToken", () => ({
+  decodeToken: vi.fn(),
+}));
+
 describe("isTokenExpired", () => {
-  const nowSpy = jest.spyOn(Date, "now");
+  const nowSpy = vi.spyOn(Date, "now");
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   afterAll(() => {
@@ -21,14 +23,14 @@ describe("isTokenExpired", () => {
   });
 
   it("возвращает true, если токен не удалось декодировать", () => {
-    jest.mocked(decodeToken).mockReturnValueOnce(null);
+    vi.mocked(decodeToken).mockReturnValueOnce(null);
     expect(isTokenExpired("broken")).toBe(true);
   });
 
   it("возвращает false, если токен ещё не истёк", () => {
     const now = 1_700_000_000_000;
     nowSpy.mockReturnValueOnce(now);
-    jest.mocked(decodeToken).mockReturnValueOnce({
+    vi.mocked(decodeToken).mockReturnValueOnce({
       exp: Math.floor((now + 60_000) / 1000),
     } as ReturnType<typeof decodeToken>);
 
@@ -38,7 +40,7 @@ describe("isTokenExpired", () => {
   it("возвращает true, если токен истёк", () => {
     const now = 1_700_000_000_000;
     nowSpy.mockReturnValueOnce(now);
-    jest.mocked(decodeToken).mockReturnValueOnce({
+    vi.mocked(decodeToken).mockReturnValueOnce({
       exp: Math.floor((now - 60_000) / 1000),
     } as ReturnType<typeof decodeToken>);
 

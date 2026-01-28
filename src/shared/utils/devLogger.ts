@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { ENVIRONMENT } from "../../constants/envs";
+import { ENVIRONMENT } from "@/constants/envs";
 
 const isDev = ENVIRONMENT === "development";
 

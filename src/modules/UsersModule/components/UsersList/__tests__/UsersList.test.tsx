@@ -1,22 +1,23 @@
 import { render, screen } from "@testing-library/react";
+import { describe, expect, it, vi, type MockedFunction } from "vitest";
 
 import { UsersList } from "../UsersList";
 import { useGetAllUsersQuery } from "../../../hooks";
 import { CountryCode, User, UserStatus } from "@/shared/interfaces";
 import { UserRole } from "@/shared/permissions/roles";
 
-jest.mock("../../../hooks", () => ({
-  useGetAllUsersQuery: jest.fn(),
+vi.mock("../../../hooks", () => ({
+  useGetAllUsersQuery: vi.fn(),
 }));
 
-jest.mock("../../UsersListItem", () => ({
+vi.mock("../../UsersListItem", () => ({
   UsersListItem: ({ user }: { user: User }) => (
     <div data-testid="user-item">{user.id}</div>
   ),
 }));
 
 describe("UsersList", () => {
-  const mockedUseGetAllUsersQuery = useGetAllUsersQuery as jest.MockedFunction<
+  const mockedUseGetAllUsersQuery = useGetAllUsersQuery as MockedFunction<
     typeof useGetAllUsersQuery
   >;
 

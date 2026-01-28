@@ -1,7 +1,7 @@
 # TASK_PROMPTS.md
 
 Curated prompts for Codex/AI to generate **CloudSquares** frontend code that follows our architecture and configs.
-Covers React 19 + TypeScript + Vite 7 + MUI 7, ESLint (flat), Prettier, Jest, TypeDoc.
+Covers React 19 + TypeScript + Vite 7 + shadcn/ui + Tailwind, ESLint (flat), Prettier, Vitest, TypeDoc.
 
 ---
 
@@ -19,6 +19,8 @@ Covers React 19 + TypeScript + Vite 7 + MUI 7, ESLint (flat), Prettier, Jest, Ty
 ## Global constraints (applies to all prompts)
 
 - **Imports:** use the `@/*` alias (configured in `tsconfig.json` / `vite.config.ts`). No deep relative imports.
+- **Re-exports:** avoid `export *` in component barrels; export explicit components/types.
+- **Props types:** if props are re-exported from a barrel, the component must export them (`export interface/type`).
 - **TypeScript:** strict, **no `any`**, honor `noUncheckedSideEffectImports`, `isolatedModules`, `moduleResolution: "bundler"`.
 - **HTTP/React Query:** only via `src/configs/*` (`useAxiosQuery`, `useAxiosSuspenseQuery`, `useAxiosMutation`) and our axios instance.
 - **Errors/Loading:** use `src/shared/interfaces/ApiErrorResponse` and `shared_components/AxiosErrorAlertMessage` / `shared_components/AxiosLoadingCircularProgress` / `shared_utils/showApiError`.
@@ -26,16 +28,16 @@ Covers React 19 + TypeScript + Vite 7 + MUI 7, ESLint (flat), Prettier, Jest, Ty
 - **Permissions:** gate via `src/shared/permissions/*` (hooks + `RequirePermission`). No inline role logic.
 - **i18n:** axios injects `X-Locale`; never hardcode it.
 - **Formatting:** Prettier (printWidth **80**, semicolons, double quotes). Don’t override in files.
-- **Vite:** do not change `manualChunks` naming (vendor-react, vendor-maps, vendor-mui, vendor-zustand, vendor-react-query, vendor-hookform, vendor-axios, vendor-date, vendor-icons).
+- **Vite:** do not change `manualChunks` naming (vendor-react, vendor-maps, vendor-zustand, vendor-react-query, vendor-hookform, vendor-axios, vendor-date, vendor-icons).
 - **Docs:** add **Typedoc** blocks for every utility/hook; `pnpm gen-docs` updates `docs/`.
-- **Tests:** for pure utilities and non-trivial hook logic (Jest + Testing Library).
+- **Tests:** for pure utilities and non-trivial hook logic (Vitest + Testing Library).
 
 ---
 
 ## 1) General Task Template
 
 ```
-Task: Implement <Feature> at <path> using React 19 + TypeScript + Vite + MUI.
+Task: Implement <Feature> at <path> using React 19 + TypeScript + Vite + shadcn/ui + Tailwind.
 
 Constraints:
 - Strict TS (no `any`), import via `@/*`, no deep relatives.

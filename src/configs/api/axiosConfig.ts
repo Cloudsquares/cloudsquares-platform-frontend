@@ -1,9 +1,9 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 
-import { VITE_API_BASE_PATH } from "../../constants/envs";
-import { useLoginStore } from "../../modules/LoginModule/store";
-import { decodeToken, refreshAccessToken } from "../../shared/utils";
+import { VITE_API_BASE_PATH } from "@/constants/envs";
+import { useLoginStore } from "@/modules/LoginModule/store";
+import { decodeToken, refreshAccessToken } from "@/shared/utils";
 
 const API_BASE_PATH = VITE_API_BASE_PATH;
 const REQUEST_TIMEOUT = 10000;

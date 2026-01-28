@@ -1,6 +1,8 @@
 import React, { ReactNode } from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { FormProvider, useForm } from "react-hook-form";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+
 import { TestProviders } from "../../../../providers";
 import { BasicSearchInputField } from "../BasicSearchInputField";
 
@@ -8,10 +10,8 @@ interface PropsWithChildren {
   children: ReactNode;
 }
 
-jest.useFakeTimers();
-
 describe("BasicSearchInputField", () => {
-  const onChangeMock = jest.fn();
+  const onChangeMock = vi.fn();
 
   const Wrapper = ({ children }: PropsWithChildren) => {
     const methods = useForm({ defaultValues: { search: "" } });
@@ -35,7 +35,12 @@ describe("BasicSearchInputField", () => {
     );
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
+  });
+
+  afterEach(() => {
+    vi.clearAllTimers();
+    vi.useRealTimers();
   });
 
   it("рендерит поле с label и placeholder", () => {
@@ -52,19 +57,16 @@ describe("BasicSearchInputField", () => {
   });
 
   it("вызывает debounced onChange", async () => {
+    vi.useFakeTimers();
     renderComponent();
 
     const input = screen.getByLabelText("Поиск") as HTMLInputElement;
 
     fireEvent.change(input, { target: { value: "test" } });
 
-    // Сначала проматываем таймер
-    jest.advanceTimersByTime(333);
+    await vi.advanceTimersByTimeAsync(333);
 
-    // Потом проверяем результат
-    await waitFor(() => {
-      expect(onChangeMock).toHaveBeenCalledWith({ searchQuery: "test" });
-    });
+    expect(onChangeMock).toHaveBeenCalledWith({ searchQuery: "test" });
   });
 
   it("показывает сообщение об ошибке, если оно передано", async () => {

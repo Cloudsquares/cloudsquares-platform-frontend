@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { UsersListItem } from "../UsersListItem";
 import { CountryCode, User, UserStatus } from "@/shared/interfaces";
@@ -7,17 +8,17 @@ import { useCanAccess } from "@/shared/permissions/canAccess";
 import { UserRole } from "@/shared/permissions/roles";
 import { useUsersStore } from "../../../store";
 
-jest.mock("@/shared/permissions/canAccess", () => ({
-  useCanAccess: jest.fn(),
+vi.mock("@/shared/permissions/canAccess", () => ({
+  useCanAccess: vi.fn(),
 }));
 
-jest.mock("../../../store", () => ({
-  useUsersStore: jest.fn(),
+vi.mock("../../../store", () => ({
+  useUsersStore: vi.fn(),
 }));
 
 describe("UsersListItem", () => {
-  const openDrawerWithMode = jest.fn();
-  const setEditableUser = jest.fn();
+  const openDrawerWithMode = vi.fn();
+  const setEditableUser = vi.fn();
 
   type UserOverrides = Omit<
     Partial<User>,
@@ -59,7 +60,7 @@ describe("UsersListItem", () => {
   };
 
   beforeEach(() => {
-    jest.mocked(useCanAccess).mockReturnValue(false);
+    vi.mocked(useCanAccess).mockReturnValue(false);
 
     type UsersStoreState = Parameters<typeof useUsersStore>[0] extends (
       state: infer State,
@@ -69,21 +70,21 @@ describe("UsersListItem", () => {
 
     const storeState: UsersStoreState = {
       showUserFormDrawer: false,
-      setShowUserFormDrawer: jest.fn(),
+      setShowUserFormDrawer: vi.fn(),
       mode: BasicDrawerMode.create,
-      setMode: jest.fn(),
+      setMode: vi.fn(),
       openDrawerWithMode,
       editableUser: null,
       setEditableUser,
     };
 
-    jest
-      .mocked(useUsersStore)
-      .mockImplementation((selector) => selector(storeState));
+    vi.mocked(useUsersStore).mockImplementation((selector) =>
+      selector(storeState),
+    );
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("показывает статус и причину блокировки", () => {

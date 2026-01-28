@@ -2,6 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import type { TFunction } from "i18next";
 import { useFormContext } from "react-hook-form";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { SelectLanguage } from "../SelectLanguage";
 import { TestProviders } from "../../../../providers";
@@ -10,13 +11,13 @@ import i18n from "../../../../i18n";
 const mockTFunction = ((key: string) => key) as TFunction;
 const mockUseFormContext = useFormContext;
 
-jest.mock("react-i18next", () => ({
+vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string) => key,
   }),
 }));
 
-jest.mock("../../BasicFormSelectField", () => ({
+vi.mock("../../BasicFormSelectField", () => ({
   BasicFormSelectField: ({
     name,
     placeholder,
@@ -52,14 +53,14 @@ jest.mock("../../BasicFormSelectField", () => ({
 
 describe("SelectLanguage", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     i18n.language = "en-US";
   });
 
   it("нормализует ru-RU до ru и меняет язык", async () => {
     i18n.language = "ru-RU";
 
-    const changeLanguageSpy = jest
+    const changeLanguageSpy = vi
       .spyOn(i18n, "changeLanguage")
       .mockResolvedValue(mockTFunction);
 
@@ -77,7 +78,7 @@ describe("SelectLanguage", () => {
   it("нормализует kz-KZ до en как fallback", async () => {
     i18n.language = "kz-KZ";
 
-    const changeLanguageSpy = jest
+    const changeLanguageSpy = vi
       .spyOn(i18n, "changeLanguage")
       .mockResolvedValue(mockTFunction);
 
@@ -93,7 +94,7 @@ describe("SelectLanguage", () => {
   });
 
   it("рендерит select с текущим языком", async () => {
-    const changeLanguageSpy = jest
+    const changeLanguageSpy = vi
       .spyOn(i18n, "changeLanguage")
       .mockResolvedValue(mockTFunction);
 
@@ -115,7 +116,7 @@ describe("SelectLanguage", () => {
 
   it("меняет язык при выборе другой опции", async () => {
     const user = userEvent.setup();
-    const changeLanguageSpy = jest
+    const changeLanguageSpy = vi
       .spyOn(i18n, "changeLanguage")
       .mockResolvedValue(mockTFunction);
 
@@ -142,7 +143,7 @@ describe("SelectLanguage", () => {
 
   it("не вызывает changeLanguage повторно, если язык не изменился", async () => {
     const user = userEvent.setup();
-    const changeLanguageSpy = jest
+    const changeLanguageSpy = vi
       .spyOn(i18n, "changeLanguage")
       .mockResolvedValue(mockTFunction);
 
