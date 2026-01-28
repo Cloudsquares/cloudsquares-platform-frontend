@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
-import { FiChevronDown } from "react-icons/fi";
+import { ChevronDown } from "lucide-react";
 
 import { cn } from "@/shared/utils";
 
@@ -49,7 +49,7 @@ export const DropdownMenuLabel = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DropdownMenuPrimitive.Label
     ref={ref}
-    className={cn("px-2 py-1.5 text-caption1 text-labels-secondary", className)}
+    className={cn("px-2 py-1.5 text-caption1 text-muted-foreground", className)}
     {...props}
   />
 ));
@@ -74,11 +74,11 @@ export const DropdownMenuShortcut = ({
   ...props
 }: React.HTMLAttributes<HTMLSpanElement>) => (
   <span
-    className={cn("ml-auto text-caption2 text-labels-secondary", className)}
+    className={cn("ml-auto text-caption2 text-muted-foreground", className)}
     {...props}
   />
 );
 
 export const DropdownMenuChevron = ({ className }: { className?: string }) => (
-  <FiChevronDown className={cn("h-4 w-4", className)} />
+  <ChevronDown className={cn("h-4 w-4", className)} />
 );

@@ -115,12 +115,12 @@ export const LoginForm = () => {
               disabled={loginMutation.isPending}
             >
               {loginMutation.isPending ? (
-                <span className="h-7 w-7 animate-spin rounded-full border-2 border-grey-300 border-t-primary" />
+                <span className="h-7 w-7 animate-spin rounded-full border-2 border-border border-t-primary" />
               ) : (
                 "Войти в систему"
               )}
             </Button>
-            <p className="text-center text-body2 text-labels-secondary">или</p>
+            <p className="text-center text-body2 text-muted-foreground">или</p>
             <Button
               type="button"
               size="lg"

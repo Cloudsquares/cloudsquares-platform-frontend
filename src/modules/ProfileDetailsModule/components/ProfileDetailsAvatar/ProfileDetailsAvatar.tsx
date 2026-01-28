@@ -1,4 +1,4 @@
-import { FaUserAlt } from "react-icons/fa";
+import { User } from "lucide-react";
 
 import { useUserProfile } from "../../../../shared/permissions/hooks";
 import { DisplayCountryFlag } from "../../../../shared/components/DisplayCountryFlag";
@@ -22,7 +22,7 @@ const roleBadgeClasses = {
   warning: "border-accent/40 bg-accent/10 text-accent",
   info: "border-primary/30 bg-primary/10 text-primary",
   success: "border-success/30 bg-success/10 text-success",
-  secondary: "border-border bg-grey-100 text-labels-secondary",
+  secondary: "border-border bg-muted text-muted-foreground",
 } satisfies Record<string, string>;
 
 export const ProfileDetailsAvatar = () => {
@@ -40,8 +40,8 @@ export const ProfileDetailsAvatar = () => {
 
     return (
       <div className="flex flex-col items-center gap-3 py-4">
-        <div className="flex h-28 w-28 items-center justify-center rounded-full border border-grey-300">
-          <FaUserAlt size={64} color="#aaa" />
+        <div className="flex h-28 w-28 items-center justify-center rounded-full border border-border">
+          <User className="h-16 w-16 text-muted-foreground" />
         </div>
         <p className="text-body1 text-foreground">{shortName}</p>
         <div className="flex items-center gap-2">
@@ -68,7 +68,7 @@ export const ProfileDetailsAvatar = () => {
 
   return (
     <div className="flex items-center justify-center p-4">
-      <div className="h-6 w-6 animate-spin rounded-full border-2 border-grey-300 border-t-primary" />
+      <div className="h-6 w-6 animate-spin rounded-full border-2 border-border border-t-primary" />
     </div>
   );
 };

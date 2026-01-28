@@ -15,7 +15,7 @@ export const PropertyPriceInfo = ({ property }: PropertyPriceInfoProps) => {
       <p className="text-h4 text-foreground">
         {(property.price - property.discount).toLocaleString("ru")} ₽
       </p>
-      <p className="text-body1 text-labels-secondary">
+      <p className="text-body1 text-muted-foreground">
         {calculatePricePerMeter(property.price, 42)} ₽ за м²
       </p>
     </div>

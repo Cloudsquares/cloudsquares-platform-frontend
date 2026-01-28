@@ -14,7 +14,7 @@ export const PropertyDetailsInfoList = ({
           <span className="text-body1 text-foreground whitespace-nowrap">
             {label}
           </span>
-          <span className="flex-1 border-b border-grey-200" />
+          <span className="flex-1 border-b border-border" />
           <span className="text-body1 text-foreground whitespace-nowrap">
             {value}
           </span>

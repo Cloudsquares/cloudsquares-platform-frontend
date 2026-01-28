@@ -1,4 +1,4 @@
-import { IoMdSettings } from "react-icons/io";
+import { Settings } from "lucide-react";
 import { Link } from "react-router-dom";
 
 import { useUserProfile } from "../../../../shared/permissions/hooks";
@@ -22,19 +22,19 @@ export const ProfileInfoCard = () => {
           to="/profile/details"
           className="flex items-center gap-4 text-foreground"
         >
-          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-accent text-white font-semibold">
+          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-accent text-accent-foreground font-semibold">
             {shortName?.[0] ?? "М"}
           </div>
           <div>
-            <p className="text-body2 font-semibold text-labels-primary">
+            <p className="text-body2 font-semibold text-foreground">
               {shortName}
             </p>
-            <p className="text-caption1 text-labels-secondary">
+            <p className="text-caption1 text-muted-foreground">
               Просмотр профиля
             </p>
           </div>
           <span className="ml-auto">
-            <IoMdSettings color="#1c1c1c" />
+            <Settings className="h-4 w-4 text-foreground" />
           </span>
         </Link>
       </div>

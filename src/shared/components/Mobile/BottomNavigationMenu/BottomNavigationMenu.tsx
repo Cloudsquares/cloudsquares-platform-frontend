@@ -1,7 +1,6 @@
 import * as React from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { FaUserAlt, FaHome, FaSearch } from "react-icons/fa";
-import { IoDocuments } from "react-icons/io5";
+import { FileText, Home, Search, User } from "lucide-react";
 
 import { cn } from "@/shared/utils";
 import { shouldShowBottomNav } from "./utils";
@@ -22,7 +21,7 @@ export const BottomNavigationMenu: React.FC = () => {
   if (!visible) return null;
 
   return (
-    <nav className="fixed bottom-0 z-20 grid w-full grid-cols-4 border-t border-grey-300 bg-white p-4 md:hidden">
+    <nav className="fixed bottom-0 z-20 grid w-full grid-cols-4 border-t border-border bg-background p-4 md:hidden">
       <NavLink
         to="/"
         end
@@ -30,13 +29,18 @@ export const BottomNavigationMenu: React.FC = () => {
         className={({ isActive }) =>
           cn(
             "flex flex-col items-center gap-1 text-caption1 transition-colors",
-            isActive ? "text-labels-primary" : "text-grey-400",
+            isActive ? "text-foreground" : "text-muted-foreground",
           )
         }
       >
         {({ isActive }) => (
           <React.Fragment>
-            <FaHome size={16} color={isActive ? "#1c1c1c" : "#cccccc"} />
+            <Home
+              className={cn(
+                "h-4 w-4",
+                isActive ? "text-foreground" : "text-muted-foreground",
+              )}
+            />
             <span>Главная</span>
           </React.Fragment>
         )}
@@ -48,13 +52,18 @@ export const BottomNavigationMenu: React.FC = () => {
         className={({ isActive }) =>
           cn(
             "flex flex-col items-center gap-1 text-caption1 transition-colors",
-            isActive ? "text-labels-primary" : "text-grey-400",
+            isActive ? "text-foreground" : "text-muted-foreground",
           )
         }
       >
         {({ isActive }) => (
           <React.Fragment>
-            <FaSearch size={16} color={isActive ? "#1c1c1c" : "#cccccc"} />
+            <Search
+              className={cn(
+                "h-4 w-4",
+                isActive ? "text-foreground" : "text-muted-foreground",
+              )}
+            />
             <span>Каталог</span>
           </React.Fragment>
         )}
@@ -66,13 +75,18 @@ export const BottomNavigationMenu: React.FC = () => {
         className={({ isActive }) =>
           cn(
             "flex flex-col items-center gap-1 text-caption1 transition-colors",
-            isActive ? "text-labels-primary" : "text-grey-400",
+            isActive ? "text-foreground" : "text-muted-foreground",
           )
         }
       >
         {({ isActive }) => (
           <React.Fragment>
-            <IoDocuments size={16} color={isActive ? "#1c1c1c" : "#cccccc"} />
+            <FileText
+              className={cn(
+                "h-4 w-4",
+                isActive ? "text-foreground" : "text-muted-foreground",
+              )}
+            />
             <span>Заявки</span>
           </React.Fragment>
         )}
@@ -84,13 +98,18 @@ export const BottomNavigationMenu: React.FC = () => {
         className={({ isActive }) =>
           cn(
             "flex flex-col items-center gap-1 text-caption1 transition-colors",
-            isActive ? "text-labels-primary" : "text-grey-400",
+            isActive ? "text-foreground" : "text-muted-foreground",
           )
         }
       >
         {({ isActive }) => (
           <React.Fragment>
-            <FaUserAlt size={16} color={isActive ? "#1c1c1c" : "#cccccc"} />
+            <User
+              className={cn(
+                "h-4 w-4",
+                isActive ? "text-foreground" : "text-muted-foreground",
+              )}
+            />
             <span>Профиль</span>
           </React.Fragment>
         )}

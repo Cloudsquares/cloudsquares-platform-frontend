@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { cn } from "@/shared/utils";
 import { Button } from "@/shared/components/ui/button";
 
@@ -28,7 +26,7 @@ export const TablePagination = ({
 
   return (
     <div className="flex flex-wrap items-center justify-between gap-4 border border-border bg-card px-4 py-3">
-      <label className="flex items-center gap-2 text-body3 text-labels-secondary">
+      <label className="flex items-center gap-2 text-body3 text-muted-foreground">
         {labelRowsPerPage}
         <select
           className={cn(
@@ -45,7 +43,7 @@ export const TablePagination = ({
         </select>
       </label>
       <div className="flex items-center gap-3">
-        <span className="text-body3 text-labels-secondary">
+        <span className="text-body3 text-muted-foreground">
           {page + 1} / {totalPages}
         </span>
         <div className="flex items-center gap-2">

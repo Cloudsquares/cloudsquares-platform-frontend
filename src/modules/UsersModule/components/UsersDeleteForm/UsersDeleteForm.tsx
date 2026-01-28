@@ -35,9 +35,7 @@ export const UsersDeleteForm = ({
   const deactivateUserByIdMutation = useDeactivateUserByIdMutation();
 
   const onSubmit = (data: DeleteUserFormData) => {
-    if (
-      data.user_name?.trim() === displayName.fullName.trim()
-    ) {
+    if (data.user_name?.trim() === displayName.fullName.trim()) {
       deactivateUserByIdMutation.mutate({ id: user.id, onSuccess: onSuccess });
     } else {
       toast.error("Введите ФИО сотрудника для подтверждения удаления!");
@@ -66,7 +64,7 @@ export const UsersDeleteForm = ({
             <p className="text-body1 text-foreground">
               Удаление сотрудника приведет к необратимым последствиям:
             </p>
-            <ul className="list-disc space-y-1 pl-5 text-body2 text-labels-secondary">
+            <ul className="list-disc space-y-1 pl-5 text-body2 text-muted-foreground">
               <li>сотрудник утратит доступ к системе;</li>
               <li>
                 все данные, где задействован сотрудник, останутся без изменений;

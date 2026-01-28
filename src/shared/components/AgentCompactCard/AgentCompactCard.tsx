@@ -1,4 +1,4 @@
-import { MdStar } from "react-icons/md";
+import { Star } from "lucide-react";
 
 import { UserSlim } from "@/shared/interfaces";
 
@@ -16,14 +16,14 @@ export const AgentCompactCard = ({ agent }: AgentCompactCardProps) => {
         <p className="text-subtitle2 text-foreground">
           {agent.last_name} {agent.first_name}
         </p>
-        <p className="text-caption1 text-labels-secondary">
+        <p className="text-caption1 text-muted-foreground">
           Специалист по недвижимости
         </p>
-        <div className="flex items-center gap-1 text-caption1 text-labels-secondary">
+        <div className="flex items-center gap-1 text-caption1 text-muted-foreground">
           <span>
             Рейтинг <strong>5.0</strong>
           </span>
-          <MdStar color="#FACC15" />
+          <Star className="h-4 w-4 text-accent" />
         </div>
       </div>
     </div>

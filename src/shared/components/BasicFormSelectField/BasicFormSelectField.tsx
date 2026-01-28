@@ -122,7 +122,7 @@ export const BasicFormSelectField = <T extends Record<string, unknown>>({
                     "truncate",
                     selectedOption
                       ? "text-foreground"
-                      : "text-labels-secondary",
+                      : "text-muted-foreground",
                   )}
                 >
                   {selectedOption ? selectedOption.label : placeholder}

@@ -3,6 +3,6 @@
  */
 export const RoutesFallback: React.FC = () => (
   <div className="grid h-screen place-items-center">
-    <div className="h-10 w-10 animate-spin rounded-full border-2 border-grey-300 border-t-primary" />
+    <div className="h-10 w-10 animate-spin rounded-full border-2 border-border border-t-primary" />
   </div>
 );

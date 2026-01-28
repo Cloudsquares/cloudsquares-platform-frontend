@@ -1,15 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
-body {
+.tip-tap-editor-module {
   --tt-toolbar-height: 44px;
   --tt-theme-text: var(--tt-gray-light-900);
 
-  .dark & {
+  &.dark {
     --tt-theme-text: var(--tt-gray-dark-900);
   }
-}
 
-body {
   font-family: "Inter", sans-serif;
   color: var(--tt-theme-text);
   font-optical-sizing: auto;
@@ -17,36 +15,25 @@ body {
   font-style: normal;
   padding: 0;
   overscroll-behavior-y: none;
-}
-
-html,
-body {
   overscroll-behavior-x: none;
-}
-
-html,
-body,
-#root,
-#app {
-  height: 100%;
   background-color: var(--tt-bg-color);
 }
 
-::-webkit-scrollbar {
+.tip-tap-editor-module::-webkit-scrollbar {
   width: 0.25rem;
 }
 
-* {
+.tip-tap-editor-module * {
   scrollbar-width: thin;
   scrollbar-color: var(--tt-scrollbar-color) transparent;
 }
 
-::-webkit-scrollbar-thumb {
+.tip-tap-editor-module::-webkit-scrollbar-thumb {
   background-color: var(--tt-scrollbar-color);
   border-radius: 9999px;
 }
 
-::-webkit-scrollbar-track {
+.tip-tap-editor-module::-webkit-scrollbar-track {
   background: transparent;
 }
 

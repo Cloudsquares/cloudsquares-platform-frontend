@@ -2,7 +2,9 @@
 
 ## 0) TL;DR (for Codex/AI)
 
-- Stack: **React 19 + TypeScript + Vite 7 + MUI 7**.
+- Stack: **React 19 + TypeScript + Vite 7 + Tailwind CSS + shadcn/ui + SCSS**.
+- Theme via CSS variables + `data-theme` (light/dark); avoid hardcoded colors.
+- Icons: use **Lucide** for consistency.
 - Use **`@` alias** → `@/*` (see `tsconfig.json` + `vite.config.ts`), **no relative deep imports**.
 - **HTTP + React Query** go through `src/configs/*` wrappers only (`useAxiosQuery`, `useAxiosSuspenseQuery`, `useAxiosMutation`) and the configured axios instance.
 - Reuse **`src/shared/*`** (components, hooks, utils, constants, permissions, interfaces) before writing anything new.
@@ -22,7 +24,7 @@ Source lives in `src/`:
 - `src/shared/*` — reusable **UI components**, **hooks**, **utils**, **constants**, **interfaces**, **permissions**, common styles.
 - `src/providers/*` — global providers (theme, router, auth, toaster, test providers).
 - `src/configs/*` — axios base + React Query wrappers (**mandatory** for data fetching).
-- `src/themes/*` — MUI theme/design tokens.
+- `src/themes/*` — design tokens + theme CSS variables.
 - `src/assets/*` — static assets.
 - `public/*` — static deploy assets.
 - `docs/*` — generated TypeDoc (do not edit).
@@ -53,7 +55,7 @@ src/modules/<Feature>/
 - **Vite** (`vite.config.ts`):
   - Plugins: `@vitejs/plugin-react-swc`, `vite-plugin-svgr`, `rollup-plugin-visualizer`.
   - **Alias** set for `@` → `./src`.
-  - Respect existing `manualChunks` buckets: `vendor-react`, `vendor-maps`, `vendor-mui`, `vendor-zustand`, `vendor-react-query`, `vendor-hookform`, `vendor-axios`, `vendor-date`, `vendor-icons`.
+  - Respect existing `manualChunks` buckets and names; don’t change `manualChunks` logic.
 - **ESLint** (flat, type-aware):
   - Parser uses project `tsconfig.json` (`parserOptions.project`), rules include React Hooks and TanStack Query recommended.
   - Stylistic concerns are handled by **Prettier**; formatting conflicts should be avoided.
@@ -140,7 +142,7 @@ Pagination & tables:
 
 ## 10) Prompt template for Codex (copy → edit → run)
 
-> **Task:** Implement `<Feature>` at `src/modules/<Feature>/…` using React 19 + TS + MUI.  
+> **Task:** Implement `<Feature>` at `src/modules/<Feature>/…` using React 19 + TS + Tailwind CSS + shadcn/ui.  
 > **Use only:** `src/configs/*` (`useAxiosQuery/Mutation/SuspenseQuery`) and axios base; **reuse** `src/shared/*`.  
 > **Deliver:** full code (no placeholders), strict TS; **Typedoc** for each hook/utility; error UX via shared components; respect permissions; import via `@/*`.  
 > **Don’t:** add deps, call raw axios/react-query, duplicate utils, change Vite chunk names.

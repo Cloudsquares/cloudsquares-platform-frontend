@@ -70,7 +70,7 @@ export const PropertyDetailsDeleteForm = ({
             <p className="text-body1 text-foreground">
               Деактивация объекта недвижимости приведет к последствиям:
             </p>
-            <ul className="list-disc space-y-1 pl-5 text-body2 text-labels-secondary">
+            <ul className="list-disc space-y-1 pl-5 text-body2 text-muted-foreground">
               <li>
                 объект недвижимости не будет отображаться в каталоге, будет
                 перемещен в "Архив";

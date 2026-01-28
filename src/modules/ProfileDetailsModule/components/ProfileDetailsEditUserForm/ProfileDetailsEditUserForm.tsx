@@ -101,7 +101,7 @@ export const ProfileDetailsEditUserForm = () => {
           {profile && (
             <button
               type="button"
-              className="w-fit text-body2 text-labels-secondary"
+              className="w-fit text-body2 text-muted-foreground"
               onClick={() =>
                 toast.error(
                   "Изменить страну Вы можете через запрос в тех. поддержку",

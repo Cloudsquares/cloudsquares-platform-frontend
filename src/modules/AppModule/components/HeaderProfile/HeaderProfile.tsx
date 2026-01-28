@@ -15,6 +15,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/shared/components/ui/tooltip";
+import { ThemeSwitcher } from "@/modules/ThemeModule";
 
 export const HeaderProfile = () => {
   const { t } = useTranslation();
@@ -50,7 +51,8 @@ export const HeaderProfile = () => {
   };
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center gap-3">
+      <ThemeSwitcher className="hidden lg:inline-flex" />
       <TooltipProvider>
         <DropdownMenu>
           <Tooltip>
@@ -62,7 +64,7 @@ export const HeaderProfile = () => {
                   aria-label={t("header.profile_menu.tooltip_title")}
                 >
                   <span className="font-semibold">{fullName}</span>
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-grey-200 text-body3 text-foreground">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-muted text-body3 text-foreground">
                     {initials}
                   </span>
                 </button>

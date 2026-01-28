@@ -8,89 +8,177 @@
   --font-sans:
     "Inter", "SF Pro", "SF Pro Display", "Helvetica", "Roboto", sans-serif;
   --radius: 8px;
+  color-scheme: light;
 
-  --color-primary: #262626;
-  --color-white: #f8f8f8;
+  --color-white: #ffffff;
+  --color-black: #0c0a09;
 
-  --color-grey-50: #fafafa;
-  --color-grey-100: #f5f5f5;
-  --color-grey-200: #e5e5e5;
-  --color-grey-300: #d4d4d4;
-  --color-grey-400: #a3a3a3;
-  --color-grey-500: #737373;
-  --color-grey-600: #525252;
-  --color-grey-700: #404040;
-  --color-grey-800: #262626;
-  --color-grey-900: #171717;
+  --color-grey-50: #fafaf9;
+  --color-grey-100: #f5f5f4;
+  --color-grey-200: #e7e5e4;
+  --color-grey-300: #d6d3d1;
+  --color-grey-400: #a8a29e;
+  --color-grey-500: #78716c;
+  --color-grey-600: #57534e;
+  --color-grey-700: #44403c;
+  --color-grey-800: #292524;
+  --color-grey-900: #1c1917;
+  --color-grey-950: #0c0a09;
 
-  --color-accent: #22c55e;
-  --color-accent-active: #16a34a;
-  --color-accent-hover: #4ade80;
+  --color-primary: var(--color-grey-950);
 
-  --color-success: #008000;
-  --color-error: #ff0000;
+  --color-accent: #f59e0b;
+  --color-accent-hover: #d97706;
+  --color-accent-active: #b45309;
 
-  --color-labels-primary: #262626;
-  --color-labels-secondary: hsla(240, 6%, 25%, 0.6);
-  --color-labels-tertiary: hsla(240, 6%, 25%, 0.3);
-  --color-labels-quaternary: hsla(240, 6%, 25%, 0.18);
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #0ea5e9;
 
-  --background: var(--color-white);
-  --foreground: var(--color-primary);
+  --color-labels-primary: var(--color-grey-900);
+  --color-labels-secondary: rgba(28, 25, 23, 0.6);
+  --color-labels-tertiary: rgba(28, 25, 23, 0.3);
+  --color-labels-quaternary: rgba(28, 25, 23, 0.18);
+
+  --background: var(--color-grey-50);
+  --foreground: var(--color-grey-950);
   --card: var(--color-grey-50);
-  --card-foreground: var(--foreground);
+  --card-foreground: var(--color-grey-950);
   --popover: var(--color-grey-50);
-  --popover-foreground: var(--foreground);
-  --primary: var(--color-primary);
-  --primary-foreground: var(--color-white);
+  --popover-foreground: var(--color-grey-950);
+  --primary: var(--color-grey-950);
+  --primary-foreground: var(--color-grey-50);
   --secondary: var(--color-grey-100);
-  --secondary-foreground: var(--foreground);
+  --secondary-foreground: var(--color-grey-900);
   --muted: var(--color-grey-100);
-  --muted-foreground: var(--color-labels-secondary);
+  --muted-foreground: var(--color-grey-500);
   --accent: var(--color-accent);
-  --accent-foreground: var(--color-white);
+  --accent-foreground: var(--color-grey-950);
   --destructive: var(--color-error);
-  --destructive-foreground: var(--color-white);
+  --destructive-foreground: var(--color-grey-50);
   --border: var(--color-grey-200);
   --input: var(--color-grey-200);
-  --ring: var(--color-primary);
+  --ring: var(--color-grey-950);
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
 
-  --font-h1-size: clamp(2.5rem, 5vw, 3rem);
-  --font-h1-line-height: clamp(3rem, 6vw, 3.625rem);
-  --font-h2-size: clamp(2rem, 4vw, 2.5rem);
-  --font-h2-line-height: clamp(2.5rem, 5vw, 3rem);
-  --font-h3-size: clamp(1.75rem, 3vw, 2rem);
-  --font-h3-line-height: clamp(2.125rem, 4vw, 2.375rem);
-  --font-h4-size: clamp(1.5rem, 2.5vw, 1.75rem);
-  --font-h4-line-height: clamp(2rem, 3vw, 2.125rem);
-  --font-h5-size: clamp(1.25rem, 2vw, 1.5rem);
-  --font-h5-line-height: clamp(1.75rem, 2.5vw, 1.875rem);
-  --font-h6-size: clamp(1.125rem, 1.5vw, 1.25rem);
-  --font-h6-line-height: clamp(1.5rem, 2vw, 1.625rem);
-  --font-subtitle1-size: clamp(1rem, 1.5vw, 1.125rem);
-  --font-subtitle1-line-height: clamp(1.5rem, 2vw, 1.75rem);
-  --font-subtitle2-size: clamp(0.875rem, 1.25vw, 1rem);
-  --font-subtitle2-line-height: clamp(1.25rem, 1.75vw, 1.5rem);
-  --font-body1-size: clamp(1rem, 1.25vw, 1.125rem);
-  --font-body1-line-height: clamp(1.5rem, 2vw, 1.75rem);
-  --font-body2-size: clamp(1rem, 1.25vw, 1.125rem);
-  --font-body2-line-height: clamp(1.5rem, 2vw, 1.75rem);
-  --font-body3-size: clamp(0.875rem, 1vw, 1rem);
-  --font-body3-line-height: clamp(1.25rem, 1.5vw, 1.5rem);
-  --font-body4-size: clamp(0.875rem, 1vw, 1rem);
-  --font-body4-line-height: clamp(1.25rem, 1.5vw, 1.5rem);
-  --font-caption1-size: clamp(0.75rem, 0.9vw, 0.875rem);
-  --font-caption1-line-height: clamp(1rem, 1.25vw, 1.125rem);
-  --font-caption2-size: clamp(0.75rem, 0.9vw, 0.875rem);
-  --font-caption2-line-height: clamp(1rem, 1.25vw, 1.125rem);
-  --font-caption3-size: clamp(0.625rem, 0.75vw, 0.75rem);
-  --font-caption3-line-height: clamp(0.875rem, 1vw, 1rem);
+  --font-h1-size: 2.25rem;
+  --font-h1-line-height: 1.25;
+  --font-h2-size: 1.875rem;
+  --font-h2-line-height: 1.3;
+  --font-h3-size: 1.5rem;
+  --font-h3-line-height: 1.35;
+  --font-h4-size: 1.25rem;
+  --font-h4-line-height: 1.4;
+  --font-h5-size: 1.125rem;
+  --font-h5-line-height: 1.4;
+  --font-h6-size: 1rem;
+  --font-h6-line-height: 1.5;
+  --font-subtitle1-size: 1rem;
+  --font-subtitle1-line-height: 1.5;
+  --font-subtitle2-size: 0.875rem;
+  --font-subtitle2-line-height: 1.5;
+  --font-body1-size: 1rem;
+  --font-body1-line-height: 1.5;
+  --font-body2-size: 0.875rem;
+  --font-body2-line-height: 1.5;
+  --font-body3-size: 0.875rem;
+  --font-body3-line-height: 1.4;
+  --font-body4-size: 0.75rem;
+  --font-body4-line-height: 1.4;
+  --font-caption1-size: 0.75rem;
+  --font-caption1-line-height: 1.4;
+  --font-caption2-size: 0.75rem;
+  --font-caption2-line-height: 1.4;
+  --font-caption3-size: 0.75rem;
+  --font-caption3-line-height: 1.4;
 
   --labels-primary: var(--color-labels-primary);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-accent: #fbbf24;
+  --color-accent-hover: #fcd34d;
+  --color-accent-active: #fde68a;
+
+  --color-success: #34d399;
+  --color-warning: #fbbf24;
+  --color-error: #f87171;
+  --color-info: #38bdf8;
+
+  --color-labels-primary: var(--color-grey-100);
+  --color-labels-secondary: rgba(245, 245, 244, 0.6);
+  --color-labels-tertiary: rgba(245, 245, 244, 0.3);
+  --color-labels-quaternary: rgba(245, 245, 244, 0.18);
+
+  --background: var(--color-grey-950);
+  --foreground: var(--color-grey-50);
+  --card: var(--color-grey-900);
+  --card-foreground: var(--color-grey-50);
+  --popover: var(--color-grey-900);
+  --popover-foreground: var(--color-grey-50);
+  --primary: var(--color-grey-50);
+  --primary-foreground: var(--color-grey-950);
+  --secondary: var(--color-grey-900);
+  --secondary-foreground: var(--color-grey-100);
+  --muted: var(--color-grey-900);
+  --muted-foreground: var(--color-grey-400);
+  --accent: var(--color-accent);
+  --accent-foreground: var(--color-grey-950);
+  --destructive: var(--color-error);
+  --destructive-foreground: var(--color-grey-950);
+  --border: var(--color-grey-800);
+  --input: var(--color-grey-800);
+  --ring: var(--color-grey-50);
+
+  --labels-primary: var(--color-labels-primary);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+
+    --color-accent: #fbbf24;
+    --color-accent-hover: #fcd34d;
+    --color-accent-active: #fde68a;
+
+    --color-success: #34d399;
+    --color-warning: #fbbf24;
+    --color-error: #f87171;
+    --color-info: #38bdf8;
+
+    --color-labels-primary: var(--color-grey-100);
+    --color-labels-secondary: rgba(245, 245, 244, 0.6);
+    --color-labels-tertiary: rgba(245, 245, 244, 0.3);
+    --color-labels-quaternary: rgba(245, 245, 244, 0.18);
+
+    --background: var(--color-grey-950);
+    --foreground: var(--color-grey-50);
+    --card: var(--color-grey-900);
+    --card-foreground: var(--color-grey-50);
+    --popover: var(--color-grey-900);
+    --popover-foreground: var(--color-grey-50);
+    --primary: var(--color-grey-50);
+    --primary-foreground: var(--color-grey-950);
+    --secondary: var(--color-grey-900);
+    --secondary-foreground: var(--color-grey-100);
+    --muted: var(--color-grey-900);
+    --muted-foreground: var(--color-grey-400);
+    --accent: var(--color-accent);
+    --accent-foreground: var(--color-grey-950);
+    --destructive: var(--color-error);
+    --destructive-foreground: var(--color-grey-950);
+    --border: var(--color-grey-800);
+    --input: var(--color-grey-800);
+    --ring: var(--color-grey-50);
+
+    --labels-primary: var(--color-labels-primary);
+  }
 }
 
 @layer base {
@@ -125,10 +213,13 @@ html,
 .wrapper {
   display: flex;
   flex-direction: column;
+  background: var(--background);
+  color: var(--foreground);
 }
 
 .content {
   flex-grow: 1;
+  background: var(--background);
 }
 
 ul,
@@ -188,8 +279,8 @@ h6 {
   100% {
     font-size: 1rem;
     font-family: var(--font-sans);
-    background: #fff;
-    color: #000;
+    background: var(--background);
+    color: var(--foreground);
   }
 }
 

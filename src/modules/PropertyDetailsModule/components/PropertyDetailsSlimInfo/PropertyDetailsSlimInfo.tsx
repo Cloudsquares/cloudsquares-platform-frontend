@@ -26,10 +26,10 @@ export const PropertyDetailsSlimInfo = () => {
     return [];
   };
   return (
-    <div className="grid grid-cols-3 gap-y-4 rounded-md border border-grey-200 px-4 py-3 md:grid-cols-8">
+    <div className="grid grid-cols-3 gap-y-4 rounded-md border border-border px-4 py-3 md:grid-cols-8">
       {displayedData().map(({ label, value }, index) => (
         <div key={index}>
-          <p className="text-body3 text-grey-500">{label}</p>
+          <p className="text-body3 text-muted-foreground">{label}</p>
           <p className="text-body2 text-foreground">{value}</p>
         </div>
       ))}

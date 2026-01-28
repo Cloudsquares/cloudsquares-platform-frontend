@@ -1,5 +1,5 @@
 import React from "react";
-import { MdMenu } from "react-icons/md";
+import { Menu } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
@@ -33,7 +33,7 @@ export const HeaderNavigation = () => {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button type="button" variant="ghost" size="sm" aria-label="menu">
-              <MdMenu />
+              <Menu className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start">

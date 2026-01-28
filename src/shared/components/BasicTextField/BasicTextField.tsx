@@ -155,7 +155,7 @@ export const BasicTextField = <T extends Record<string, unknown>>({
                 />
               )}
               {isNumeric && showCurrency && (
-                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-body3 text-labels-primary">
+                <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-body3 text-foreground">
                   {currencySymbol}
                 </span>
               )}
@@ -164,7 +164,7 @@ export const BasicTextField = <T extends Record<string, unknown>>({
               <p
                 className={cn(
                   "text-caption1",
-                  hasError ? "text-error" : "text-labels-secondary",
+                  hasError ? "text-error" : "text-muted-foreground",
                 )}
               >
                 {helperMessage}

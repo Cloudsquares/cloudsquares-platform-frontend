@@ -10,7 +10,7 @@ import { CustomTableCell } from "../../../../shared/components/CustomTabCell";
  */
 export const PropertyOwnersTableHeader = () => {
   return (
-    <thead className="bg-grey-100">
+    <thead className="bg-muted">
       <tr>
         <CustomTableCell text="№" fw={600} as="th" />
         <CustomTableCell text="ФИО" fw={600} as="th" />

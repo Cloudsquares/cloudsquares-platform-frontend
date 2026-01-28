@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { FaHome } from "react-icons/fa";
-import { IoDocuments } from "react-icons/io5";
+import { FileText, Home } from "lucide-react";
 
 export const ProfileFavoritesLinks = () => {
   return (
@@ -11,8 +10,8 @@ export const ProfileFavoritesLinks = () => {
           to="/properties"
           className="flex items-center gap-3 text-foreground"
         >
-          <FaHome size={20} color="#1c1c1c" />
-          <span className="text-body2 text-labels-primary">Недвижимость</span>
+          <Home className="h-5 w-5 text-foreground" />
+          <span className="text-body2 text-foreground">Недвижимость</span>
         </Link>
       </div>
       <div className="rounded-lg border border-border bg-card p-4">
@@ -20,8 +19,8 @@ export const ProfileFavoritesLinks = () => {
           to="/requests"
           className="flex items-center gap-3 text-foreground"
         >
-          <IoDocuments size={20} color="#1c1c1c" />
-          <span className="text-body2 text-labels-primary">Заявки</span>
+          <FileText className="h-5 w-5 text-foreground" />
+          <span className="text-body2 text-foreground">Заявки</span>
         </Link>
       </div>
     </div>
