@@ -14,7 +14,7 @@ import {
 } from "@/shared/utils";
 import { PropertyPriceInfo } from "@/shared/components/PropertyPriceInfo";
 import { AgentCompactCard } from "@/shared/components/AgentCompactCard";
-import { Button } from "@/shared/components/ui/button";
+import { Button } from "@/shared/components/ui/Button";
 
 // TODO: перевести компонент в shared/components так как используется в нескольких модулях.
 // TODO: убрать description из карточки

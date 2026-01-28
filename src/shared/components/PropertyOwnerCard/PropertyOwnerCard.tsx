@@ -5,15 +5,15 @@ import {
 import { displayUserName } from "@/shared/utils";
 import { Pencil, Trash2 } from "lucide-react";
 
-import { Badge } from "@/shared/components/ui/badge";
-import { Button } from "@/shared/components/ui/button";
-import { Card, CardContent } from "@/shared/components/ui/card";
+import { Badge } from "@/shared/components/ui/Badge";
+import { Button } from "@/shared/components/ui/Button";
+import { Card, CardContent } from "@/shared/components/ui/Card";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/shared/components/ui/tooltip";
+} from "@/shared/components/ui/Tooltip";
 import { cn } from "@/shared/utils";
 
 interface PropertyOwnerCardProps {

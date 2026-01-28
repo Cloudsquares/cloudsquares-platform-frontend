@@ -2,7 +2,7 @@ import React from "react";
 import { Customer } from "../../../../shared/interfaces/Customer";
 import { CustomersTableHead } from "../CustomersTableHead";
 import { CustomersTableBody } from "../CustomersTableBody";
-import { TablePagination } from "@/shared/components/ui/table-pagination";
+import { TablePagination } from "@/shared/components/ui/TablePagination";
 
 interface CustomersTableProps {
   data: Customer[];

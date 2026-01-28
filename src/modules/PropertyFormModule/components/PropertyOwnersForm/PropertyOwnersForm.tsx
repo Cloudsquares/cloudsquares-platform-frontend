@@ -15,7 +15,7 @@ import {
   PropertyOwnersDataFormData,
 } from "../../validations";
 import { usePropertyFormStore } from "../../store";
-import { Button } from "@/shared/components/ui/button";
+import { Button } from "@/shared/components/ui/Button";
 
 interface PropertyOwnersFormProps {
   mode: PropertyFormMode;

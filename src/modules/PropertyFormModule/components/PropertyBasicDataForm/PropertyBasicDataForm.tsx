@@ -22,7 +22,7 @@ import {
 } from "../../hooks";
 import { normalizePropertyBasicData } from "../../utils";
 import { PropertyCategoryDrawer } from "../PropertyCategoryDrawer";
-import { Button } from "@/shared/components/ui/button";
+import { Button } from "@/shared/components/ui/Button";
 
 interface PropertyBasicDataFormProps {
   mode: PropertyFormMode;

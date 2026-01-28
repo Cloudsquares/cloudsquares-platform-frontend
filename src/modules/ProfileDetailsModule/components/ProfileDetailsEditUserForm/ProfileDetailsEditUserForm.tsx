@@ -12,7 +12,7 @@ import { devLogger } from "../../../../shared/utils";
 import { BasicTextField } from "../../../../shared/components/BasicTextField";
 import { usePatchUserProfileMutation } from "../../hooks";
 import { CountryCodeDisplayFlag } from "../../../../shared/interfaces/Country";
-import { Button } from "@/shared/components/ui/button";
+import { Button } from "@/shared/components/ui/Button";
 
 export const ProfileDetailsEditUserForm = () => {
   const profile = useUserProfile();

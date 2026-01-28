@@ -1,5 +1,5 @@
 import { PropertyCategory } from "@/shared/interfaces/PropertyCategory";
-import { Alert, AlertDescription } from "@/shared/components/ui/alert";
+import { Alert, AlertDescription } from "@/shared/components/ui/Alert";
 
 interface PropertyCategoriesDeleteFormProps {
   editablePropertyCategory: PropertyCategory | null;

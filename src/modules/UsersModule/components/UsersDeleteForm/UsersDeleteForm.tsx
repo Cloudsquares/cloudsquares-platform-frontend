@@ -5,7 +5,7 @@ import { devLogger, displayUserName } from "@/shared/utils";
 import { FormProvider, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
-import { Button } from "@/shared/components/ui/button";
+import { Button } from "@/shared/components/ui/Button";
 
 interface UsersDeleteFormProps {
   user: User;

@@ -7,7 +7,7 @@ import { DiscountLabel } from "@/shared/components/DiscountLabel";
 import { calculatePricePerMeter, propertyAddress } from "@/shared/utils";
 import { usePropertyDetailsStore } from "../../store";
 import { PropertyDetailsOwnersDrawer } from "../PropertyDetailsOwnersDrawer";
-import { Button } from "@/shared/components/ui/button";
+import { Button } from "@/shared/components/ui/Button";
 
 // TODO: При клике на "Данные владельца" открыть модалку с карточками всех владельцев и кнопку "Редактировать",
 // при клике на кнопку открывать страницу редактирования с параметром ?step=property_owners

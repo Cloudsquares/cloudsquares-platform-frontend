@@ -8,13 +8,13 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/shared/components/ui/dropdown-menu";
+} from "@/shared/components/ui/DropdownMenu";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/shared/components/ui/tooltip";
+} from "@/shared/components/ui/Tooltip";
 import { ThemeSwitcher } from "@/modules/ThemeModule";
 
 export const HeaderProfile = () => {

@@ -22,7 +22,7 @@ import { useCreateNewUserMutation, usePatchUserMutation } from "./hooks";
 import { User } from "../../shared/interfaces";
 import { normalizeEditableUserData } from "./utils";
 import { useCanAccess } from "../../shared/permissions/canAccess";
-import { Button } from "@/shared/components/ui/button";
+import { Button } from "@/shared/components/ui/Button";
 
 interface UsersFormModuleProps {
   mode: BasicDrawerMode;

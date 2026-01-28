@@ -13,7 +13,9 @@ interface ThemeContextValue {
 
 const THEME_STORAGE_KEY = "cloudsquares-theme";
 
-const ThemeContext = React.createContext<ThemeContextValue | undefined>(undefined);
+const ThemeContext = React.createContext<ThemeContextValue | undefined>(
+  undefined,
+);
 
 const getStoredTheme = (): ThemePreference => {
   if (typeof window === "undefined") return null;
@@ -34,8 +36,10 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  const [theme, setThemeState] = React.useState<ThemePreference>(getStoredTheme);
-  const [systemTheme, setSystemTheme] = React.useState<ThemeName>(getSystemTheme);
+  const [theme, setThemeState] =
+    React.useState<ThemePreference>(getStoredTheme);
+  const [systemTheme, setSystemTheme] =
+    React.useState<ThemeName>(getSystemTheme);
 
   const resolvedTheme = theme ?? systemTheme;
 
@@ -91,7 +95,9 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     [resolvedTheme, setTheme, theme, toggleTheme],
   );
 
-  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+  );
 };
 
 /**
