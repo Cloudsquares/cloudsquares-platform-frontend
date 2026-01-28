@@ -20,6 +20,7 @@ Covers React 19 + TypeScript + Vite 7 + shadcn/ui + Tailwind, ESLint (flat), Pre
 
 - **Imports:** use the `@/*` alias (configured in `tsconfig.json` / `vite.config.ts`). No deep relative imports.
 - **Re-exports:** avoid `export *` in component barrels; export explicit components/types.
+- **Props types:** if props are re-exported from a barrel, the component must export them (`export interface/type`).
 - **TypeScript:** strict, **no `any`**, honor `noUncheckedSideEffectImports`, `isolatedModules`, `moduleResolution: "bundler"`.
 - **HTTP/React Query:** only via `src/configs/*` (`useAxiosQuery`, `useAxiosSuspenseQuery`, `useAxiosMutation`) and our axios instance.
 - **Errors/Loading:** use `src/shared/interfaces/ApiErrorResponse` and `shared_components/AxiosErrorAlertMessage` / `shared_components/AxiosLoadingCircularProgress` / `shared_utils/showApiError`.

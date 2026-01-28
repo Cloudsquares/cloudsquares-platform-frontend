@@ -14,6 +14,7 @@
 - Respect existing **Vite chunk split** names; don’t randomly change `manualChunks` logic.
 - Tests: **Vitest + Testing Library**; for providers use `src/providers/TestProviders.tsx`.
 - Re-exports: avoid `export *` in component barrels; export named components/types explicitly.
+- Props types: when re-exporting `*Props` from barrels, ensure the component file exports the props type.
 
 ---
 

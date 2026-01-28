@@ -20,6 +20,7 @@
 
 - **Импорты:** только через алиас `@/*` (настроен в `tsconfig.json` / `vite.config.ts`). Без глубоких относительных путей.
 - **Ре-экспорты:** не использовать `export *` в barrel-файлах компонентов; экспортировать явные компоненты/типы.
+- **Props-типы:** если типы ре-экспортируются из barrel, то компонент обязан их экспортировать (`export interface/type`).
 - **TypeScript:** строгий, **без `any`**, учитывай `noUncheckedSideEffectImports`, `isolatedModules`, `moduleResolution: "bundler"`.
 - **HTTP / React Query:** только через `@/configs/*` (`useAxiosQuery`, `useAxiosSuspenseQuery`, `useAxiosMutation`) и наш настроенный axios.
 - **Ошибки/Загрузка:** тип `@/shared/interfaces/ApiErrorResponse`; UI через `shared_components/AxiosErrorAlertMessage` / `shared_components/AxiosLoadingCircularProgress` / `shared_utils/showApiError`.
