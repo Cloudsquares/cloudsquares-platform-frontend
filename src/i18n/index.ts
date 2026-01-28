@@ -6,7 +6,7 @@ import en from "./locales/en/translation.json";
 import ru from "./locales/ru/translation.json";
 import kz from "./locales/kz/translation.json";
 
-import { ENVIRONMENT } from "../constants/envs";
+import { ENVIRONMENT } from "@/constants/envs";
 
 const isDevelopment = ENVIRONMENT === "development";
 

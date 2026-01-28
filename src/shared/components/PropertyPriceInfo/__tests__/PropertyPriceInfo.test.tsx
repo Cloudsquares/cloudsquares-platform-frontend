@@ -5,6 +5,8 @@ import {
   PropertyStatus,
 } from "@/shared/interfaces/Property";
 import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
+
 import { PropertyPriceInfo } from "../PropertyPriceInfo";
 
 const createProperty = (overrides?: Partial<Property>): Property => ({

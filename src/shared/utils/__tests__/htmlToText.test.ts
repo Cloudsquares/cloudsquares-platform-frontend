@@ -3,6 +3,7 @@ import {
   htmlToShortText,
   truncateText,
 } from "@/shared/utils/htmlToText";
+import { describe, expect, it } from "vitest";
 
 describe("htmlToPlainText", () => {
   it("удаляет теги и сущности через DOMParser", () => {

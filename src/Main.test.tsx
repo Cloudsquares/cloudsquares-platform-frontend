@@ -1,11 +1,12 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import { describe, expect, it, vi, type MockedFunction } from "vitest";
 
-jest.mock("react-dom/client", () => ({
-  createRoot: jest.fn(),
+vi.mock("react-dom/client", () => ({
+  createRoot: vi.fn(),
 }));
 
-jest.mock("./modules/AppModule", () => ({
+vi.mock("./modules/AppModule", () => ({
   AppModule: () => <div>Mocked AppModule</div>,
 }));
 
@@ -13,10 +14,11 @@ describe("index.tsx", () => {
   it("renders the application correctly", async () => {
     // Создаем фиктивный контейнер для корня приложения
     const mockRoot = {
-      render: jest.fn(),
+      render: vi.fn(),
     };
 
-    (createRoot as jest.Mock).mockReturnValue(mockRoot);
+    const mockedCreateRoot = createRoot as MockedFunction<typeof createRoot>;
+    mockedCreateRoot.mockReturnValue(mockRoot);
 
     // Подключаем сам файл
     await import("./main");

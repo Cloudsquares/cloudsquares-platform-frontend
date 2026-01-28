@@ -1,10 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import { AxiosError } from "axios";
+import { afterAll, afterEach, describe, expect, it, vi } from "vitest";
+
 import { AxiosErrorAlertMessage } from "../AxiosErrorAlertMessage";
 import { ApiErrorResponse } from "../../../interfaces";
 
 describe("AxiosErrorAlertMessage", () => {
-  const consoleErrorMock = jest
+  const consoleErrorMock = vi
     .spyOn(console, "error")
     .mockImplementation(() => {});
 

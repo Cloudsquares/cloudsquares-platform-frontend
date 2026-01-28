@@ -2,6 +2,7 @@ import {
   calculatePricePerMeter,
   formatPrice,
 } from "@/shared/utils/calculatePricePerMeter";
+import { describe, expect, it } from "vitest";
 
 describe("formatPrice", () => {
   it("форматирует сумму без дробной части по умолчанию", () => {

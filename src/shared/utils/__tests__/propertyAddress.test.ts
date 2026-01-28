@@ -4,6 +4,7 @@ import {
   Property,
   PropertyStatus,
 } from "@/shared/interfaces/Property";
+import { describe, expect, it } from "vitest";
 
 const createProperty = (
   overrides: Partial<Property["property_location"]>,

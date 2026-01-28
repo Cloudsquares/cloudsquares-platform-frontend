@@ -4,7 +4,7 @@ import { PropertyFormMode } from "@/shared/interfaces/PropertyForm";
 const PRICE_MAX_VALUE = 999999999999;
 
 export const createPropertyBasicDataFormSchema = (mode: PropertyFormMode) => {
-  console.log("Validation form mode: ", mode); // temp
+  void mode;
   return z.object({
     title: z.string().max(255).optional().or(z.literal("")),
     description: z.string().max(50000).optional().or(z.literal("")),

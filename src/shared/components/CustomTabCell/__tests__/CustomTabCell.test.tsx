@@ -1,6 +1,8 @@
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { describe, expect, it, vi } from "vitest";
+
 import { CustomTableCell } from "../CustomTabCell";
 import { TestProviders } from "../../../../providers";
 
@@ -31,8 +33,8 @@ describe("CustomTableCell", () => {
     const user = userEvent.setup();
     renderComponent({
       options: [
-        { label: "Просмотр", onClick: jest.fn() },
-        { label: "Редактировать", onClick: jest.fn() },
+        { label: "Просмотр", onClick: vi.fn() },
+        { label: "Редактировать", onClick: vi.fn() },
       ],
     });
 
@@ -51,7 +53,7 @@ describe("CustomTableCell", () => {
 
   it("вызывает обработчик и закрывает меню после выбора опции", async () => {
     const user = userEvent.setup();
-    const onOptionClick = jest.fn();
+    const onOptionClick = vi.fn();
 
     renderComponent({
       options: [{ label: "Удалить", onClick: onOptionClick }],

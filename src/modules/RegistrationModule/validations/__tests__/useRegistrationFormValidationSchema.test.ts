@@ -1,4 +1,5 @@
 import { useRegistrationFormValidationSchema } from "../useRegistrationFormValidationSchema";
+import { describe, expect, it } from "vitest";
 
 describe("useRegistrationFormValidationSchema", () => {
   const validData = {

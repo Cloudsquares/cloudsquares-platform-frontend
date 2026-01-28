@@ -1,6 +1,8 @@
 import { TestProviders } from "@/providers";
 import { render, screen } from "@testing-library/react";
 import React from "react";
+import { describe, expect, it } from "vitest";
+
 import { DiscountLabel } from "../DiscountLabel";
 
 const renderComponent = (props: React.ComponentProps<typeof DiscountLabel>) =>

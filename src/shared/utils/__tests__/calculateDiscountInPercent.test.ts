@@ -1,4 +1,5 @@
 import { calculateDiscountInPercent } from "@/shared/utils/calculateDiscountInPercent";
+import { describe, expect, it } from "vitest";
 
 describe("calculateDiscountInPercent", () => {
   it("возвращает скидку в процентах с двумя знаками после запятой", () => {

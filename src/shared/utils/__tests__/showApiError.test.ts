@@ -1,6 +1,13 @@
-jest.mock("react-hot-toast", () => {
-  const mockToast = Object.assign(jest.fn(), {
-    error: jest.fn(),
+import { AxiosError } from "axios";
+import toast from "react-hot-toast";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
+import { ApiErrorResponse } from "@/shared/interfaces";
+import { showApiError } from "@/shared/utils/showApiError";
+
+vi.mock("react-hot-toast", () => {
+  const mockToast = Object.assign(vi.fn(), {
+    error: vi.fn(),
   });
 
   return {
@@ -8,11 +15,6 @@ jest.mock("react-hot-toast", () => {
     default: mockToast,
   };
 });
-
-import toast from "react-hot-toast";
-import { showApiError } from "@/shared/utils/showApiError";
-import { ApiErrorResponse } from "@/shared/interfaces";
-import { AxiosError } from "axios";
 
 describe("showApiError", () => {
   const createError = (
@@ -33,7 +35,7 @@ describe("showApiError", () => {
     }) as AxiosError<ApiErrorResponse>;
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("рендерит отдельный toast для каждой ошибки из details", () => {

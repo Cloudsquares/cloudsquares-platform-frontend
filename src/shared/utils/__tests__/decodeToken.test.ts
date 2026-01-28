@@ -1,25 +1,27 @@
-jest.mock("jwt-decode", () => ({
-  jwtDecode: jest.fn(),
+import { jwtDecode } from "jwt-decode";
+import { afterEach, describe, expect, it, vi } from "vitest";
+
+import { UserRole } from "@/shared/permissions/roles";
+import { decodeToken } from "@/shared/utils/decodeToken";
+import { devLogger } from "@/shared/utils/devLogger";
+
+vi.mock("jwt-decode", () => ({
+  jwtDecode: vi.fn(),
 }));
 
-jest.mock("@/shared/utils/devLogger", () => ({
+vi.mock("@/shared/utils/devLogger", () => ({
   devLogger: {
-    log: jest.fn(),
-    warn: jest.fn(),
-    error: jest.fn(),
-    info: jest.fn(),
-    debug: jest.fn(),
+    log: vi.fn(),
+    warn: vi.fn(),
+    error: vi.fn(),
+    info: vi.fn(),
+    debug: vi.fn(),
   },
 }));
 
-import { jwtDecode } from "jwt-decode";
-import { decodeToken } from "@/shared/utils/decodeToken";
-import { devLogger } from "@/shared/utils/devLogger";
-import { UserRole } from "@/shared/permissions/roles";
-
 describe("decodeToken", () => {
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it("возвращает декодированные данные токена", () => {
@@ -37,14 +39,14 @@ describe("decodeToken", () => {
       first_name: "Test",
     };
 
-    jest.mocked(jwtDecode).mockReturnValueOnce(decoded);
+    vi.mocked(jwtDecode).mockReturnValueOnce(decoded);
 
     expect(decodeToken("token")).toEqual(decoded);
     expect(jwtDecode).toHaveBeenCalledWith("token");
   });
 
   it("возвращает null и логирует ошибку, если декодирование не удалось", () => {
-    jest.mocked(jwtDecode).mockImplementationOnce(() => {
+    vi.mocked(jwtDecode).mockImplementationOnce(() => {
       throw new Error("invalid token");
     });
 

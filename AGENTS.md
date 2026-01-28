@@ -12,7 +12,8 @@
 - Strict TS (`"strict": true`, `"noUncheckedSideEffectImports": true`) — **no `any`**.
 - Every utility / custom hook must have a **Typedoc** block (params, returns, examples when useful).
 - Respect existing **Vite chunk split** names; don’t randomly change `manualChunks` logic.
-- Tests: **Jest + Testing Library**; for providers use `src/providers/TestProviders.tsx`.
+- Tests: **Vitest + Testing Library**; for providers use `src/providers/TestProviders.tsx`.
+- Re-exports: avoid `export *` in component barrels; export named components/types explicitly.
 
 ---
 
@@ -121,7 +122,7 @@ Pagination & tables:
 
 ## 8) Testing
 
-- **Jest + Testing Library**; environment: `jsdom`.
+- **Vitest + Testing Library**; environment: `jsdom`.
 - Co-locate specs (`*.spec.ts(x)` / `*.test.ts(x)`).
 - Mock HTTP with `axios-mock-adapter`.
 - For provider-heavy tests, wrap with `src/providers/TestProviders.tsx`.

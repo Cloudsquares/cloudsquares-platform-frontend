@@ -3,6 +3,8 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { describe, expect, it, vi } from "vitest";
+
 import { BasicFormSelectField } from "../BasicFormSelectField";
 
 type FormValues = {
@@ -81,7 +83,7 @@ describe("BasicFormSelectField", () => {
 
   it("отображает кнопку в меню и вызывает обработчик", async () => {
     const user = userEvent.setup();
-    const onButtonClick = jest.fn();
+    const onButtonClick = vi.fn();
 
     renderComponent({
       buttonOptions: {

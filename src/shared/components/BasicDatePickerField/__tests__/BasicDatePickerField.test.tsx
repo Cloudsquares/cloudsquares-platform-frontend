@@ -2,6 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { useForm, FormProvider } from "react-hook-form";
 import { format } from "date-fns";
+import { describe, expect, it, vi } from "vitest";
 
 import { BasicDatePickerField } from "../BasicDatePickerField";
 import { TestProviders } from "../../../../providers";
@@ -13,7 +14,7 @@ const renderWithForm = (defaultValues = {}, props = {}) => {
     return (
       <TestProviders>
         <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(jest.fn())}>
+          <form onSubmit={methods.handleSubmit(vi.fn())}>
             <BasicDatePickerField
               name="testDate"
               label="Дата рождения"
@@ -56,7 +57,7 @@ describe("BasicDatePickerField", () => {
       return (
         <TestProviders>
           <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(jest.fn())}>
+            <form onSubmit={methods.handleSubmit(vi.fn())}>
               <BasicDatePickerField name="testDate" label="Дата рождения" />
             </form>
           </FormProvider>

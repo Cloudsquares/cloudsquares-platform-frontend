@@ -1,10 +1,17 @@
-import "@testing-library/jest-dom";
-import { TextEncoder, TextDecoder } from "util";
+import "@testing-library/jest-dom/vitest";
+import { cleanup } from "@testing-library/react";
+import { TextDecoder, TextEncoder } from "util";
+import { afterEach } from "vitest";
+
 import "./src/i18n";
 
+afterEach(() => {
+  cleanup();
+});
+
 // Полифилы для Node.js
-global.TextEncoder = TextEncoder;
-global.TextDecoder = TextDecoder;
+globalThis.TextEncoder = TextEncoder;
+globalThis.TextDecoder = TextDecoder;
 
 if (!HTMLElement.prototype.hasPointerCapture) {
   HTMLElement.prototype.hasPointerCapture = () => false;

@@ -1,7 +1,7 @@
 # TASK_PROMPTS (RU).md
 
 Подборка шаблонов для Codex/AI, чтобы генерировать фронтенд-код **CloudSquares** строго по нашей архитектуре и конфигам.
-Ориентировано на React 19 + TypeScript + Vite 7 + MUI 7, ESLint (flat), Prettier, Jest, TypeDoc.
+Ориентировано на React 19 + TypeScript + Vite 7 + MUI 7, ESLint (flat), Prettier, Vitest, TypeDoc.
 
 ---
 
@@ -19,6 +19,7 @@
 ## Глобальные ограничения (для всех промптов)
 
 - **Импорты:** только через алиас `@/*` (настроен в `tsconfig.json` / `vite.config.ts`). Без глубоких относительных путей.
+- **Ре-экспорты:** не использовать `export *` в barrel-файлах компонентов; экспортировать явные компоненты/типы.
 - **TypeScript:** строгий, **без `any`**, учитывай `noUncheckedSideEffectImports`, `isolatedModules`, `moduleResolution: "bundler"`.
 - **HTTP / React Query:** только через `@/configs/*` (`useAxiosQuery`, `useAxiosSuspenseQuery`, `useAxiosMutation`) и наш настроенный axios.
 - **Ошибки/Загрузка:** тип `@/shared/interfaces/ApiErrorResponse`; UI через `shared_components/AxiosErrorAlertMessage` / `shared_components/AxiosLoadingCircularProgress` / `shared_utils/showApiError`.
@@ -28,7 +29,7 @@
 - **Форматирование:** Prettier (printWidth **80**, точки с запятой, двойные кавычки). Не переопределять в файлах.
 - **Vite:** не ломаем имена чанков в `manualChunks` (vendor-react, vendor-maps, vendor-mui, vendor-zustand, vendor-react-query, vendor-hookform, vendor-axios, vendor-date, vendor-icons).
 - **Документация:** добавляй **Typedoc**-блоки для каждого утилити/хука; `pnpm gen-docs` обновляет `docs/`.
-- **Тесты:** для чистых утилит и нетривиальной логики хуков (Jest + Testing Library).
+- **Тесты:** для чистых утилит и нетривиальной логики хуков (Vitest + Testing Library).
 
 ---
 
@@ -268,7 +269,7 @@
 
 ```plaintext
 Задача (только тесты): Напиши unit/interaction-тесты для компонента
-`src/modules/<Feature>/components/<Component>.tsx` (React 19, Jest + Testing Library).
+`src/modules/<Feature>/components/<Component>.tsx` (React 19, Vitest + Testing Library).
 
 Открой ROOT/TASK_PROMPTS.md и выбери шаблон «Тесты для компонента»/«List Page…» по ситуации.
 Ограничения:
@@ -278,18 +279,18 @@
 - Учитывать наши shared-компоненты и пермишены, если они влияют на рендер.
 ```
 
-## 14) Шаблон — Тесты для компонента (Jest + Testing Library)
+## 14) Шаблон — Тесты для компонента (Vitest + Testing Library)
 
 ```plaintext
 Задача (только тесты): Написать unit/interaction-тесты для компонента
-`src/modules/<Feature>/components/<Component>.tsx` (React 19, Jest + @testing-library/react).
+`src/modules/<Feature>/components/<Component>.tsx` (React 19, Vitest + @testing-library/react).
 
 Ограничения:
 - Создавать ТОЛЬКО файлы `*.test.tsx` рядом с компонентом. Исходный код/конфиги не изменять.
 - Оборачивать рендер в `src/providers/TestProviders.tsx` (если компонент зависит от Router, QueryClient, Theme и т.п.).
 - Сетевые вызовы/хуки замещать через моки:
   - Использовать `axios-mock-adapter` на нашем axios-инстансе из `@/configs/api/axiosConfig`.
-  - Либо замокать врапперы (`@/configs/useAxiosQuery|useAxiosMutation`) через `jest.mock(...)`.
+  - Либо замокать врапперы (`@/configs/useAxiosQuery|useAxiosMutation`) через `vi.mock(...)`.
 - Селекторы — только по ролям и доступности: `getByRole`, `getByLabelText`, `getByPlaceholderText`.
   Избегать хрупких `getByText("Сохранить")`, если есть `name`/`aria-label`.
 - Учитывать пермишены: если рендер зависит от ролей, подставить соответствующий начальный state провайдера/стора.
@@ -308,7 +309,7 @@
   5) Ветвления по пермишенам (если применимо).
 
 Формат ответа:
-- TEMPLATE: "Тесты для компонента (Jest + Testing Library)"
+- TEMPLATE: "Тесты для компонента (Vitest + Testing Library)"
 - FILES: список созданных тестовых файлов с путями
 - Далее — полный код тестов (без заглушек)
 - В конце — CHANGES/NOTES/NEXT
@@ -317,7 +318,7 @@
 ## 15) Шаблон — Тесты для утилиты (pure functions)
 
 Задача (только тесты): Написать unit-тесты для утилиты
-`src/<path>/utils/<util>.ts` (Jest).
+`src/<path>/utils/<util>.ts` (Vitest).
 
 Ограничения:
 

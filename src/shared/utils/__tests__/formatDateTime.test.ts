@@ -1,4 +1,5 @@
 import { formatDateTime } from "@/shared/utils/formatDateTime";
+import { describe, expect, it } from "vitest";
 
 describe("formatDateTime", () => {
   it("форматирует ISO-строку с временем по умолчанию", () => {

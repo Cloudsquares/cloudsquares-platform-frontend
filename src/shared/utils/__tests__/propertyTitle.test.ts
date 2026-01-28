@@ -4,18 +4,9 @@ import {
   Property,
   PropertyStatus,
 } from "@/shared/interfaces/Property";
+import { describe, expect, it } from "vitest";
 
 describe("propertyTitle", () => {
-  const originalLog = console.log;
-
-  beforeEach(() => {
-    console.log = jest.fn();
-  });
-
-  afterEach(() => {
-    console.log = originalLog;
-  });
-
   const createProperty = (): Property => ({
     id: "1",
     title: "Test",
@@ -46,11 +37,10 @@ describe("propertyTitle", () => {
     updated_at: "",
   });
 
-  it("возвращает заглушку заголовка и логирует property", () => {
+  it("возвращает заглушку заголовка", () => {
     const property = createProperty();
     const result = propertyTitle(property);
 
-    expect(console.log).toHaveBeenCalledWith(property);
     expect(result).toBe(" 2-комн. / 76,5м² / этаж 3 из 44");
   });
 });

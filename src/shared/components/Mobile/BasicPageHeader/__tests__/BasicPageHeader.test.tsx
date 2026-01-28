@@ -1,12 +1,17 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
 import { BasicPageHeader } from "../BasicPageHeader";
 import { TestProviders } from "../../../../../providers";
 
 // Мокаем useNavigate
-const mockNavigate = jest.fn();
-jest.mock("react-router-dom", () => {
-  const actual = jest.requireActual("react-router-dom");
+const mockNavigate = vi.fn();
+vi.mock("react-router-dom", async () => {
+  const actual =
+    await vi.importActual<typeof import("react-router-dom")>(
+      "react-router-dom",
+    );
   return {
     ...actual,
     useNavigate: () => mockNavigate,
@@ -60,7 +65,7 @@ describe("BasicPageHeader", () => {
   });
 
   it("навигация: использует history.back() если window.history.length > 1", () => {
-    const spy = jest.spyOn(window.history, "length", "get").mockReturnValue(2);
+    const spy = vi.spyOn(window.history, "length", "get").mockReturnValue(2);
 
     renderComponent({ shownBackArrowButton: true });
     fireEvent.click(screen.getByRole("button"));
@@ -71,7 +76,7 @@ describe("BasicPageHeader", () => {
   });
 
   it("навигация: fallback на '/' если истории нет", () => {
-    const spy = jest.spyOn(window.history, "length", "get").mockReturnValue(1);
+    const spy = vi.spyOn(window.history, "length", "get").mockReturnValue(1);
 
     renderComponent({ shownBackArrowButton: true });
     fireEvent.click(screen.getByRole("button"));

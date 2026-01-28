@@ -5,7 +5,7 @@ import "./styles/_keyframe-animations.scss";
 import React from "react";
 import { buildIntroContent } from "./lib/buildIntroContent";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "../ThemeModule";
+import { useTheme } from "@/modules/ThemeModule/hooks";
 import { cn } from "@/shared/utils";
 
 interface TipTapEditorModuleProps<T extends Record<string, unknown>> {

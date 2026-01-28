@@ -21,11 +21,11 @@
     "src/**/*.spec.tsx",
     "src/**/*.config.ts",
     "vite.config.ts",
-    "jest.config.js"
+    "vitest.config.ts"
   ],
   // Исключает файлы и папки, которые **не должны** попадать в документацию:
   // - `__tests__`, `*.test.ts(x)`, `*.spec.ts(x)` — файлы с тестами
-  // - `*.config.ts`, `vite.config.ts`, `jest.config.js` — конфигурационные файлы
+  // - `*.config.ts`, `vite.config.ts`, `vitest.config.ts` — конфигурационные файлы
 
   "excludePrivate": true,
   // Исключает **приватные методы и свойства** (`private` в TypeScript) из документации.

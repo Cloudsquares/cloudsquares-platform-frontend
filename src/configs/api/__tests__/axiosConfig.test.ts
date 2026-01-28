@@ -1,4 +1,5 @@
 import MockAdapter from "axios-mock-adapter";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
 import { axiosBaseWrap } from "../axiosConfig";
 import { VITE_API_BASE_PATH } from "../../../constants/__mocks__/envs";

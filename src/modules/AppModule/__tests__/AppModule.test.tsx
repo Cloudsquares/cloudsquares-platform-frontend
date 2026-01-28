@@ -1,4 +1,5 @@
 import { render, act } from "@testing-library/react";
+import { describe, it } from "vitest";
 
 import { AppModule } from "..";
 
