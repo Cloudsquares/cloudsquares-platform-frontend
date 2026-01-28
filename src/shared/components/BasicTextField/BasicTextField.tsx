@@ -6,9 +6,9 @@ import { preventNonDigitKeydown } from "./utils/keys";
 import { getCurrencySymbol } from "./utils/currency";
 import { useUserProfile } from "@/shared/permissions/hooks";
 import { cn } from "@/shared/utils";
-import { Input } from "@/shared/components/ui/input";
-import { Label } from "@/shared/components/ui/label";
-import { Textarea } from "@/shared/components/ui/textarea";
+import { Input } from "@/shared/components/ui/Input";
+import { Label } from "@/shared/components/ui/Label";
+import { Textarea } from "@/shared/components/ui/Textarea";
 
 interface BasicTextFieldProps<T extends Record<string, unknown>> {
   name: keyof T & string;

@@ -6,7 +6,7 @@ import {
 import { devLogger, displayUserName } from "@/shared/utils";
 import { FormProvider, useForm } from "react-hook-form";
 
-import { Button } from "@/shared/components/ui/button";
+import { Button } from "@/shared/components/ui/Button";
 
 interface DeletePropertyOwnerFormData {
   property_id: string;

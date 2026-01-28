@@ -5,8 +5,8 @@ import { PropertyOwnerCard } from "@/shared/components/PropertyOwnerCard";
 import { useGetAllPropertyOwnersByPropertyIDQuery } from "@/shared/hooks/propertyOwners";
 import { Property } from "@/shared/interfaces/Property";
 import { PropertyFormMode } from "@/shared/interfaces/PropertyForm";
-import { Alert, AlertDescription } from "@/shared/components/ui/alert";
-import { Skeleton } from "@/shared/components/ui/skeleton";
+import { Alert, AlertDescription } from "@/shared/components/ui/Alert";
+import { Skeleton } from "@/shared/components/ui/Skeleton";
 
 import { PropertyOwnerDrawerModule } from "@/modules/PropertyOwnerDrawerModule";
 import { usePropertyOwnerDrawersStore } from "@/modules/PropertyOwnerDrawerModule/store";

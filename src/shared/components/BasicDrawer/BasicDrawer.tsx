@@ -7,8 +7,8 @@ import {
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from "@/shared/components/ui/dialog";
-import { Button } from "@/shared/components/ui/button";
+} from "@/shared/components/ui/Dialog";
+import { Button } from "@/shared/components/ui/Button";
 import { cn } from "@/shared/utils";
 
 /**
@@ -54,8 +54,7 @@ const drawerAnimationClasses = {
   top: "data-[state=open]:slide-in-from-top-6 data-[state=closed]:slide-out-to-top-6",
   right:
     "data-[state=open]:slide-in-from-right-6 data-[state=closed]:slide-out-to-right-6",
-  left:
-    "data-[state=open]:slide-in-from-left-6 data-[state=closed]:slide-out-to-left-6",
+  left: "data-[state=open]:slide-in-from-left-6 data-[state=closed]:slide-out-to-left-6",
 } satisfies Record<NonNullable<BasicDrawerProps["anchor"]>, string>;
 
 const drawerTransitionClasses =

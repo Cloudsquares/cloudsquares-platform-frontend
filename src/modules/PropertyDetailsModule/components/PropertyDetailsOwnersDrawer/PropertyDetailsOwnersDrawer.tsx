@@ -5,8 +5,8 @@ import { PropertyOwnerCard } from "@/shared/components/PropertyOwnerCard";
 import { BasicDrawerMode } from "@/shared/interfaces/Shared";
 import { useNavigate } from "react-router-dom";
 
-import { Alert, AlertDescription } from "@/shared/components/ui/alert";
-import { Button } from "@/shared/components/ui/button";
+import { Alert, AlertDescription } from "@/shared/components/ui/Alert";
+import { Button } from "@/shared/components/ui/Button";
 
 export const PropertyDetailsOwnersDrawer = () => {
   const showOwnersDrawer = usePropertyDetailsStore(

@@ -4,8 +4,8 @@ import { PropertyOwnersTableHeader } from "../PropertyOwnersTableHeader";
 import { PropertyOwnersTableBodyItem } from "../PropertyOwnersTableBodyItem";
 import { AxiosErrorAlertMessage } from "../../../../shared/components/AxiosErrorAlertMessage";
 import { useGetAllPropertyOwnersQuery } from "../../hooks";
-import { Alert, AlertDescription } from "@/shared/components/ui/alert";
-import { TablePagination } from "@/shared/components/ui/table-pagination";
+import { Alert, AlertDescription } from "@/shared/components/ui/Alert";
+import { TablePagination } from "@/shared/components/ui/TablePagination";
 
 export const PropertyOwnersTable = () => {
   const { page, rowsPerPage, setPage, setRowsPerPage } = useTablePagination(

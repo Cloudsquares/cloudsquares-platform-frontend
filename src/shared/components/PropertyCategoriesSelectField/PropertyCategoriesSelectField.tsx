@@ -6,7 +6,7 @@ import { FieldValues, Path } from "react-hook-form";
 
 import { AxiosErrorAlertMessage } from "../AxiosErrorAlertMessage";
 import { BasicFormSelectField } from "../BasicFormSelectField";
-import { Skeleton } from "@/shared/components/ui/skeleton";
+import { Skeleton } from "@/shared/components/ui/Skeleton";
 
 interface PropertyCategoriesSelectFieldProps<TFieldValues extends FieldValues> {
   name: Path<TFieldValues>;

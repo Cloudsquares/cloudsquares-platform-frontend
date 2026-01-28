@@ -1,6 +1,6 @@
 import { Image } from "lucide-react";
 
-import { Skeleton } from "@/shared/components/ui/skeleton";
+import { Skeleton } from "@/shared/components/ui/Skeleton";
 
 export const PropertiesListSkeleton = () => {
   return (

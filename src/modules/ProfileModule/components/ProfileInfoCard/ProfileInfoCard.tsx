@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { useUserProfile } from "../../../../shared/permissions/hooks";
 import { displayUserName } from "../../../../shared/utils";
-import { Skeleton } from "@/shared/components/ui/skeleton";
+import { Skeleton } from "@/shared/components/ui/Skeleton";
 
 export const ProfileInfoCard = () => {
   const profile = useUserProfile();

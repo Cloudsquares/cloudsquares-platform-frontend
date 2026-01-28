@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 
-import { Button } from "@/shared/components/ui/button";
+import { Button } from "@/shared/components/ui/Button";
 
 /**
  * Пропсы для компонента BasicPageHeader.

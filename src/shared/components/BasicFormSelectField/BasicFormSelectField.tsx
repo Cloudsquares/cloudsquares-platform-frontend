@@ -1,13 +1,13 @@
 import { Controller, FieldErrors, useFormContext, Path } from "react-hook-form";
 
-import { Button } from "@/shared/components/ui/button";
+import { Button } from "@/shared/components/ui/Button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
-} from "@/shared/components/ui/select";
-import { Label } from "@/shared/components/ui/label";
+} from "@/shared/components/ui/Select";
+import { Label } from "@/shared/components/ui/Label";
 import { cn } from "@/shared/utils";
 
 // todo: Сделать по размерам таким же, как <BasicTextField />
