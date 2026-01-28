@@ -8,7 +8,7 @@ import {
   DisplayTextBasicDrawerMode,
 } from "@/shared/interfaces/Shared";
 import { devLogger } from "@/shared/utils";
-import { Alert, AlertDescription } from "@/shared/components/ui/Alert";
+import { Alert, AlertDescription } from "@/shared/components/ui";
 
 export const PropertyOwnerDrawerModule = () => {
   const mode = usePropertyOwnerDrawersStore((state) => state.mode);

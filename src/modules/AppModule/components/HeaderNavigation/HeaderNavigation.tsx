@@ -3,13 +3,13 @@ import { Menu } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import { Button } from "@/shared/components/ui/Button";
 import {
+  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/shared/components/ui/DropdownMenu";
+} from "@/shared/components/ui";
 
 // TODO: решить нужен ли бургер меню на мобилке или все ссылки будут в профиле
 export const HeaderNavigation = () => {

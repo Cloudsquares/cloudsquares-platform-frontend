@@ -8,7 +8,7 @@ import { PropertiesListItem } from "@/modules/PropertiesModule/components/Proper
 
 import { usePropertyDetailsStore } from "../../store";
 import { useDeactivatePropertyMutation } from "../../hooks";
-import { Button } from "@/shared/components/ui/Button";
+import { Button } from "@/shared/components/ui";
 
 interface PropertyDetailsDeleteFormProps {
   property: Property;

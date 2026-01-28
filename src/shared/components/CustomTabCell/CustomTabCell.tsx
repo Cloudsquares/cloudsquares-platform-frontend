@@ -1,13 +1,13 @@
 import React from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
-import { Button } from "@/shared/components/ui/Button";
 import {
+  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/shared/components/ui/DropdownMenu";
+} from "@/shared/components/ui";
 import { cn } from "@/shared/utils";
 
 /**

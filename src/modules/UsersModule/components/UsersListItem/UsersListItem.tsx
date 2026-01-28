@@ -10,8 +10,7 @@ import { BasicDrawerMode } from "@/shared/interfaces/Shared";
 import { useCanAccess } from "@/shared/permissions/canAccess";
 import { UserRole, UserRoleDisplayText } from "@/shared/permissions/roles";
 import { useUsersStore } from "../../store";
-import { Badge } from "@/shared/components/ui/Badge";
-import { Button } from "@/shared/components/ui/Button";
+import { Badge, Button } from "@/shared/components/ui";
 import { cn } from "@/shared/utils";
 
 interface UsersListItemProps {

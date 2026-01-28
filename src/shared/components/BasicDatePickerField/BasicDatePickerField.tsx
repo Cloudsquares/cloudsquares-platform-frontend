@@ -2,8 +2,7 @@ import React from "react";
 import { format } from "date-fns";
 import { Controller, useFormContext } from "react-hook-form";
 
-import { Input } from "@/shared/components/ui/Input";
-import { Label } from "@/shared/components/ui/Label";
+import { Input, Label } from "@/shared/components/ui";
 
 interface BasicDatePickerFieldProps {
   name: string;

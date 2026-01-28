@@ -5,7 +5,7 @@ import {
   ServiceTypeDisplayText,
 } from "../../../../shared/interfaces/Customer";
 import { displayUserName } from "../../../../shared/utils";
-import { Button } from "@/shared/components/ui/Button";
+import { Button } from "@/shared/components/ui";
 
 interface CustomersTableBodyProps {
   data: Customer[];

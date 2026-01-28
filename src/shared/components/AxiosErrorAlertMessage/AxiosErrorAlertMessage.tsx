@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 
 import { ApiErrorResponse } from "../../interfaces";
-import { Alert, AlertDescription } from "@/shared/components/ui/Alert";
+import { Alert, AlertDescription } from "@/shared/components/ui";
 
 /**
  * Пропсы для компонента `AxiosErrorAlertMessage`.

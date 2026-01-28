@@ -14,8 +14,7 @@ import { CountryCode } from "../../../../shared/interfaces/Country";
 import { PasswordRulesHint } from "../../../../shared/components/PasswordRulesHint";
 import { BasicTextField } from "../../../../shared/components/BasicTextField";
 import { devLogger } from "../../../../shared/utils";
-import { Alert, AlertDescription } from "@/shared/components/ui/Alert";
-import { Button } from "@/shared/components/ui/Button";
+import { Alert, AlertDescription, Button } from "@/shared/components/ui";
 
 /**
  * Форма регистрации агентского администратора и агентства.

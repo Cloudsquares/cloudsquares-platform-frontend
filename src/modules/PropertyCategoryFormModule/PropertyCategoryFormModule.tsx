@@ -18,7 +18,7 @@ import {
 } from "./hooks";
 import { PropertyCategoriesDeleteForm } from "./components";
 import { useDeletePropertyCategoryMutation } from "./hooks/useDeletePropertyCategoryMutation";
-import { Button } from "@/shared/components/ui/Button";
+import { Button } from "@/shared/components/ui";
 
 interface PropertyCategoryFormModuleProps {
   mode: BasicDrawerMode;

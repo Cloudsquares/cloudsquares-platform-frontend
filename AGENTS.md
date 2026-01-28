@@ -5,6 +5,7 @@
 - Stack: **React 19 + TypeScript + Vite 7 + Tailwind CSS + shadcn/ui + SCSS**.
 - Theme via CSS variables + `data-theme` (light/dark); avoid hardcoded colors.
 - Icons: use **Lucide** for consistency.
+- UI primitives (`src/shared/components/ui`) are **folder-per-component** in PascalCase: `Button/Button.tsx` + `Button/index.tsx`. Tests/utilities live inside the component folder.
 - Use **`@` alias** → `@/*` (see `tsconfig.json` + `vite.config.ts`), **no relative deep imports**.
 - **HTTP + React Query** go through `src/configs/*` wrappers only (`useAxiosQuery`, `useAxiosSuspenseQuery`, `useAxiosMutation`) and the configured axios instance.
 - Reuse **`src/shared/*`** (components, hooks, utils, constants, permissions, interfaces) before writing anything new.

@@ -6,7 +6,7 @@ import { UsersFormDrawer } from "./components/UsersFormDrawer";
 import { BasicPageHeader } from "../../shared/components/Mobile/BasicPageHeader";
 import { BasicDrawerMode } from "../../shared/interfaces/Shared";
 import { useCanAccess } from "../../shared/permissions/canAccess";
-import { Button } from "@/shared/components/ui/Button";
+import { Button } from "@/shared/components/ui";
 
 export const UsersModule = () => {
   const openDrawerWithMode = useUsersStore((state) => state.openDrawerWithMode);

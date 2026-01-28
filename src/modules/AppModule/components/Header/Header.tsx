@@ -5,7 +5,7 @@ import { HeaderNavigation } from "../HeaderNavigation";
 import { HeaderLogotype } from "../HeaderLogotype";
 import { useIsAuthenticated } from "../../../../shared/permissions/hooks";
 import { HeaderProfile } from "../HeaderProfile";
-import { Button } from "@/shared/components/ui/Button";
+import { Button } from "@/shared/components/ui";
 
 export const Header = () => {
   const { t } = useTranslation();

@@ -2,13 +2,13 @@ import React from "react";
 import { X } from "lucide-react";
 
 import {
+  Button,
   Dialog,
   DialogClose,
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from "@/shared/components/ui/Dialog";
-import { Button } from "@/shared/components/ui/Button";
+} from "@/shared/components/ui";
 import { cn } from "@/shared/utils";
 
 /**

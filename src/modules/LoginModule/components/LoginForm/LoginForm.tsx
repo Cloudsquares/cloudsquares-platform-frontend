@@ -11,8 +11,7 @@ import {
 import { useLoginMutation } from "../../hooks";
 import { useRegistrationStore } from "../../../RegistrationModule/store/useRegistrationStore";
 import { BasicTextField } from "../../../../shared/components/BasicTextField";
-import { Alert, AlertDescription } from "@/shared/components/ui/Alert";
-import { Button } from "@/shared/components/ui/Button";
+import { Alert, AlertDescription, Button } from "@/shared/components/ui";
 
 /**
  * Форма входа в систему.

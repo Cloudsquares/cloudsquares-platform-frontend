@@ -1,6 +1,6 @@
 import { usePropertyCategoriesStore } from "../../store";
 import { BasicDrawerMode } from "@/shared/interfaces/Shared";
-import { Button } from "@/shared/components/ui/Button";
+import { Button } from "@/shared/components/ui";
 
 export const PropertyCategoriesCreateButton = () => {
   const openDrawerWithMode = usePropertyCategoriesStore(

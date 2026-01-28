@@ -2,13 +2,13 @@ import { GripVertical, Pencil, Trash2 } from "lucide-react";
 import { PropertyCategory } from "@/shared/interfaces/PropertyCategory";
 import { BasicDrawerMode } from "@/shared/interfaces/Shared";
 import { usePropertyCategoriesStore } from "../../store";
-import { Button } from "@/shared/components/ui/Button";
 import {
+  Button,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/shared/components/ui/Tooltip";
+} from "@/shared/components/ui";
 
 interface PropertyCategoriesListItemProps {
   category: PropertyCategory;

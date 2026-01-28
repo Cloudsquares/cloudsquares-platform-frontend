@@ -8,13 +8,13 @@ import {
   UserRoleColor,
   UserRoleDisplayText,
 } from "../../../../shared/permissions/roles";
-import { Badge } from "@/shared/components/ui/Badge";
 import {
+  Badge,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/shared/components/ui/Tooltip";
+} from "@/shared/components/ui";
 
 const roleBadgeClasses = {
   default: "border-border bg-secondary text-foreground",

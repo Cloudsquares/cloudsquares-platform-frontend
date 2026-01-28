@@ -1,5 +1,5 @@
 import { cn } from "@/shared/utils";
-import { Button } from "@/shared/components/ui/Button";
+import { Button } from "@/shared/components/ui";
 
 interface TablePaginationProps {
   page: number;

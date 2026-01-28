@@ -12,7 +12,7 @@ import { usePatchAgencyInfoMutation } from "../../hooks";
 import { devLogger } from "../../../../shared/utils";
 import { useUserProfile } from "../../../../shared/permissions/hooks";
 import { BasicTextField } from "../../../../shared/components/BasicTextField";
-import { Button } from "@/shared/components/ui/Button";
+import { Button } from "@/shared/components/ui";
 
 export const HomeAgencyInfoEditForm = () => {
   const profile = useUserProfile();

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useProfileDetailsStore } from "../../store/useProfileDetailsStore";
 import { useLoginStore } from "../../../LoginModule/store";
 import { BasicDrawer } from "../../../../shared/components/BasicDrawer";
-import { Button } from "@/shared/components/ui/Button";
+import { Button } from "@/shared/components/ui";
 
 export const ProfileDetailsLogoutDrawer = () => {
   const navigate = useNavigate();
