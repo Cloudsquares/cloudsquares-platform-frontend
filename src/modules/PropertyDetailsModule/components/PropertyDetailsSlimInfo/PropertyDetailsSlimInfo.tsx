@@ -33,7 +33,7 @@ export const PropertyDetailsSlimInfo = () => {
       data-testid="property-slim-info"
     >
       {displayedData().map(({ label, value }, index) => {
-        if (!value) return null;
+        if (value === null || value === undefined) return null;
         return (
           <div key={index}>
             <p className="text-body3 text-muted-foreground">{label}</p>
