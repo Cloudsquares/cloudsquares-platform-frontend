@@ -1,15 +1,41 @@
-import { axiosBaseWrap } from "../../../configs/api";
-import { Property } from "../../../shared/interfaces/Property";
+import { axiosBaseWrap } from "@/configs/api";
+import { AllPropertiesResponseData } from "@/shared/interfaces/Property";
+
+/**
+ * Параметры запроса всех объектов недвижимости агентства.
+ */
+interface GetAllPropertiesOfAgencyParams {
+  /** Идентификатор агентства */
+  agency_id: string;
+
+  /** Номер страницы (1-based) */
+  page: number;
+
+  /** Количество объектов на странице */
+  per_page: number;
+}
 
 export const apiPropertiesModule = {
   /**
    * Запрос на получение всех объектов недвижимости текущего агентства недвижимости.
    * TODO: убрать айди из параметров, бекенд должен определять по токну авторизации
-   * @returns
+   *
+   * @param {GetAllPropertiesOfAgencyParams} params Параметры фильтрации и пагинации
+   * @returns Промис с данными объектов недвижимости
    */
-  getAllPropertiesOfAgency(agency_id: string): Promise<Property[]> {
+  getAllPropertiesOfAgency({
+    agency_id,
+    page,
+    per_page,
+  }: GetAllPropertiesOfAgencyParams): Promise<AllPropertiesResponseData> {
+    const params = new URLSearchParams({
+      agency_id,
+      page: String(page),
+      per_page: String(per_page),
+    });
+
     return axiosBaseWrap
-      .get("/properties?agency_id=" + agency_id)
+      .get(`/properties?${params.toString()}`)
       .then((response) => response.data)
       .catch((error) => {
         throw error;

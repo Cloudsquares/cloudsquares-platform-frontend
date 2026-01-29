@@ -3,6 +3,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { BasicSearchInputField } from "../BasicSearchInputField";
+import type { InputProps } from "@/shared/components/ui";
 
 /**
  * Схема валидации для формы поиска.
@@ -31,6 +32,11 @@ interface SearchInputFormProps {
    * Текст внутри инпута
    */
   placeholder?: string;
+
+  /**
+   * Размер инпута
+   */
+  size?: InputProps["size"];
 }
 
 /**
@@ -45,6 +51,7 @@ interface SearchInputFormProps {
 export const SearchInputForm = ({
   sendRequest,
   placeholder = "Поиск",
+  size = "md",
 }: SearchInputFormProps) => {
   const methods = useForm<SearchInputFormData>({
     resolver: zodResolver(SearchInputFormSchema),
@@ -59,6 +66,7 @@ export const SearchInputForm = ({
           onChange={sendRequest}
           name="searchQuery"
           placeholder={placeholder}
+          size={size}
         />
       </div>
     </FormProvider>

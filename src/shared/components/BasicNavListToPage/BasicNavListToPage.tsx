@@ -14,7 +14,7 @@ interface BasicNavListToPageProps {
 
 export const BasicNavListToPage = ({ list }: BasicNavListToPageProps) => {
   return (
-    <div className="rounded-md border border-border bg-card py-2">
+    <div className="rounded-md border border-border bg-card">
       <ul>
         {list.map(({ label, link }, index) => (
           <li key={`${label}-${index}`}>

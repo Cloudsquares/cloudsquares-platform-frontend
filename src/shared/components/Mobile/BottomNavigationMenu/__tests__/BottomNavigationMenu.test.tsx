@@ -21,6 +21,7 @@ describe("BottomNavigationMenu", () => {
 
     expect(screen.getByText("Главная")).toBeInTheDocument();
     expect(screen.getByText("Каталог")).toBeInTheDocument();
+    expect(screen.getByTestId("nav-item-add-property")).toBeInTheDocument();
     expect(screen.getByText("Заявки")).toBeInTheDocument();
     expect(screen.getByText("Профиль")).toBeInTheDocument();
   });
