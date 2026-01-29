@@ -1,6 +1,6 @@
 import * as React from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { FileText, Home, Search, User } from "lucide-react";
+import { FileText, Home, Plus, Search, User } from "lucide-react";
 
 import { cn } from "@/shared/utils";
 import { shouldShowBottomNav } from "./utils";
@@ -21,7 +21,7 @@ export const BottomNavigationMenu: React.FC = () => {
   if (!visible) return null;
 
   return (
-    <nav className="fixed bottom-0 z-20 grid w-full grid-cols-4 border-t border-border bg-background p-4 md:hidden">
+    <nav className="fixed bottom-0 z-20 grid w-full grid-cols-5 border-t border-border bg-background p-4 md:hidden">
       <NavLink
         to="/"
         end
@@ -67,6 +67,17 @@ export const BottomNavigationMenu: React.FC = () => {
             <span>Каталог</span>
           </React.Fragment>
         )}
+      </NavLink>
+
+      <NavLink
+        to="/properties/create"
+        data-testid="nav-item-add-property"
+        aria-label="Добавить объект"
+        className="flex items-center justify-center rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      >
+        <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-sm transition-opacity hover:opacity-90">
+          <Plus className="h-5 w-5" />
+        </span>
       </NavLink>
 
       <NavLink

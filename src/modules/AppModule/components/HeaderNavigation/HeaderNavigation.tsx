@@ -22,6 +22,7 @@ export const HeaderNavigation = () => {
     { title: t("header.navigation.analytics"), link: "/agency/dashboards" },
     { title: t("header.navigation.customers"), link: "/agency/customers" },
   ];
+  const addPropertyLink = "/properties/create";
 
   const handleClickMenuItem = (link: string) => {
     navigate(link);
@@ -59,6 +60,13 @@ export const HeaderNavigation = () => {
             {title}
           </Button>
         ))}
+        <Button
+          onClick={() => handleClickMenuItem(addPropertyLink)}
+          variant="default"
+          size="md"
+        >
+          Добавить объект
+        </Button>
       </div>
     </React.Fragment>
   );

@@ -82,3 +82,9 @@ export interface PropertyPhoto {
   file_url: string;
   created_at: string; // "2025-06-25T21:22:28.340Z";
 }
+
+export interface AllPropertiesResponseData {
+  data: Property[];
+  total: number;
+  pages: number;
+}

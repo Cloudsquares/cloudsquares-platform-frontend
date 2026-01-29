@@ -3,7 +3,7 @@ import debounce from "lodash/debounce";
 import { Search } from "lucide-react";
 import { Controller, useFormContext } from "react-hook-form";
 
-import { Input, Label } from "@/shared/components/ui";
+import { Input, type InputProps, Label } from "@/shared/components/ui";
 import { cn } from "@/shared/utils";
 
 /**
@@ -26,6 +26,9 @@ interface BasicSearchInputFieldProps {
 
   /** Подсказка внутри поля (опционально) */
   placeholder?: string;
+
+  /** Размер инпута */
+  size?: InputProps["size"];
 }
 
 /** Задержка debounce в миллисекундах */
@@ -43,6 +46,7 @@ export const BasicSearchInputField = ({
   label,
   onChange,
   placeholder,
+  size = "md",
 }: BasicSearchInputFieldProps) => {
   const {
     control,
@@ -85,6 +89,7 @@ export const BasicSearchInputField = ({
               {...field}
               ref={field.ref}
               id={name}
+              size={size}
               placeholder={placeholder}
               className={cn("pl-9", errorMessage && "border-error")}
               hasError={Boolean(errorMessage)}

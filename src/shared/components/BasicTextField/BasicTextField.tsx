@@ -22,7 +22,7 @@ interface BasicTextFieldProps<T extends Record<string, unknown>> {
   disabled?: boolean;
 
   /** Размер инпута TextField */
-  size?: "small" | "medium";
+  size?: "sm" | "md" | "lg";
 
   /** Подсказка под инпутом */
   helperText?: React.ReactNode;
@@ -43,7 +43,7 @@ export const BasicTextField = <T extends Record<string, unknown>>({
   placeholder,
   type,
   disabled,
-  size = "medium",
+  size = "md",
   helperText,
   inputName,
   autoComplete,
@@ -62,7 +62,7 @@ export const BasicTextField = <T extends Record<string, unknown>>({
 
   const isNumeric = type === "number";
   const inputId = inputName ?? name;
-  const sizeClassName = size === "small" ? "h-9 text-body3" : "h-11 text-body2";
+  const textSizeClassName = size === "sm" ? "text-body3" : "text-body2";
   const helperMessage = (fieldError?.message as string) || helperText;
   const hasError = Boolean(fieldError?.message);
 
@@ -111,7 +111,6 @@ export const BasicTextField = <T extends Record<string, unknown>>({
           disabled,
           onBlur,
           value,
-          className: cn(sizeClassName, showCurrency && isNumeric && "pr-10"),
           hasError,
         };
 
@@ -123,6 +122,7 @@ export const BasicTextField = <T extends Record<string, unknown>>({
                 <Textarea
                   {...sharedInputProps}
                   ref={inputRef}
+                  className={cn(textSizeClassName)}
                   onClick={
                     onClick as React.MouseEventHandler<HTMLTextAreaElement>
                   }
@@ -138,7 +138,9 @@ export const BasicTextField = <T extends Record<string, unknown>>({
                 <Input
                   {...sharedInputProps}
                   ref={inputRef}
+                  size={size}
                   type={effectiveType}
+                  className={cn(showCurrency && isNumeric && "pr-10")}
                   onClick={onClick as React.MouseEventHandler<HTMLInputElement>}
                   onChange={handleInputChange}
                   inputMode={isNumeric ? "numeric" : undefined}

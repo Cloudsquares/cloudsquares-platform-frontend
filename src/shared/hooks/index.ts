@@ -1,1 +1,2 @@
-export * from "./useTablePagination";
+export { useTablePagination } from "./useTablePagination";
+export { usePagination } from "./usePagination";

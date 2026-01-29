@@ -1,1 +1,1 @@
-export * from "./apiPropertiesModule";
+export { apiPropertiesModule } from "./apiPropertiesModule";

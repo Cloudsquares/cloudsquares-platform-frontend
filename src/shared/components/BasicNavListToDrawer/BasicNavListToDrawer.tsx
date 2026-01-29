@@ -13,7 +13,7 @@ interface BasicNavListToDrawerProps {
 
 export const BasicNavListToDrawer = ({ list }: BasicNavListToDrawerProps) => {
   return (
-    <div className="rounded-md border border-border bg-card py-2">
+    <div className="rounded-md border border-border bg-card">
       <ul>
         {list.map(({ label, onClick }, index) => (
           <li key={`${label}-${index}`}>

@@ -1,1 +1,1 @@
-export * from "./useGetAllPropertiesOfAgencyQuery";
+export { useGetAllPropertiesOfAgencyQuery } from "./useGetAllPropertiesOfAgencyQuery";

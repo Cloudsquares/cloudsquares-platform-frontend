@@ -2,10 +2,18 @@ import { Image } from "lucide-react";
 
 import { Skeleton } from "@/shared/components/ui";
 
-export const PropertiesListSkeleton = () => {
+interface PropertiesListSkeletonProps {
+  count?: number;
+}
+
+export const PropertiesListSkeleton = ({
+  count = 7,
+}: PropertiesListSkeletonProps) => {
+  const skeletonCount = Math.max(1, count);
+
   return (
     <>
-      {Array.from({ length: 7 }).map((_, index) => (
+      {Array.from({ length: skeletonCount }).map((_, index) => (
         <div
           key={index}
           className="grid gap-4 rounded-lg border border-border bg-card p-4 lg:grid-cols-[1fr_2fr]"

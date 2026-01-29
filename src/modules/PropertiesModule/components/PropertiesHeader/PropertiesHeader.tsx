@@ -7,7 +7,7 @@ export const PropertiesHeader = () => {
       <h1 className="hidden text-h3 text-foreground lg:block">
         Каталог недвижимости
       </h1>
-      <div className="flex flex-wrap items-center justify-end gap-4">
+      <div className="flex items-center justify-end gap-4">
         <PropertiesSearchWrapper />
         <PropertiesFilter />
       </div>

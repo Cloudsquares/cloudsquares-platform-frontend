@@ -16,6 +16,7 @@ import { PropertyPriceInfo } from "@/shared/components/PropertyPriceInfo";
 import { AgentCompactCard } from "@/shared/components/AgentCompactCard";
 import { Button } from "@/shared/components/ui";
 
+// TODO: выяснить, почему данные не кэшируются при переходе между страницами в пагинации
 // TODO: перевести компонент в shared/components так как используется в нескольких модулях.
 // TODO: убрать description из карточки
 
@@ -116,7 +117,7 @@ export const PropertiesListItem = ({
 
           {showActionButton && (
             <div className="grid gap-3 sm:grid-cols-[1.25fr_1fr]">
-              <Button asChild variant="secondary" size="lg">
+              <Button asChild variant="outline" size="lg">
                 <Link to={`/requests/buy?property=${property.id}`}>
                   Открыть заявки
                 </Link>

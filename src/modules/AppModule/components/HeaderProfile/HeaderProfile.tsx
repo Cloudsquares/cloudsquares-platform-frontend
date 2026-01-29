@@ -13,12 +13,14 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/shared/components/ui";
+import { LogoutDrawer } from "@/shared/components/LogoutDrawer";
 import { ThemeSwitcher } from "@/modules/ThemeModule";
 
 export const HeaderProfile = () => {
   const { t } = useTranslation();
   const profile = useUserProfile();
   const navigate = useNavigate();
+  const [showLogoutDrawer, setShowLogoutDrawer] = React.useState(false);
 
   const settings = [
     {
@@ -35,7 +37,7 @@ export const HeaderProfile = () => {
     },
     {
       title: t("header.profile_menu.logout"),
-      link: "/profile",
+      onSelect: () => setShowLogoutDrawer(true),
     },
   ];
 
@@ -44,8 +46,12 @@ export const HeaderProfile = () => {
     .join(" ");
   const initials = profile?.first_name?.[0] ?? "?";
 
-  const handleClickMenuItem = (link: string) => {
-    navigate(link);
+  const handleClickMenuItem = (link?: string, onSelect?: () => void) => {
+    if (onSelect) {
+      onSelect();
+      return;
+    }
+    if (link) navigate(link);
   };
 
   return (
@@ -73,10 +79,10 @@ export const HeaderProfile = () => {
             </TooltipContent>
           </Tooltip>
           <DropdownMenuContent align="end">
-            {settings.map(({ link, title }) => (
+            {settings.map(({ link, onSelect, title }) => (
               <DropdownMenuItem
                 key={title}
-                onSelect={() => handleClickMenuItem(link)}
+                onSelect={() => handleClickMenuItem(link, onSelect)}
               >
                 {title}
               </DropdownMenuItem>
@@ -84,6 +90,7 @@ export const HeaderProfile = () => {
           </DropdownMenuContent>
         </DropdownMenu>
       </TooltipProvider>
+      <LogoutDrawer isOpen={showLogoutDrawer} setIsOpen={setShowLogoutDrawer} />
     </div>
   );
 };
