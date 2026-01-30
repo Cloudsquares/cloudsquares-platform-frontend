@@ -1,9 +1,15 @@
-import { apiUsersModule } from "../api";
-import { useAxiosQuery } from "../../../configs/useAxiosQuery";
+import { useAxiosQuery } from "@/configs/useAxiosQuery";
+import { apiUsersModule } from "@/modules/UsersModule/api";
 
-export const useGetAllUsersQuery = () => {
+/**
+ * Запрашивает список сотрудников с учётом поискового запроса.
+ *
+ * @param {string | undefined} query Поисковая строка
+ * @returns React Query результат запроса
+ */
+export const useGetAllUsersQuery = (query?: string) => {
   return useAxiosQuery({
-    queryFn: () => apiUsersModule.getAllUsers(),
-    queryKey: ["get-all-users"],
+    queryFn: () => apiUsersModule.getAllUsers({ q: query }),
+    queryKey: ["get-all-users", query],
   });
 };

@@ -1,8 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useForm, FormProvider } from "react-hook-form";
-import { BasicFormSelectField } from "../BasicFormSelectField";
-import i18n from "../../../i18n";
+import { BasicFormSelectField } from "@/shared/components/BasicFormSelectField";
+import i18n from "@/i18n";
 
 interface LanguageFormValues {
   language: string;

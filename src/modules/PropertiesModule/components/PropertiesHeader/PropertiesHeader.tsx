@@ -1,5 +1,5 @@
-import { PropertiesSearchWrapper } from "../PropertiesSearchWrapper";
 import { PropertiesFilter } from "../PropertiesFilter";
+import { SearchInputWrapper } from "@/shared/components/SearchInputWrapper";
 
 export const PropertiesHeader = () => {
   return (
@@ -8,7 +8,10 @@ export const PropertiesHeader = () => {
         Каталог недвижимости
       </h1>
       <div className="flex items-center justify-end gap-4">
-        <PropertiesSearchWrapper />
+        <SearchInputWrapper
+          placeholder="Поиск по объектам"
+          pageParamToReset="page"
+        />
         <PropertiesFilter />
       </div>
     </div>

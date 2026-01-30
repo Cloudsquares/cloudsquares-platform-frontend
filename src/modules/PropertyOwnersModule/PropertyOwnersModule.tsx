@@ -1,8 +1,14 @@
 import React from "react";
-import { BasicPageHeader } from "../../shared/components/Mobile/BasicPageHeader";
-import { PropertyOwnersTable } from "./components/PropertyOwnersTable";
+
+import { PropertyOwnersTable } from "@/modules/PropertyOwnersModule/components/PropertyOwnersTable";
+import { usePropertyOwnersSearchParams } from "@/modules/PropertyOwnersModule/hooks";
+import { SearchInputWrapper } from "@/shared/components/SearchInputWrapper";
+import { Alert, AlertDescription } from "@/shared/components/ui";
+import { BasicPageHeader } from "@/shared/components/Mobile/BasicPageHeader";
 
 export const PropertyOwnersModule = () => {
+  const { propertyId } = usePropertyOwnersSearchParams();
+
   return (
     <React.Fragment>
       <BasicPageHeader title="База собственников" shownBackArrowButton />
@@ -11,8 +17,20 @@ export const PropertyOwnersModule = () => {
           <div className="hidden md:block">
             <h1 className="text-h1 text-foreground">База собственников</h1>
           </div>
-          <div>Filters and search</div>
-          <PropertyOwnersTable />
+          {propertyId && (
+            <SearchInputWrapper
+              placeholder="Поиск по собственникам"
+              className="w-full max-w-md"
+            />
+          )}
+          {!propertyId && (
+            <Alert variant="info">
+              <AlertDescription>
+                Укажите объект недвижимости, чтобы просмотреть собственников.
+              </AlertDescription>
+            </Alert>
+          )}
+          {propertyId && <PropertyOwnersTable propertyId={propertyId} />}
         </div>
       </div>
     </React.Fragment>

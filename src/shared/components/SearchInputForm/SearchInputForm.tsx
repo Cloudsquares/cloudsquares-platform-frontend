@@ -1,21 +1,30 @@
+import React from "react";
 import { z } from "zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { BasicSearchInputField } from "../BasicSearchInputField";
+import { BasicSearchInputField } from "@/shared/components/BasicSearchInputField";
 import type { InputProps } from "@/shared/components/ui";
 
 /**
  * Схема валидации для формы поиска.
  *
- * - `searchQuery` - строка, максимум 255 символов.
+ * - `searchQuery` - строка с ограничением длины.
+ *
+ * @param {number} maxLength Максимальная длина строки
+ * @returns Zod-схема формы поиска
  */
-export const SearchInputFormSchema = z.object({
-  searchQuery: z.string().max(30, { message: "Слишком длинное значение" }),
-});
+const createSearchInputFormSchema = (maxLength: number) =>
+  z.object({
+    searchQuery: z
+      .string()
+      .max(maxLength, { message: "Слишком длинное значение" }),
+  });
 
 /** Тип данных, используемый в форме поиска. */
-export type SearchInputFormData = z.infer<typeof SearchInputFormSchema>;
+export type SearchInputFormData = {
+  searchQuery: string;
+};
 
 /**
  * Пропсы для компонента `SearchInputForm`.
@@ -37,6 +46,16 @@ interface SearchInputFormProps {
    * Размер инпута
    */
   size?: InputProps["size"];
+
+  /**
+   * Значение по умолчанию, синхронизируемое с URL.
+   */
+  defaultValue?: string;
+
+  /**
+   * Максимальная длина значения
+   */
+  maxLength?: number;
 }
 
 /**
@@ -52,21 +71,43 @@ export const SearchInputForm = ({
   sendRequest,
   placeholder = "Поиск",
   size = "md",
+  defaultValue,
+  maxLength = 256,
 }: SearchInputFormProps) => {
+  const normalizedDefaultValue = defaultValue ?? "";
+  const schema = React.useMemo(
+    () => createSearchInputFormSchema(maxLength),
+    [maxLength],
+  );
   const methods = useForm<SearchInputFormData>({
-    resolver: zodResolver(SearchInputFormSchema),
-    defaultValues: { searchQuery: "" },
+    resolver: zodResolver(schema),
+    defaultValues: { searchQuery: normalizedDefaultValue },
     mode: "onChange",
   });
+
+  React.useEffect(() => {
+    methods.reset({ searchQuery: normalizedDefaultValue });
+  }, [methods, normalizedDefaultValue]);
+
+  const handleSearch = React.useCallback(
+    (value: SearchInputFormData) => {
+      const { invalid } = methods.getFieldState("searchQuery");
+      if (invalid) return;
+
+      sendRequest(value);
+    },
+    [methods, sendRequest],
+  );
 
   return (
     <FormProvider {...methods}>
       <div>
         <BasicSearchInputField
-          onChange={sendRequest}
+          onChange={handleSearch}
           name="searchQuery"
           placeholder={placeholder}
           size={size}
+          maxLength={maxLength}
         />
       </div>
     </FormProvider>

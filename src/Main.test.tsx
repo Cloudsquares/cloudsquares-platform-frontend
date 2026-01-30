@@ -15,6 +15,7 @@ describe("index.tsx", () => {
     // Создаем фиктивный контейнер для корня приложения
     const mockRoot = {
       render: vi.fn(),
+      unmount: vi.fn(),
     };
 
     const mockedCreateRoot = createRoot as MockedFunction<typeof createRoot>;

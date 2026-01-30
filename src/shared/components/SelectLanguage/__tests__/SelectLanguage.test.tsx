@@ -4,9 +4,9 @@ import type { TFunction } from "i18next";
 import { useFormContext } from "react-hook-form";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { SelectLanguage } from "../SelectLanguage";
-import { TestProviders } from "../../../../providers";
-import i18n from "../../../../i18n";
+import { SelectLanguage } from "@/shared/components/SelectLanguage";
+import { TestProviders } from "@/providers";
+import i18n from "@/i18n";
 
 const mockTFunction = ((key: string) => key) as TFunction;
 const mockUseFormContext = useFormContext;
@@ -17,7 +17,7 @@ vi.mock("react-i18next", () => ({
   }),
 }));
 
-vi.mock("../../BasicFormSelectField", () => ({
+vi.mock("@/shared/components/BasicFormSelectField", () => ({
   BasicFormSelectField: ({
     name,
     placeholder,
