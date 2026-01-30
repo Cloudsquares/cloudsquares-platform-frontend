@@ -1,1 +1,0 @@
-export { PropertiesSearchWrapper } from "./PropertiesSearchWrapper";

@@ -22,7 +22,9 @@ describe("BasicSearchInputField", () => {
     );
   };
 
-  const renderComponent = () =>
+  const renderComponent = (
+    props: Partial<React.ComponentProps<typeof BasicSearchInputField>> = {},
+  ) =>
     render(
       <Wrapper>
         <BasicSearchInputField
@@ -30,6 +32,7 @@ describe("BasicSearchInputField", () => {
           label="Поиск"
           placeholder="Введите запрос"
           onChange={onChangeMock}
+          {...props}
         />
       </Wrapper>,
     );
@@ -64,9 +67,33 @@ describe("BasicSearchInputField", () => {
 
     fireEvent.change(input, { target: { value: "test" } });
 
-    await vi.advanceTimersByTimeAsync(333);
+    await vi.advanceTimersByTimeAsync(350);
 
     expect(onChangeMock).toHaveBeenCalledWith({ searchQuery: "test" });
+  });
+
+  it("очищает значение по клику на крестик", async () => {
+    vi.useFakeTimers();
+    renderComponent();
+
+    const input = screen.getByLabelText("Поиск") as HTMLInputElement;
+
+    fireEvent.change(input, { target: { value: "test" } });
+    await vi.advanceTimersByTimeAsync(350);
+
+    const clearButton = screen.getByRole("button", { name: "Очистить поиск" });
+    fireEvent.click(clearButton);
+
+    expect(input.value).toBe("");
+    expect(onChangeMock).toHaveBeenLastCalledWith({ searchQuery: "" });
+  });
+
+  it("прокидывает maxLength в input", () => {
+    renderComponent({ maxLength: 10 });
+
+    const input = screen.getByLabelText("Поиск") as HTMLInputElement;
+
+    expect(input.maxLength).toBe(10);
   });
 
   it("показывает сообщение об ошибке, если оно передано", async () => {

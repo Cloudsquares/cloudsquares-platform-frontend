@@ -1,20 +1,34 @@
 import React from "react";
-import { useTablePagination } from "../../../../shared/hooks";
-import { PropertyOwnersTableHeader } from "../PropertyOwnersTableHeader";
-import { PropertyOwnersTableBodyItem } from "../PropertyOwnersTableBodyItem";
-import { AxiosErrorAlertMessage } from "../../../../shared/components/AxiosErrorAlertMessage";
-import { useGetAllPropertyOwnersQuery } from "../../hooks";
+
+import { PropertyOwnersTableBodyItem } from "@/modules/PropertyOwnersModule/components/PropertyOwnersTableBodyItem";
+import { PropertyOwnersTableHeader } from "@/modules/PropertyOwnersModule/components/PropertyOwnersTableHeader";
+import { useGetAllPropertyOwnersQuery } from "@/modules/PropertyOwnersModule/hooks";
+import { AxiosErrorAlertMessage } from "@/shared/components/AxiosErrorAlertMessage";
 import {
   Alert,
   AlertDescription,
   TablePagination,
 } from "@/shared/components/ui";
+import { useSearchQueryParam, useTablePagination } from "@/shared/hooks";
 
-export const PropertyOwnersTable = () => {
+interface PropertyOwnersTableProps {
+  /** Идентификатор объекта недвижимости */
+  propertyId: string;
+}
+
+export const PropertyOwnersTable = ({
+  propertyId,
+}: PropertyOwnersTableProps) => {
+  const { query } = useSearchQueryParam();
+  const hasSearchQuery = query.trim().length > 0;
   const { page, rowsPerPage, setPage, setRowsPerPage } = useTablePagination(
     15,
     "allPropertiesTable",
   );
+
+  React.useEffect(() => {
+    setPage(0);
+  }, [propertyId, query, setPage]);
 
   const {
     data: owners,
@@ -23,8 +37,10 @@ export const PropertyOwnersTable = () => {
     isError,
     error,
   } = useGetAllPropertyOwnersQuery({
+    property_id: propertyId,
     per_page: rowsPerPage,
     page: page + 1,
+    q: query || undefined,
   });
 
   const handleChangePage = (newPage: number) => {
@@ -60,7 +76,9 @@ export const PropertyOwnersTable = () => {
       {owners?.data.length === 0 && (
         <Alert variant="info">
           <AlertDescription>
-            По заданным фильтрам заявок не найдено.
+            {hasSearchQuery
+              ? "По заданному поиску ничего не найдено."
+              : "Собственники не найдены."}
           </AlertDescription>
         </Alert>
       )}

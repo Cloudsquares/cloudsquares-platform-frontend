@@ -6,11 +6,13 @@ import { PropertiesCreateCard } from "@/modules/PropertiesModule/components/Prop
 import { PropertiesListSkeleton } from "@/modules/PropertiesModule/components/PropertiesListSkeleton";
 import { AxiosErrorAlertMessage } from "@/shared/components/AxiosErrorAlertMessage";
 import { Pagination } from "@/shared/components/Pagination";
-import { usePagination } from "@/shared/hooks";
+import { Alert, AlertDescription } from "@/shared/components/ui";
+import { usePagination, useSearchQueryParam } from "@/shared/hooks";
 import { useUserProfile } from "@/shared/permissions/hooks";
 
 export const PropertiesList = () => {
   const profile = useUserProfile();
+  const { query } = useSearchQueryParam();
   const { page, rowsPerPage, setPage, setRowsPerPage } = usePagination({
     defaultRowsPerPage: 10,
     rowsPerPageKey: "propertiesCatalogRowsPerPage",
@@ -24,11 +26,13 @@ export const PropertiesList = () => {
   } = useGetAllPropertiesOfAgencyQuery(profile?.agency?.id, {
     page: page + 1,
     per_page: rowsPerPage,
+    q: query || undefined,
   });
 
   const properties = propertiesResponse?.data ?? [];
   const total = propertiesResponse?.total ?? 0;
   const isPageLoading = propertiesIsLoading || propertiesIsFetching;
+  const hasSearchQuery = query.trim().length > 0;
 
   if (propertiesError)
     return (
@@ -40,10 +44,18 @@ export const PropertiesList = () => {
   if (!isPageLoading && propertiesIsSuccess && properties.length === 0)
     return (
       <div className="w-full md:w-1/2 lg:w-1/3">
-        <PropertiesCreateCard
-          title="Каталог пуст"
-          description="Добавьте объекты недвижимости в систему и они появятся здесь"
-        />
+        {hasSearchQuery ? (
+          <Alert variant="info">
+            <AlertDescription>
+              По заданному поиску ничего не найдено.
+            </AlertDescription>
+          </Alert>
+        ) : (
+          <PropertiesCreateCard
+            title="Каталог пуст"
+            description="Добавьте объекты недвижимости в систему и они появятся здесь"
+          />
+        )}
       </div>
     );
 

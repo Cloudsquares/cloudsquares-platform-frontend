@@ -23,3 +23,4 @@ export * from "./devLogger";
 
 // ui utils
 export * from "./cn";
+export * from "./appendSearchParams";

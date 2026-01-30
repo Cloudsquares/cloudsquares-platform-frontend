@@ -1,12 +1,13 @@
 import React from "react";
 
-import { useUsersStore } from "./store";
-import { UsersList } from "./components/UsersList";
-import { UsersFormDrawer } from "./components/UsersFormDrawer";
-import { BasicPageHeader } from "../../shared/components/Mobile/BasicPageHeader";
-import { BasicDrawerMode } from "../../shared/interfaces/Shared";
-import { useCanAccess } from "../../shared/permissions/canAccess";
+import { UsersFormDrawer } from "@/modules/UsersModule/components/UsersFormDrawer";
+import { UsersList } from "@/modules/UsersModule/components/UsersList";
+import { useUsersStore } from "@/modules/UsersModule/store";
+import { BasicPageHeader } from "@/shared/components/Mobile/BasicPageHeader";
+import { SearchInputWrapper } from "@/shared/components/SearchInputWrapper";
 import { Button } from "@/shared/components/ui";
+import { BasicDrawerMode } from "@/shared/interfaces/Shared";
+import { useCanAccess } from "@/shared/permissions/canAccess";
 
 export const UsersModule = () => {
   const openDrawerWithMode = useUsersStore((state) => state.openDrawerWithMode);
@@ -29,6 +30,10 @@ export const UsersModule = () => {
               </Button>
             )}
           </div>
+          <SearchInputWrapper
+            placeholder="Поиск по сотрудникам"
+            className="w-full max-w-md"
+          />
           <UsersList />
         </div>
       </div>

@@ -10,13 +10,16 @@ interface GetAllPropertiesQueryParams {
 
   /** Количество объектов на странице */
   per_page: number;
+
+  /** Поисковый запрос */
+  q?: string;
 }
 
 /**
  * Запрашивает список объектов недвижимости агентства с пагинацией.
  *
  * @param {string | undefined} agency_id Идентификатор агентства
- * @param {GetAllPropertiesQueryParams} params Параметры пагинации
+ * @param {GetAllPropertiesQueryParams} params Параметры пагинации и поиска
  * @returns React Query результат запроса
  */
 export const useGetAllPropertiesOfAgencyQuery = (

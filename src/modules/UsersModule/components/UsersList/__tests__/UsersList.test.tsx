@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 import { describe, expect, it, vi, type MockedFunction } from "vitest";
 
 import { UsersList } from "../UsersList";
@@ -60,6 +61,13 @@ describe("UsersList", () => {
     };
   };
 
+  const renderComponent = (initialEntries: string[] = ["/agency/users"]) =>
+    render(
+      <MemoryRouter initialEntries={initialEntries}>
+        <UsersList />
+      </MemoryRouter>,
+    );
+
   it("сортирует пользователей по приоритету статуса", () => {
     const users = [
       buildUser({
@@ -91,12 +99,27 @@ describe("UsersList", () => {
       error: null,
     } as ReturnType<typeof useGetAllUsersQuery>);
 
-    render(<UsersList />);
+    renderComponent();
 
     const ids = screen
       .getAllByTestId("user-item")
       .map((node) => node.textContent);
 
     expect(ids).toEqual(["active", "pending", "banned", "deactivated"]);
+  });
+
+  it("показывает сообщение, если поиск не дал результатов", () => {
+    mockedUseGetAllUsersQuery.mockReturnValue({
+      data: [],
+      isSuccess: true,
+      isLoading: false,
+      error: null,
+    } as unknown as ReturnType<typeof useGetAllUsersQuery>);
+
+    renderComponent(["/agency/users?q=Boss"]);
+
+    expect(
+      screen.getByText("По заданному поиску ничего не найдено."),
+    ).toBeInTheDocument();
   });
 });

@@ -1,6 +1,6 @@
 import React from "react";
 import debounce from "lodash/debounce";
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { Controller, useFormContext } from "react-hook-form";
 
 import { Input, type InputProps, Label } from "@/shared/components/ui";
@@ -29,10 +29,13 @@ interface BasicSearchInputFieldProps {
 
   /** Размер инпута */
   size?: InputProps["size"];
+
+  /** Максимальная длина значения */
+  maxLength?: number;
 }
 
 /** Задержка debounce в миллисекундах */
-const DEBOUNCE_DELAY = 333;
+const DEBOUNCE_DELAY = 350;
 
 /**
  * Базовый компонент поля ввода с debounce, используемый для поиска.
@@ -47,6 +50,7 @@ export const BasicSearchInputField = ({
   onChange,
   placeholder,
   size = "md",
+  maxLength = 256,
 }: BasicSearchInputFieldProps) => {
   const {
     control,
@@ -91,13 +95,28 @@ export const BasicSearchInputField = ({
               id={name}
               size={size}
               placeholder={placeholder}
-              className={cn("pl-9", errorMessage && "border-error")}
+              maxLength={maxLength}
+              className={cn("pl-9 pr-9", errorMessage && "border-error")}
               hasError={Boolean(errorMessage)}
               onChange={(event) => {
                 field.onChange(event);
                 debouncedOnChange(event.target.value);
               }}
             />
+            {field.value ? (
+              <button
+                type="button"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                onClick={() => {
+                  field.onChange("");
+                  debouncedOnChange.cancel();
+                  onChange({ searchQuery: "" });
+                }}
+                aria-label="Очистить поиск"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            ) : null}
           </div>
         )}
       />

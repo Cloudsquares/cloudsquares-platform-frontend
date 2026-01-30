@@ -13,6 +13,9 @@ interface GetAllPropertiesOfAgencyParams {
 
   /** Количество объектов на странице */
   per_page: number;
+
+  /** Поисковый запрос */
+  q?: string;
 }
 
 export const apiPropertiesModule = {
@@ -27,12 +30,17 @@ export const apiPropertiesModule = {
     agency_id,
     page,
     per_page,
+    q,
   }: GetAllPropertiesOfAgencyParams): Promise<AllPropertiesResponseData> {
     const params = new URLSearchParams({
       agency_id,
       page: String(page),
       per_page: String(per_page),
     });
+
+    if (q) {
+      params.set("q", q);
+    }
 
     return axiosBaseWrap
       .get(`/properties?${params.toString()}`)
